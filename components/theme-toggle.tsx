@@ -16,7 +16,7 @@ export default function ThemeToggle() {
 
   const { setMetaColor } = useMetaColor();
 
-  const playClick = useSound("/audio/ui-sounds/click.wav");
+  const playClick = useSound("/audio/ui-sounds/click.mp3");
 
   const switchTheme = useCallback(() => {
     playClick(0.5);

@@ -1,5 +1,3 @@
-import dynamic from "next/dynamic";
-import Link from "next/link";
 
 // import { DesktopNav } from "@/components/desktop-nav";
 // import { NavItemGitHub } from "@/components/nav-item-github";
@@ -8,9 +6,11 @@ import { MAIN_NAV } from "@/config/site";
 import { cn } from "@/lib/utils";
 
 // import { SiteHeaderMark } from "./site-header-mark";
-import SiteHeaderWrapper from "./site-header-wrapper";
 import ThemeToggle from "@/components/theme-toggle";
 import { DesktopNav } from "./desktop-nav";
+import SiteHeaderWrapper from "./site-header-wrapper";
+import Link from "next/link";
+import { SiteHeaderMark } from "./site-header-mark";
 
 // const BrandContextMenu = dynamic(() =>
 //   import("@/components/brand-context-menu").then((mod) => mod.BrandContextMenu)
@@ -37,10 +37,10 @@ export function SiteHeader() {
       )}
     >
       <div
-        className="screen-line-before screen-line-after mx-auto flex h-12 items-center justify-between gap-2 border-x border-edge px-2 after:z-1 after:transition-[background-color] sm:gap-4 md:max-w-3xl"
+        className="screen-line-before md:max-w-[54rem] screen-line-after mx-auto flex h-12 items-center justify-between gap-2 border-x border-edge px-2 after:z-1 after:transition-[background-color] sm:gap-4"
         data-header-container
       >
-        {/* <BrandContextMenu>
+        {/* <BrandContextMenu> */}
           <Link
             className="has-data-[visible=false]:pointer-events-none [&_svg]:h-8"
             href="/"
@@ -48,7 +48,7 @@ export function SiteHeader() {
           >
             <SiteHeaderMark />
           </Link>
-        </BrandContextMenu> */}
+        {/* </BrandContextMenu> */}
 
         <div className="flex-1" />
 

@@ -3,12 +3,13 @@ import Image from "next/image";
 
 import { cn } from "@/lib/utils";
 import { SocialLink } from "@/types/user";
+import Link from "next/link";
 
 export function SocialLinkItem({ icon, title, description, href }: SocialLink) {
   return (
-    <a
+    <Link
       className={cn(
-        "group/link flex cursor-pointer items-center gap-4 p-4 pr-2 transition-colors hover:bg-accent2",
+        "group/link flex cursor-pointer items-center gap-4 p-4 pr-2 transition-colors hover:bg-accent2 border-x",
         "max-sm:screen-line-before max-sm:screen-line-after",
         "sm:nth-[2n+1]:screen-line-before sm:nth-[2n+1]:screen-line-after"
       )}
@@ -40,6 +41,6 @@ export function SocialLinkItem({ icon, title, description, href }: SocialLink) {
       </div>
 
       <ArrowUpRightIcon className="size-4 text-muted-foreground" />
-    </a>
+    </Link>
   );
 }

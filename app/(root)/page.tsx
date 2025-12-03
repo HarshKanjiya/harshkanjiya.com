@@ -14,8 +14,10 @@ import Script from "next/script";
 
 export default async function Page() {
     return (
-        <main className="mx-auto md:max-w-3xl *:[[id]]:scroll-mt-22">
+        <main
+            className="mx-auto md:max-w-3xl *:[[id]]:scroll-mt-22">
             <Script src="/js/meshCanvas.js" strategy="beforeInteractive" />
+
             <HeroSection />
             <ProfileHeader />
             <CustomSeparator />
@@ -27,19 +29,19 @@ export default async function Page() {
             <CustomSeparator />
 
             <About />
-            <CustomSeparator />
-
-            {/* <TestimonialsMarquee /> */}
-            <CustomSeparator />
+            {/* <CustomSeparator /> */}
 
             <GitHubContributions />
             <CustomSeparator />
+
+            {/* <TestimonialsMarquee /> */}
+            {/* <CustomSeparator /> */}
 
             <TeckStack />
             <CustomSeparator />
 
             {/* <Blog /> */}
-            <CustomSeparator />
+            {/* <CustomSeparator /> */}
 
             <Experiences />
             <CustomSeparator />
