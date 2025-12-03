@@ -1,4 +1,4 @@
-import { GlobeIcon, MailIcon, MapPinIcon, MarsIcon, VenusIcon } from "lucide-react";
+import { GlobeIcon, MapPinIcon, MarsIcon, VenusIcon } from "lucide-react";
 
 import { urlToName } from "@/utils/url";
 
@@ -12,8 +12,6 @@ import { JobItem } from "@/components/job-item";
 import { Panel, PanelContent } from "@/components/panel";
 import { PhoneItem } from "@/components/phone-item";
 import { USER } from "@/data/user";
-import { useIsClient } from "@/hooks/use-is-client";
-import { decodeEmail } from "@/utils/string";
 import { CurrentLocalTimeItem } from "./current-local-time-item";
 import { EmailItem } from "./email-item";
 

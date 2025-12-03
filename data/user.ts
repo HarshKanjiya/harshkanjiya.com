@@ -20,11 +20,18 @@ export const USER: User = {
     jobs: [
         {
             title: "Full stack Developer",
-            company: "Self",
-            website: "https://harshkanjiya.com",
+            company: "Project Tree Infotech",
+            website: "https://projecttree.in/",
         },
     ],
-    about: "",
+    about: `
+- **Design Engineer** with **3+ years of experience**,
+- Skilled in **Next.js**, **React**, **Angular**, **TypeScript**, and modern front-end technologies; building high-quality, user-centric web and mobile applications.
+- Passionate about exploring new technologies and learning design philosophy.
+- Proven track record in modernizing legacy systems and optimizing performance.
+- Intrested in **Golang**, **GenAI** and **System Design**.
+
+    `,
     avatar: "images/profile.png",
     ogImage: "",
     namePronunciationUrl: "",

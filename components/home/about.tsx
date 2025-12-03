@@ -16,6 +16,11 @@ export function About() {
           <Markdown>{USER.about}</Markdown>
         </ProseMono>
       </PanelContent>
+
+      <PanelContent>
+        <ProseMono>
+        </ProseMono>
+      </PanelContent>
     </Panel>
   );
 }

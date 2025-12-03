@@ -27,9 +27,6 @@ export default async function Page() {
             <Overview />
             <CustomSeparator />
 
-            <SocialLinks />
-            <CustomSeparator />
-
             {/* <TestimonialsMarquee /> */}
             {/* <CustomSeparator /> */}
 
@@ -58,6 +55,9 @@ export default async function Page() {
             <CustomSeparator />
 
             <GitHubContributions />
+            <CustomSeparator />
+
+            <SocialLinks />
             <CustomSeparator />
 
             <Brand />
