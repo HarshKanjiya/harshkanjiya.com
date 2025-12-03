@@ -1,9 +1,10 @@
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
 import type { Metadata } from "next";
+import { ThemeProvider } from "next-themes";
 import dynamic from "next/dynamic";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,14 +31,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-base-50`}
+        suppressHydrationWarning
       >
-        <SiteHeader />
-        <main className="max-w-screen overflow-x-hidden px-2">{children}</main>
-        <SiteFooter />
-        <ScrollToTop />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <SiteHeader />
+          <main className="max-w-screen overflow-x-hidden px-2">{children}</main>
+          <SiteFooter />
+          <ScrollToTop />
+        </ThemeProvider>
       </body>
     </html>
   );

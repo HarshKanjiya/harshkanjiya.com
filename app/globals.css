@@ -209,6 +209,11 @@
   --selection-foreground: oklch(0.985 0 0);
 
   --shadow-popover: 0 6px 24px rgba(0, 0, 0, 0.25);
+
+  --mesh-color-1: #53e1b4 !important;
+  --mesh-color-2: #f4ff5784 !important;
+  --mesh-color-3: #0ea497 !important;
+  --mesh-color-4: #0c7168 !important;
 }
 
 .dark {
@@ -551,4 +556,21 @@
     0 var(--scroll-buffer),
     calc(100% - var(--scroll-buffer)) 100%;
   animation-fill-mode: both;
+}
+
+/* Gradient canvas positioning and color variables */
+#gradient-canvas {
+  position: absolute;
+  z-index: -1;
+  opacity: 100%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(180deg);
+  aspect-ratio: auto;
+  --gradient-color-1: var(--mesh-color-1);
+  --gradient-color-2: var(--mesh-color-2);
+  --gradient-color-3: var(--mesh-color-3);
+  --gradient-color-4: var(--mesh-color-4);
 }
