@@ -1,5 +1,6 @@
 import CustomSeparator from "@/components/custom-separator";
 import { About } from "@/components/home/about";
+import { Bookmarks } from "@/components/home/bookmarks";
 import { Brand } from "@/components/home/brand";
 import { Experiences } from "@/components/home/experiences";
 import { GitHubContributions } from "@/components/home/github-contributions";
@@ -28,12 +29,6 @@ export default async function Page() {
             <SocialLinks />
             <CustomSeparator />
 
-            <About />
-            {/* <CustomSeparator /> */}
-
-            <GitHubContributions />
-            <CustomSeparator />
-
             {/* <TestimonialsMarquee /> */}
             {/* <CustomSeparator /> */}
 
@@ -43,11 +38,8 @@ export default async function Page() {
             {/* <Blog /> */}
             {/* <CustomSeparator /> */}
 
-            <Experiences />
-            <CustomSeparator />
-
             {/* <Projects /> */}
-            <CustomSeparator />
+            {/* <CustomSeparator /> */}
 
             {/* <Awards /> */}
             <CustomSeparator />
@@ -55,8 +47,17 @@ export default async function Page() {
             {/* <Certifications /> */}
             <CustomSeparator />
 
-            {/* <Bookmarks /> */}
-            {/* <CustomSeparator /> */}
+            <Bookmarks />
+            <CustomSeparator />
+
+            <Experiences />
+            <CustomSeparator />
+
+            <About />
+            <CustomSeparator />
+
+            <GitHubContributions />
+            <CustomSeparator />
 
             <Brand />
             <CustomSeparator />

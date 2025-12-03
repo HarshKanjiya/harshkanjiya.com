@@ -1,7 +1,7 @@
 
 import { Panel } from "@/components/panel";
-import { SOCIAL_LINKS } from "@/data/user";
 import { SocialLinkItem } from "./social-link-item";
+import { SOCIAL_LINKS } from "@/data/social-links";
 
 export function SocialLinks() {
   return (
