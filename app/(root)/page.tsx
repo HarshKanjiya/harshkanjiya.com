@@ -1,5 +1,6 @@
 import CustomSeparator from "@/components/custom-separator";
 import { About } from "@/components/home/about";
+import { Blog } from "@/components/home/blogs";
 import { Bookmarks } from "@/components/home/bookmarks";
 import { Brand } from "@/components/home/brand";
 import { Experiences } from "@/components/home/experiences";
@@ -35,17 +36,17 @@ export default async function Page() {
             <TeckStack />
             <CustomSeparator />
 
-            {/* <Blog /> */}
-            {/* <CustomSeparator /> */}
+            <Blog />
+            <CustomSeparator />
 
             {/* <Projects /> */}
             {/* <CustomSeparator /> */}
 
             {/* <Awards /> */}
-            <CustomSeparator />
+            {/* <CustomSeparator /> */}
 
             {/* <Certifications /> */}
-            <CustomSeparator />
+            {/* <CustomSeparator /> */}
 
             <Bookmarks />
             <CustomSeparator />
