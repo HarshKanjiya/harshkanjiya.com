@@ -1,6 +1,5 @@
 
 // import { DesktopNav } from "@/components/desktop-nav";
-// import { NavItemGitHub } from "@/components/nav-item-github";
 import { MAIN_NAV } from "@/config/site";
 // import { getAllPosts } from "@/features/blog/data/posts";
 import { cn } from "@/lib/utils";
@@ -11,6 +10,7 @@ import { DesktopNav } from "./desktop-nav";
 import SiteHeaderWrapper from "./site-header-wrapper";
 import Link from "next/link";
 import { SiteHeaderMark } from "./site-header-mark";
+import { NavItemGitHub } from "./nav-item-github";
 
 // const BrandContextMenu = dynamic(() =>
 //   import("@/components/brand-context-menu").then((mod) => mod.BrandContextMenu)
@@ -37,17 +37,17 @@ export function SiteHeader() {
       )}
     >
       <div
-        className="screen-line-before md:max-w-[54rem] screen-line-after mx-auto flex h-12 items-center justify-between gap-2 border-x border-edge px-2 after:z-1 after:transition-[background-color] sm:gap-4"
+        className="screen-line-before md:max-w-216 screen-line-after mx-auto flex h-12 items-center justify-between gap-2 border-x border-edge px-2 after:z-1 after:transition-[background-color] sm:gap-4"
         data-header-container
       >
         {/* <BrandContextMenu> */}
-          <Link
-            className="has-data-[visible=false]:pointer-events-none [&_svg]:h-8"
-            href="/"
-            aria-label="Home"
-          >
-            <SiteHeaderMark />
-          </Link>
+        <Link
+          className="has-data-[visible=false]:pointer-events-none [&_svg]:h-8"
+          href="/"
+          aria-label="Home"
+        >
+          <SiteHeaderMark />
+        </Link>
         {/* </BrandContextMenu> */}
 
         <div className="flex-1" />
@@ -56,8 +56,8 @@ export function SiteHeader() {
 
         <div className="flex items-center *:first:mr-2">
           {/* <CommandMenu posts={posts} /> */}
-          {/* <NavItemGitHub /> */}
-          <span className="mx-2 flex h-4 w-px bg-border" />
+          <NavItemGitHub />
+          <span className="mx-1 flex h-6 w-px bg-border" />
           <ThemeToggle />
           {/* <MobileNav className="md:hidden" items={MAIN_NAV} /> */}
         </div>

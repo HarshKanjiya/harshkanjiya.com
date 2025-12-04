@@ -1,5 +1,5 @@
-export function HeroSection() {
 
+export function HeroSection() {
     return (
         <>
             <div className="aspect-2/1 border-x border-edge relative select-none sm:aspect-5/2 overflow-hidden flex items-center justify-center -mb-20 text-white">

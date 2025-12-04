@@ -1,5 +1,6 @@
 import { USER } from "@/data/user";
 import type { NavItem } from "@/types/nav";
+import { BookCopyIcon, ContactRoundIcon, RssIcon } from "lucide-react";
 
 export const SITE_INFO = {
   name: USER.displayName,
@@ -18,26 +19,29 @@ export const MAIN_NAV: NavItem[] = [
   {
     title: "Portfolio",
     href: "/",
+    // icon: ContactRoundIcon
   },
-  {
-    title: "Components",
-    href: "/components",
-  },
+  // {
+  //   title: "Components",
+  //   href: "/components",
+  // },
   {
     title: "Blog",
     href: "/blog",
+    // icon: RssIcon
   },
-  // {
-  //   title: "Sponsors",
-  //   href: "/sponsors",
-  // },
+  {
+    title: "TBR List",
+    href: "/tbr-list",
+    // icon: BookCopyIcon
+  },
 ];
 
 export const GITHUB_USERNAME = "harshkanjiya";
-export const SOURCE_CODE_GITHUB_REPO = "harshkanjiya/harshkanjiya.com";
-export const SOURCE_CODE_GITHUB_URL = "https://github.com/harshkanjiya/harshkanjiya.com";
+export const SOURCE_CODE_GITHUB_REPO = "HarshKanjiya/harshkanjiya.com";
+export const SOURCE_CODE_GITHUB_URL = "https://github.com/HarshKanjiya/harshkanjiya.com";
 
-export const SPONSORSHIP_URL = "https://github.com/sponsors/harshkanjiya";
+// export const SPONSORSHIP_URL = "https://github.com/sponsors/harshkanjiya";
 
 export const UTM_PARAMS = {
   utm_source: "harshkanjiya.com",

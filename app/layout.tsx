@@ -4,16 +4,21 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import dynamic from "next/dynamic";
 import { Geist, Geist_Mono } from "next/font/google";
+
+import Script from "next/script";
 import "./globals.css";
+import MeshReloader from "@/components/mesh-reloader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  adjustFontFallback: false
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  adjustFontFallback: false
 });
 
 export const metadata: Metadata = {
@@ -42,6 +47,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <MeshReloader />
           <SiteHeader />
           <div className="flex-1 flex justify-center">
             <div

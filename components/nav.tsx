@@ -16,12 +16,12 @@ export default function Nav({
   return (
     <nav
       data-active-id={activeId}
-      className={cn("flex items-center gap-4", className)}
+      className={cn("flex items-center gap-6", className)}
     >
       {items.map(({ title, href }) => {
         const active =
           activeId === href ||
-          (href === "/" // Home page
+          (href === "/" //
             ? ["/", "/index"].includes(activeId || "")
             : activeId?.startsWith(href));
 
@@ -44,7 +44,7 @@ export function NavItem({
   return (
     <Link
       className={cn(
-        "font-mono text-sm font-medium text-muted-foreground transition-[color] duration-300",
+        "font-mono text-sm font-medium text-muted-foreground transition-[color] duration-300 flex items-center gap-2",
         active && "text-foreground"
       )}
       {...props}

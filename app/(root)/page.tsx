@@ -6,7 +6,6 @@ import { Brand } from "@/components/home/brand";
 import { Experiences } from "@/components/home/experiences";
 import { GitHubContributions } from "@/components/home/github-contributions";
 import { HeroSection } from "@/components/home/hero-section";
-// import { MeshCanvasLoader } from "@/components/mesh-canvas-loader";
 import Overview from "@/components/home/overview";
 import { ProfileHeader } from "@/components/home/profile-header";
 import { SocialLinks } from "@/components/home/social-links";
