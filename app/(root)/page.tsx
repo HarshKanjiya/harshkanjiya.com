@@ -59,8 +59,8 @@ export default async function Page() {
             <SocialLinks />
             <CustomSeparator />
 
-            <Brand />
-            <CustomSeparator />
+            {/* <Brand /> */}
+            {/* <CustomSeparator /> */}
         </main>
     );
 }
