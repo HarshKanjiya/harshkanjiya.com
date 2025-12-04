@@ -1,13 +1,12 @@
+import MeshReloader from "@/components/mesh-reloader";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import dynamic from "next/dynamic";
 import { Geist, Geist_Mono } from "next/font/google";
-
-import Script from "next/script";
+import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import "./globals.css";
-import MeshReloader from "@/components/mesh-reloader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -47,29 +46,31 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <MeshReloader />
-          <SiteHeader />
-          <div className="flex-1 flex justify-center">
-            <div
-              className="relative w-4 md:w-12 border-l border-edge opacity-75 lg:block
+          <NuqsAdapter>
+            <MeshReloader />
+            <SiteHeader />
+            <div className="flex-1 flex justify-center">
+              <div
+                className="relative w-4 md:w-12 border-l border-edge opacity-75 lg:block
               before:absolute before:inset-0 before:-z-1
               before:bg-[repeating-linear-gradient(315deg,var(--pattern-foreground)_0,var(--pattern-foreground)_2px,transparent_0,transparent_50%)]
               before:bg-size-[10px_10px]
               before:[--pattern-foreground:var(--color-border)]/56
               dark:before:[--pattern-foreground:var(--color-border)]/56"
-            />
-            <main className="w-screen max-w-3xl overflow-x-hidden">{children}</main>
-            <div
-              className="relative w-4 md:w-12 border-r border-edge opacity-75 lg:block
+              />
+              <main className="w-screen max-w-3xl overflow-x-hidden">{children}</main>
+              <div
+                className="relative w-4 md:w-12 border-r border-edge opacity-75 lg:block
               before:absolute before:inset-0 before:-z-1
               before:bg-[repeating-linear-gradient(315deg,var(--pattern-foreground)_0,var(--pattern-foreground)_2px,transparent_0,transparent_50%)]
               before:bg-size-[10px_10px]
               before:[--pattern-foreground:var(--color-border)]/56
               dark:before:[--pattern-foreground:var(--color-border)]/56"
-            />
-          </div>
-          <SiteFooter />
-          <ScrollToTop />
+              />
+            </div>
+            <SiteFooter />
+            <ScrollToTop />
+          </NuqsAdapter>
         </ThemeProvider>
       </body>
     </html>

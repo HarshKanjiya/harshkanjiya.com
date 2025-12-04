@@ -9,7 +9,6 @@ import { findNeighbour, getAllBlogs, getBlogBySlug } from "@/actions/blog";
 import { InlineTOC } from "@/components/blog/inline-toc";
 import { MDX } from "@/components/blog/mdx";
 import { PostKeyboardShortcuts } from "@/components/blog/post-keyboard-shortcuts";
-import { LLMCopyButtonWithViewOptions } from "@/components/blog/post-page-actions";
 import { PostShareMenu } from "@/components/blog/post-share-menu";
 import { Button } from "@/components/ui/button";
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
@@ -137,10 +136,10 @@ export default async function Page({
         </Button>
 
         <div className="flex items-center gap-2">
-          <LLMCopyButtonWithViewOptions
+          {/* <LLMCopyButtonWithViewOptions
             markdownUrl={`${getPostUrl(post)}.mdx`}
             isComponent={post.metadata.category === "components"}
-          />
+          /> */}
 
           <PostShareMenu url={getPostUrl(post)} />
 

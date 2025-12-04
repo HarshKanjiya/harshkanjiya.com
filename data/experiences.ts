@@ -4,7 +4,7 @@ export const EXPERIENCES: Experience[] = [
   {
     id: "projecttree",
     companyName: "Project Tree Infotech",
-    // companyLogo: "https://assets.chanhdai.com/images/companies/simplamo.webp",
+    companyLogo: "/images/ptree-logo.svg",
     positions: [
       {
         id: "20f8bfe5-b6a3-4b0d-ac2f-6fccd50d417e",

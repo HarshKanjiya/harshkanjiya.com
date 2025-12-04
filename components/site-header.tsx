@@ -11,6 +11,7 @@ import SiteHeaderWrapper from "./site-header-wrapper";
 import Link from "next/link";
 import { SiteHeaderMark } from "./site-header-mark";
 import { NavItemGitHub } from "./nav-item-github";
+import dynamic from "next/dynamic";
 
 // const BrandContextMenu = dynamic(() =>
 //   import("@/components/brand-context-menu").then((mod) => mod.BrandContextMenu)
@@ -20,9 +21,9 @@ import { NavItemGitHub } from "./nav-item-github";
 //   import("@/components/command-menu").then((mod) => mod.CommandMenu)
 // );
 
-// const MobileNav = dynamic(() =>
-//   import("@/components/mobile-nav").then((mod) => mod.MobileNav)
-// );
+const MobileNav = dynamic(() =>
+  import("@/components/mobile-nav").then((mod) => mod.MobileNav)
+);
 
 export function SiteHeader() {
   // const posts = getAllPosts();
@@ -30,7 +31,7 @@ export function SiteHeader() {
   return (
     <SiteHeaderWrapper
       className={cn(
-        "sticky top-0 z-50 max-w-screen overflow-x-hidden bg-background px-2 pt-2",
+        "sticky top-0 z-50 max-w-screen overflow-x-hidden bg-background px-4 sm:px-2 pt-2",
         "data-[affix=true]:shadow-[0_0_16px_0_black]/8 dark:data-[affix=true]:shadow-[0_0_16px_0_black]",
         "not-dark:data-[affix=true]:**:data-header-container:after:bg-border",
         "transition-shadow duration-300"
@@ -59,7 +60,7 @@ export function SiteHeader() {
           <NavItemGitHub />
           <span className="mx-1 flex h-6 w-px bg-border" />
           <ThemeToggle />
-          {/* <MobileNav className="md:hidden" items={MAIN_NAV} /> */}
+          <MobileNav className="md:hidden" items={MAIN_NAV} />
         </div>
       </div>
     </SiteHeaderWrapper>

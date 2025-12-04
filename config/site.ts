@@ -1,6 +1,5 @@
 import { USER } from "@/data/user";
 import type { NavItem } from "@/types/nav";
-import { BookCopyIcon, ContactRoundIcon, RssIcon } from "lucide-react";
 
 export const SITE_INFO = {
   name: USER.displayName,
@@ -19,7 +18,6 @@ export const MAIN_NAV: NavItem[] = [
   {
     title: "Portfolio",
     href: "/",
-    // icon: ContactRoundIcon
   },
   // {
   //   title: "Components",
@@ -28,12 +26,10 @@ export const MAIN_NAV: NavItem[] = [
   {
     title: "Blog",
     href: "/blog",
-    // icon: RssIcon
   },
   {
-    title: "TBR List",
-    href: "/tbr-list",
-    // icon: BookCopyIcon
+    title: "My Library",
+    href: "/my-library",
   },
 ];
 

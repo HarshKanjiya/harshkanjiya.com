@@ -46,27 +46,6 @@ export default function Overview() {
                             </IntroItemLink>
                         </IntroItemContent>
                     </IntroItem>
-
-                    <CurrentLocalTimeItem timeZone={USER.timeZone} />
-
-                    <PhoneItem phoneNumber={USER.phoneNumber} />
-
-                    <EmailItem email={USER.email} />
-
-                    <IntroItem>
-                        <IntroItemIcon>
-                            <GlobeIcon />
-                        </IntroItemIcon>
-                        <IntroItemContent>
-                            <IntroItemLink
-                                href={USER.website}
-                                aria-label={`Personal website: ${urlToName(USER.website)}`}
-                            >
-                                {urlToName(USER.website)}
-                            </IntroItemLink>
-                        </IntroItemContent>
-                    </IntroItem>
-
                     <IntroItem>
                         <IntroItemIcon>
                             {USER.gender === "male" ? <MarsIcon /> : <VenusIcon />}
@@ -75,6 +54,11 @@ export default function Overview() {
                             {USER.pronouns}
                         </IntroItemContent>
                     </IntroItem>
+
+                    <PhoneItem phoneNumber={USER.phoneNumber} />
+
+                    <EmailItem email={USER.email} />
+
                 </div>
             </PanelContent>
         </Panel>

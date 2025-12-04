@@ -20,7 +20,7 @@ export const USER: User = {
     jobs: [
         {
             title: "Full stack Developer",
-            company: "Project Tree Infotech",
+            company: "Project Tree",
             website: "https://projecttree.in/",
         },
     ],
