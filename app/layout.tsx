@@ -51,7 +51,7 @@ export default function RootLayout({
           <SiteHeader />
           <div className="flex-1 flex justify-center">
             <div
-              className="relative hidden w-12 border-l border-edge opacity-75 lg:block
+              className="relative w-4 md:w-12 border-l border-edge opacity-75 lg:block
               before:absolute before:inset-0 before:-z-1
               before:bg-[repeating-linear-gradient(315deg,var(--pattern-foreground)_0,var(--pattern-foreground)_2px,transparent_0,transparent_50%)]
               before:bg-size-[10px_10px]
@@ -60,7 +60,7 @@ export default function RootLayout({
             />
             <main className="w-screen max-w-3xl overflow-x-hidden">{children}</main>
             <div
-              className="relative hidden w-12 border-r border-edge opacity-75 lg:block
+              className="relative w-4 md:w-12 border-r border-edge opacity-75 lg:block
               before:absolute before:inset-0 before:-z-1
               before:bg-[repeating-linear-gradient(315deg,var(--pattern-foreground)_0,var(--pattern-foreground)_2px,transparent_0,transparent_50%)]
               before:bg-size-[10px_10px]
