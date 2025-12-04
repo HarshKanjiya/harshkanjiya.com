@@ -1,13 +1,33 @@
-import BookItem from "@/components/book-item";
 import { BOOKS } from "@/data/books";
 import { cn } from "@/lib/utils";
 import { PinIcon } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
+import { SITE_INFO } from "@/config/site";
 
 export const metadata: Metadata = {
-    title: "My Library - Harsh Kanjiya",
-    description: "List of all the books that I have read or plan to read.",
+    title: {
+        default: "My Library",
+        template: `%s · ${SITE_INFO.name}`,
+    },
+    description: "List of books I've read or plan to read.",
+    alternates: {
+        canonical: `${SITE_INFO.url}/my-library`,
+    },
+    openGraph: {
+        title: "My Library",
+        description: "List of books I've read or plan to read.",
+        url: `${SITE_INFO.url}/my-library`,
+        siteName: SITE_INFO.name,
+        type: "website",
+        images: [{ url: SITE_INFO.ogImage }],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "My Library",
+        description: "List of books I've read or plan to read.",
+        images: [SITE_INFO.ogImage],
+    },
 };
 
 export default function Page() {
@@ -22,26 +42,6 @@ export default function Page() {
                     {metadata.description}
                 </p>
             </div>
-
-            {/* <div className="px-4">
-                <div className="relative pt-4">
-                    <div className="absolute inset-0 -z-1 grid grid-cols-2 gap-4 max-sm:hidden sm:grid-cols-4">
-                        <div className="border-x border-edge" />
-                        <div className="border-x border-edge" />
-                        <div className="border-x border-edge" />
-                        <div className="border-x border-edge" />
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-                        {BOOKS.map((book, index) => (
-                            <BookItem
-                                key={book.title}
-                                {...book}
-                            />
-                        ))}
-                    </div>
-                </div>
-            </div> */}
 
             <div className="relative mt-4">
                 <div className="absolute inset-0 -z-1 grid grid-cols-2 gap-4 sm:grid-cols-4">

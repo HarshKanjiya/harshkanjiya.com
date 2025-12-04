@@ -3,11 +3,37 @@ import { PostList } from "@/components/blog/post-list";
 import { PostListWithSearch } from "@/components/blog/post-list-with-search";
 import { PostSearchInput } from "@/components/blog/post-search-input";
 import type { Metadata } from "next";
+import { SITE_INFO } from "@/config/site";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
-  title: "Blog",
-  description: "A collection of articles on development, design, and ideas.",
+  title: {
+    default: "Blog - Articles on Web Development",
+    template: `%s · ${SITE_INFO.name}`,
+  },
+  description: "Articles on web development, React, TypeScript, and building clean, scalable products.",
+  applicationName: SITE_INFO.name,
+  keywords: SITE_INFO.keywords,
+  creator: SITE_INFO.name,
+  authors: [{ name: SITE_INFO.name, url: SITE_INFO.url }],
+  publisher: SITE_INFO.name,
+  alternates: {
+    canonical: `${SITE_INFO.url}/blog`,
+  },
+  openGraph: {
+    title: "Blog",
+    description: "Articles on web development, React, TypeScript, and building clean, scalable products.",
+    url: `${SITE_INFO.url}/blog`,
+    siteName: SITE_INFO.name,
+    type: "website",
+    images: [{ url: SITE_INFO.ogImage }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog",
+    description: "Articles on web development, React, TypeScript, and building clean, scalable products.",
+    images: [SITE_INFO.ogImage],
+  },
 };
 
 export default function Page() {
