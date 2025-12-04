@@ -5,7 +5,6 @@ import type { UnistNode, UnistTree } from "@/types/unist";
 export function rehypeNpmCommand() {
   // Thanks @shadcn/ui
   return (tree: UnistTree) => {
-    // @ts-ignore
     visit(tree, (node: UnistNode) => {
       if (node.type !== "element" || node?.tagName !== "pre") {
         return;

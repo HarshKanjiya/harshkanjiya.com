@@ -20,7 +20,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
         href: "https://www.linkedin.com/in/harsh-kanjiya",
     },
     // {
-    //     icon: "https://assets.chanhdai.com/images/link-icons/dailydotdev.webp?t=1759581475",
+    //     icon: "https://assets.harshkanjiya.com/images/link-icons/dailydotdev.webp?t=1759581475",
     //     title: "daily.dev",
     //     description: "@ncdai",
     //     href: "https://app.daily.dev/ncdai",
