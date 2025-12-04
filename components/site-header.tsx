@@ -38,7 +38,7 @@ export function SiteHeader() {
       )}
     >
       <div
-        className="screen-line-before md:max-w-216 screen-line-after mx-auto flex h-12 items-center justify-between gap-2 border-x border-edge px-2 after:z-1 after:transition-[background-color] sm:gap-4"
+        className="screen-line-before md:max-w-216 screen-line-after mx-auto flex h-12 items-center justify-between gap-2 border-x border-edge pl-2 pr-1.5 after:z-1 after:transition-[background-color] sm:gap-4"
         data-header-container
       >
         {/* <BrandContextMenu> */}
@@ -58,7 +58,7 @@ export function SiteHeader() {
         <div className="flex items-center *:first:mr-2">
           {/* <CommandMenu posts={posts} /> */}
           <NavItemGitHub />
-          <span className="mx-1 flex h-6 w-px bg-border" />
+          <span className="mx-1.5 flex h-6 w-px bg-border" />
           <ThemeToggle />
           <MobileNav className="md:hidden" items={MAIN_NAV} />
         </div>

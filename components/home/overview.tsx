@@ -1,6 +1,5 @@
-import { GlobeIcon, MapPinIcon, MarsIcon, VenusIcon } from "lucide-react";
+import { MapPinIcon, MarsIcon, VenusIcon } from "lucide-react";
 
-import { urlToName } from "@/utils/url";
 
 import {
     IntroItem,
@@ -12,7 +11,6 @@ import { JobItem } from "@/components/job-item";
 import { Panel, PanelContent } from "@/components/panel";
 import { PhoneItem } from "@/components/phone-item";
 import { USER } from "@/data/user";
-import { CurrentLocalTimeItem } from "./current-local-time-item";
 import { EmailItem } from "./email-item";
 
 export default function Overview() {

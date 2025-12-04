@@ -1,5 +1,6 @@
 "use client";
 
+import { USER } from "@/data/user";
 import { useMotionValueEvent, useScroll } from "motion/react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
@@ -43,14 +44,17 @@ function ChanhDaiMarkMotion() {
     };
   }, []);
 
+  // theme === "dark" ? "/images/logo-dark.svg" : "/images/logo-light.svg"
   return (
     <Image
-      src={theme === "dark" ? "/images/logo-dark.svg" : "/images/logo-light.svg"}
+      src={
+        '/' + USER.avatar
+      }
       alt="logo"
       data-visible={visible}
       width={32}
       height={32}
-      className="translate-y-2 opacity-0 transition-[opacity,translate] duration-300 data-[visible=true]:translate-y-0 data-[visible=true]:opacity-100"
+      className="translate-y-2 rounded-full border border-muted-foreground/15 ring-1 ring-edge ring-offset-1 ring-offset-background overflow-hidden opacity-0 transition-[opacity,translate] duration-300 data-[visible=true]:translate-y-0 data-[visible=true]:opacity-100"
     />
   );
 }
@@ -63,6 +67,10 @@ export function SiteHeaderMark() {
     alt="logo"
     width={32}
     height={32}
-    src={theme === "dark" ? "/images/logo-dark.svg" : "/images/logo-light.svg"}
+    className="rounded-full overflow-hidden border border-muted-foreground/15 ring-1 ring-edge ring-offset-1 ring-offset-background"
+    src={
+      '/' + USER.avatar
+    }
   />;
 }
+// theme === "dark" ? "/images/logo-dark.svg" : "/images/logo-light.svg"
