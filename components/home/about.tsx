@@ -30,7 +30,7 @@ export function About() {
         </ProseMono>
       </PanelContent>
 
-      <div className="relative border-t border-edge">
+      {/* <div className="relative border-t border-edge">
         <div className="absolute inset-0 -z-1 grid grid-cols-1 gap-4 max-sm:hidden sm:grid-cols-2 px-4">
           <div className="border-x border-edge" />
           <div className="border-x border-edge" />
@@ -54,7 +54,7 @@ export function About() {
             <FavSongCard />
           </div>
         </div>
-      </div>
+      </div> */}
     </Panel>
   );
 }
