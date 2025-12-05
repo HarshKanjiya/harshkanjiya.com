@@ -1,7 +1,7 @@
 "use client";
 
 import { FAVORITE_SONG } from '@/data/user';
-import { CirclePattern } from './circle-pattern';
+import { CirclePattern } from '../circle-pattern';
 import { useState } from 'react';
 
 const FavSongCard = () => {
@@ -11,8 +11,8 @@ const FavSongCard = () => {
             <h3 className="font-medium w-full py-1.5 px-2 text-lg opacity-50 text-center">
                 Recent Favorite
             </h3>
-            <div className="p-1.5 pt-0 flex-1 h-full rounded-md flex">
-                <div className="flex-1 px-3 py-2 flex flex-col border border-edge bg-accent dark:bg-accent/50 rounded-lg relative overflow-hidden group"
+            <div className="p-1.5 pt-0 flex-1 h-full rounded-md flex w-full">
+                <div className="flex-1 px-3 py-2 flex flex-col border w-full border-edge bg-accent dark:bg-accent/50 rounded-lg relative overflow-hidden group"
                     onMouseEnter={() => setHovered(true)}
                     onMouseLeave={() => setHovered(false)}>
                     <p className="max-h-[150px] overflow-hidden text-base text-text-secondary mt-5">

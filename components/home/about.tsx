@@ -1,13 +1,13 @@
 import { Markdown } from "@/components/markdown";
 import { ProseMono } from "@/components/ui/typography";
-import { FAVORITE_SONG, USER } from "@/data/user";
+import { USER } from "@/data/user";
 
 import { Panel, PanelContent, PanelHeader, PanelTitle } from "@/components/panel";
-import { FavoriteSong } from "@/types/user";
 
 import Link from "next/link";
-import { CirclePattern } from "./circle-pattern";
-import FavSongCard from "./fav-song-card";
+import CurrentBookCard from "./aboutus/current-book-card";
+import FavSongCard from "./aboutus/fav-song-card";
+import ScrapBookCard from "./aboutus/scrap-book-card";
 
 export function About() {
   return (
@@ -44,15 +44,11 @@ export function About() {
           <div className="border-y col-span-full max-w-[calc(50%+8px)] border-edge h-[359px]" />
         </div>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 p-4">
-          <div className="p-3 border-edge border aspect-3/2">
-            <div className="flex items-center justify-center flex-col border-edge border p-2 h-full rounded-lg bg-accent2">
-
-            </div>
+          <div className="p-3 border-edge border aspect-3/2 flex">
+            <CurrentBookCard />
           </div>
-          <div className="p-3 border-edge border row-span-2">
-            <div className="flex items-center justify-center flex-col border-edge border p-2 h-full rounded-lg bg-accent2">
-
-            </div>
+          <div className="p-3 border-edge border row-span-2 flex">
+            <ScrapBookCard />
           </div>
           <div className="p-3 border-edge border aspect-square flex">
             <FavSongCard />
