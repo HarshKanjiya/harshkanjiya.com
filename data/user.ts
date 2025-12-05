@@ -7,7 +7,6 @@ export const USER: User = {
     username: "harshkanjiya",
     gender: "male",
     pronouns: "he/him",
-    bio: "Creating with code. Small details matter.",
     flipSentences: [
         "Creating with code. Small details matter.",
         "Full stack Developer",
@@ -30,12 +29,14 @@ export const USER: User = {
 - Passionate about exploring new technologies and learning design philosophy.
 - Proven track record in modernizing legacy systems and optimizing performance.
 - Learning in **Golang**, **GenAI** and **System Design**.
-
     `,
     avatar: "https://assets.harshkanjiya.com/general/profile.png",
-    ogImage: "",
+
+    // METADATA
+    bio: "Minimal, and modern developer portfolio built with Next.js, MDX, and ShadCN. Designed for project documentation, technical blogs, and personal notes.",
+    ogImage: "https://assets.harshkanjiya.com/general/tweetr-card.png",
     namePronunciationUrl: "",
-    keywords: [],
-    timeZone: "Asia/Ho_Chi_Minh",
-    dateCreated: "2024-01-01",
+    keywords: ["Harsh Kanjiya", "Harsh", "Kanjiya", "harshkanjiya", "Full stack Developer", "React Developer", "Angular Developer", "Next.js Developer", "TypeScript Developer", "Web Developer", "Frontend Developer", "Backend Developer", "JavaScript Developer", "Portfolio", "Personal Website", "Minimalist Portfolio", "Developer Portfolio", "Modern portfolio", "Clean portfolio"],
+    timeZone: "Asia/Kolkata",
+    dateCreated: "2025-4-12",
 }

@@ -8,10 +8,12 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import "./globals.css";
 import { META_THEME_COLORS, SITE_INFO } from "@/config/site";
+import Head from "next/head";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: {
-    default: SITE_INFO.name,
+    default: `${SITE_INFO.name}`,
     template: `%s · ${SITE_INFO.name}`,
   },
   description: SITE_INFO.description,
@@ -79,6 +81,18 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-base-50`}
         suppressHydrationWarning
       >
+        <Head>
+          <link
+            rel="preconnect"
+            href="https://assets.harshkanjiya.com"
+            crossOrigin=""
+          />
+          <link
+            rel="dns-prefetch"
+            href="https://assets.harshkanjiya.com"
+          />
+          <Script src="https://assets.harshkanjiya.com/js/meshCanvas.js" strategy="beforeInteractive" />
+        </Head>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
