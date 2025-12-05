@@ -11,7 +11,15 @@ export function Blog() {
     return (
         <Panel id="blog">
             <PanelHeader>
-                <PanelTitle>Blog</PanelTitle>
+                <PanelTitle className="flex gap-2 items-center group">
+                    Blog
+                    <Link
+                        href="#blog"
+                        className="opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                    >
+                        #
+                    </Link>
+                </PanelTitle>
             </PanelHeader>
 
             <div className="relative py-4">

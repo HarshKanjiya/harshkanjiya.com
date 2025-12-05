@@ -25,14 +25,14 @@ export const USER: User = {
         },
     ],
     about: `
-- **Design Engineer** with **3+ years of experience**,
-- Skilled in **Next.js**, **React**, **Angular**, **TypeScript**, and modern front-end technologies; building high-quality, user-centric web and mobile applications.
+- **Full Stack Developer** with **3+ years of experience**,
+- Skilled in **Next.js**, **React**, **Angular**, **TypeScript**, and modern technologies; building high-quality, user-centric web applications.
 - Passionate about exploring new technologies and learning design philosophy.
 - Proven track record in modernizing legacy systems and optimizing performance.
-- Intrested in **Golang**, **GenAI** and **System Design**.
+- Learning in **Golang**, **GenAI** and **System Design**.
 
     `,
-    avatar: "images/profile.png",
+    avatar: "https://assets.harshkanjiya.com/general/profile.png",
     ogImage: "",
     namePronunciationUrl: "",
     keywords: [],

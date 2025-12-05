@@ -9,13 +9,13 @@ export function SiteFooter() {
     <footer className="max-w-screen overflow-x-hidden px-4 sm:px-2">
       <div className="screen-line-before mx-auto border-x border-edge pt-4 md:max-w-216">
         <figure className="relative mx-auto flex flex-col items-center sm:items-end px-4 text-center z-10 pb-3">
-          <blockquote className="text-center">
+          <blockquote className="w-full text-right">
             <p className="font-serif italic tracking-tight text-lg sm:text-2xl md:text-3xl">
-              Beauty of style and harmony and grace depend on simplicity.”
+              “Simplicity is the ultimate sophistication.”
             </p>
           </blockquote>
           <figcaption className="mt-2 text-right text-sm opacity-85 flex flex-col items-center sm:items-end">
-            — Plato <span className="opacity-80">(4th century)</span>
+            ~ Leonardo da Vinci <span className="opacity-80">(15th century)</span>
           </figcaption>
         </figure>
 

@@ -2,19 +2,19 @@ import { SocialLink } from "@/types/social-links";
 
 export const SOCIAL_LINKS: SocialLink[] = [
     {
-        icon: "/images/x.webp",
+        icon: "https://assets.harshkanjiya.com/social/x.webp",
         title: "X",
         description: "@harsh_kaniiya",
         href: "https://x.com/harsh_kaniiya",
     },
     {
-        icon: "/images/github.webp",
+        icon: "https://assets.harshkanjiya.com/social/github.webp",
         title: "GitHub",
         description: "HarshKanjiya",
         href: "https://github.com/HarshKanjiya",
     },
     {
-        icon: "/images/linkedin.webp",
+        icon: "https://assets.harshkanjiya.com/social/linkedin.webp",
         title: "LinkedIn",
         description: "Harsh Kanjiya",
         href: "https://www.linkedin.com/in/harsh-kanjiya",

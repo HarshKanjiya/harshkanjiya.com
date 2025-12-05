@@ -1,6 +1,5 @@
 "use client";
 
-import { USER } from "@/data/user";
 import { useMotionValueEvent, useScroll } from "motion/react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
@@ -23,10 +22,15 @@ function ChanhDaiMarkMotion() {
   const [visible, setVisible] = useState(false);
   const distanceRef = useRef(160);
   const { theme } = useTheme();
+  const [src, setSrc] = useState(`https://assets.harshkanjiya.com/general/logo-dark.svg`);
 
   useMotionValueEvent(scrollY, "change", (latestValue) => {
     setVisible(latestValue >= distanceRef.current);
   });
+
+  useEffect(() => {
+    setSrc(`https://assets.harshkanjiya.com/general/logo-${theme === "dark" ? "dark" : "light"}.svg`);
+  }, [theme]);
 
   useEffect(() => {
     const coverMark = document.getElementById("js-cover-mark");
@@ -44,17 +48,14 @@ function ChanhDaiMarkMotion() {
     };
   }, []);
 
-  // theme === "dark" ? "/images/logo-dark.svg" : "/images/logo-light.svg"
   return (
     <Image
-      src={
-        '/' + USER.avatar
-      }
+      src={src}
       alt="logo"
       data-visible={visible}
       width={32}
       height={32}
-      className="translate-y-2 rounded-full border border-muted-foreground/15 ring-1 ring-edge ring-offset-1 ring-offset-background overflow-hidden opacity-0 transition-[opacity,translate] duration-300 data-[visible=true]:translate-y-0 data-[visible=true]:opacity-100"
+      className="translate-y-2 overflow-hidden opacity-0 transition-[opacity,translate] duration-300 data-[visible=true]:translate-y-0 data-[visible=true]:opacity-100"
     />
   );
 }
@@ -62,15 +63,18 @@ function ChanhDaiMarkMotion() {
 export function SiteHeaderMark() {
   const pathname = usePathname();
   const { theme } = useTheme();
+  const [src, setSrc] = useState(`https://assets.harshkanjiya.com/general/logo-dark.svg`);
+
+  useEffect(() => {
+    setSrc(`https://assets.harshkanjiya.com/general/logo-${theme === "dark" ? "dark" : "light"}.svg`);
+  }, [theme]);
+
   const isHome = ["/", "/index"].includes(pathname);
   return isHome ? <ChanhDaiMarkMotion /> : <Image
     alt="logo"
     width={32}
     height={32}
-    className="rounded-full overflow-hidden border border-muted-foreground/15 ring-1 ring-edge ring-offset-1 ring-offset-background"
-    src={
-      '/' + USER.avatar
-    }
+    className="overflow-hidden"
+    src={src}
   />;
 }
-// theme === "dark" ? "/images/logo-dark.svg" : "/images/logo-light.svg"

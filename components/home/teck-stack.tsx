@@ -9,12 +9,22 @@ import { cn } from "@/lib/utils";
 
 import { Panel, PanelContent, PanelHeader, PanelTitle } from "@/components/panel";
 import { TECH_STACK } from "@/data/tech-stack";
+import Link from "next/link";
+import { HashIcon } from "lucide-react";
 
 export function TeckStack() {
   return (
     <Panel id="stack">
       <PanelHeader>
-        <PanelTitle>Stack</PanelTitle>
+        <PanelTitle className="flex gap-2 items-center group">
+          Stack
+          <Link
+            href="#stack"
+            className="opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+          >
+            #
+          </Link>
+        </PanelTitle>
       </PanelHeader>
 
       <PanelContent
@@ -39,7 +49,7 @@ export function TeckStack() {
                       {tech.theme ? (
                         <>
                           <Image
-                            src={`/images/tech/${tech.key}-light.svg`}
+                            src={`https://assets.harshkanjiya.com/tech-stack/${tech.key}-light.svg`}
                             alt={`${tech.title} light icon`}
                             width={32}
                             height={32}
@@ -47,7 +57,7 @@ export function TeckStack() {
                             unoptimized
                           />
                           <Image
-                            src={`/images/tech/${tech.key}-dark.svg`}
+                            src={`https://assets.harshkanjiya.com/tech-stack/${tech.key}-dark.svg`}
                             alt={`${tech.title} dark icon`}
                             width={32}
                             height={32}
@@ -57,7 +67,7 @@ export function TeckStack() {
                         </>
                       ) : (
                         <Image
-                          src={`/images/tech/${tech.key}.svg`}
+                          src={`https://assets.harshkanjiya.com/tech-stack/${tech.key}.svg`}
                           alt={`${tech.title} icon`}
                           width={32}
                           height={32}

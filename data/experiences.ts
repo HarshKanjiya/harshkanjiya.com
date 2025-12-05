@@ -4,7 +4,7 @@ export const EXPERIENCES: Experience[] = [
   {
     id: "projecttree",
     companyName: "Project Tree Infotech",
-    companyLogo: "/images/ptree-logo.svg",
+    companyLogo: "https://assets.harshkanjiya.com/companies/ptree-logo.svg",
     positions: [
       {
         id: "20f8bfe5-b6a3-4b0d-ac2f-6fccd50d417e",
@@ -26,9 +26,10 @@ export const EXPERIENCES: Experience[] = [
           "Next.js",
           "TypeScript",
           "Tailwind CSS",
+          "Shadcn UI",
+          "Prime NG",
           "Design System",
           "Brand Design",
-          "Agile",
           "Teamwork",
           "Research",
           "Problem-solving",
@@ -54,7 +55,7 @@ export const EXPERIENCES: Experience[] = [
   {
     id: "squirracode-technologies",
     companyName: "Squirracode Technologies",
-    companyLogo: "/images/squirracode-technologies.png",
+    companyLogo: "https://assets.harshkanjiya.com/companies/squirracode-technologies.svg",
     positions: [
       {
         id: "30d3a9fb-021d-452a-9d27-83655369b4b9",
@@ -63,7 +64,7 @@ export const EXPERIENCES: Experience[] = [
           start: "Dec 2022",
           end: "Oct 2023",
         },
-        employmentType: "Part-time",
+        employmentType: "Remote",
         icon: "code",
         description: `
 - Worked on designing and developing a scalable monitoring platform, focusing on real-time data handling, role-based access, and system performance improvements.
@@ -73,13 +74,12 @@ export const EXPERIENCES: Experience[] = [
         skills: [
           "React",
           "Express.js",
+          "Node.js",
+          "Microservices",
           "Socket.IO",
           "MongoDB",
           "Docker",
-          "UI/UX Design",
-          "Design System",
-          "Brand Design",
-          "Research",
+          "UI/UX",
         ],
       },
       {
@@ -89,8 +89,16 @@ export const EXPERIENCES: Experience[] = [
           start: "Sept 2022",
           end: "Dec 2022",
         },
-        employmentType: "Part-time",
+        employmentType: "Remote",
         icon: "idea",
+        skills: [
+          "HTML5",
+          "CSS3",
+          "JS",
+          "TS",
+          "React",
+          "Research",
+        ],
       },
     ],
   },

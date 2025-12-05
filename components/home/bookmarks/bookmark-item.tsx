@@ -40,11 +40,11 @@ export function BookmarkItem({
         <div className="text-sm text-muted-foreground">
           <dl>
             <dt className="sr-only">Created on</dt>
-            <dd>
+            {/* <dd>
               <time dateTime={new Date(bookmark.createdAt).toISOString()}>
                 {format(new Date(bookmark.createdAt), "dd.MM.yyyy")}
               </time>
-            </dd>
+            </dd> */}
           </dl>
         </div>
       </div>

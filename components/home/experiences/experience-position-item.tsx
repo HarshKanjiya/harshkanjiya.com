@@ -1,5 +1,4 @@
 import { InfinityIcon } from "lucide-react";
-import React from "react";
 
 import { Markdown } from "@/components/markdown";
 import {
