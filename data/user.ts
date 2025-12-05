@@ -1,4 +1,4 @@
-import { User } from "@/types/user";
+import { FavoriteSong, User } from "@/types/user";
 
 export const USER: User = {
     firstName: "Harsh",
@@ -40,3 +40,14 @@ export const USER: User = {
     timeZone: "Asia/Kolkata",
     dateCreated: "2025-4-12",
 }
+
+export const FAVORITE_SONG: FavoriteSong = {
+    artist: "Kishore&nbsp;Kumar",
+    albumName: "Kishore&nbsp;Kumar&nbsp;Masti&nbsp;Ki&nbsp;Chakri",
+    albumId: "6lxPWc34lT7pYMgqy0Sd3a",
+    artistId: "0GF4shudTAFv8ak9eWdd4Y",
+    title: "Chala&nbsp;Jata&nbsp;Hoon",
+    albumImageUrl:
+        "https://i.scdn.co/image/ab67616d00001e02e1b092b5f873a2afd324a98e",
+    songUrl: "https://open.spotify.com/track/5qQIs3YxG66SUHK3KHhSIr",
+};

@@ -1,4 +1,5 @@
 import MeshReloader from "@/components/mesh-reloader";
+import { Analytics } from "@vercel/analytics/next"
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import type { Metadata } from "next";
@@ -100,6 +101,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <NuqsAdapter>
+            <Analytics />
             <MeshReloader />
             <SiteHeader />
             <div className="flex-1 flex justify-center">

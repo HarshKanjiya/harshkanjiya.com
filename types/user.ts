@@ -43,3 +43,13 @@ export type User = {
     /** Profile/site start date in YYYY-MM-DD */
     dateCreated: string;
 };
+
+export type FavoriteSong = {
+    albumImageUrl: string;
+    albumName: string;
+    albumId: string;
+    artist: string;
+    artistId: string;
+    songUrl: string;
+    title: string;
+};
