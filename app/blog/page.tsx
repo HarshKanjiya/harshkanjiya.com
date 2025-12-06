@@ -40,7 +40,7 @@ export default function Page() {
   const allPosts = getAllBlogs();
 
   return (
-    <div className="min-h-svh">
+    <div className="min-h-svh border-x border-edge">
       <div className="screen-line-after px-4">
         <h1 className="text-3xl font-semibold">Blog</h1>
       </div>

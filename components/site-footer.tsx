@@ -9,7 +9,7 @@ export function SiteFooter() {
     <footer className="max-w-screen overflow-x-hidden px-4 sm:px-2">
       <div className="screen-line-before mx-auto border-x border-edge pt-4 md:max-w-216">
         <figure className="relative mx-auto flex flex-col items-center sm:items-end px-4 text-center z-10 pb-3">
-          <blockquote className="w-full text-right">
+          <blockquote className="w-full text-center sm:text-right">
             <p className="font-serif italic tracking-tight text-lg sm:text-2xl md:text-3xl">
               “Simplicity is the ultimate sophistication.”
             </p>

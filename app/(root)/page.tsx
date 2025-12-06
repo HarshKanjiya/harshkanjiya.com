@@ -7,6 +7,7 @@ import { GitHubContributions } from "@/components/home/github-contributions";
 import { HeroSection } from "@/components/home/hero-section";
 import Overview from "@/components/home/overview";
 import { ProfileHeader } from "@/components/home/profile-header";
+import { Projects } from "@/components/home/Projects";
 import { SocialLinks } from "@/components/home/social-links";
 import { TeckStack } from "@/components/home/teck-stack";
 import Script from "next/script";
@@ -31,11 +32,12 @@ export default async function Page() {
             <TeckStack />
             <CustomSeparator />
 
+            <Projects />
+            <CustomSeparator />
+
             <Blog />
             <CustomSeparator />
 
-            {/* <Projects /> */}
-            {/* <CustomSeparator /> */}
 
             {/* <Awards /> */}
             {/* <CustomSeparator /> */}

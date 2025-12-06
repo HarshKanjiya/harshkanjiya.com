@@ -1,5 +1,5 @@
 import { Blog } from "@/types/blog";
-import { PostItem } from "../post-item";
+import { PostItem } from "./post-item";
 import { NotData } from "../no-data";
 
 export function PostList({ posts }: { posts: Blog[] }) {

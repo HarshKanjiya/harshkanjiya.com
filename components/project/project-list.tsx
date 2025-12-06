@@ -1,6 +1,6 @@
 import { Project } from "@/types/projects";
 import { NotData } from "../no-data";
-import { PostItem } from "../post-item";
+import { ProjectItem } from "./project-item";
 
 export function ProjectList({ projects }: { projects: Project[] }) {
   return (
@@ -21,10 +21,9 @@ export function ProjectList({ projects }: { projects: Project[] }) {
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               {projects.map((project, index) => (
-                <PostItem
-                  isProject={true}
+                <ProjectItem
                   key={project.slug}
-                  post={project}
+                  project={project}
                   shouldPreloadImage={index <= 4}
                 />
               ))}

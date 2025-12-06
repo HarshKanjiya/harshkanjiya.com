@@ -5,10 +5,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { BlogPosting as PageSchema, WithContext } from "schema-dts";
 
-import { findNeighbour, getAllProjects, getProjectBySlug } from "@/actions/project";
 import { InlineTOC } from "@/components/blog/inline-toc";
 import { MDX } from "@/components/blog/mdx";
-import { PostKeyboardShortcuts } from "@/components/blog/post-keyboard-shortcuts";
+import { KeyboardShortcuts } from "@/components/keyboard-shortcuts";
 import { PostShareMenu } from "@/components/blog/post-share-menu";
 import { Button } from "@/components/ui/button";
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
@@ -20,11 +19,12 @@ import {
 import { Prose } from "@/components/ui/typography";
 import { SITE_INFO } from "@/config/site";
 import { USER } from "@/data/user";
-import { cn } from "@/lib/utils";
+import { cn, findNeighbour } from "@/lib/utils";
 import { Blog } from "@/types/blog";
+import { getAllBlogs, getBlogBySlug } from "@/actions/blog";
 
 export async function generateStaticParams() {
-  const blogs = getAllProjects();
+  const blogs = getAllBlogs();
   return blogs.map((post) => ({
     slug: post.slug,
   }));
@@ -36,7 +36,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const slug = (await params).slug;
-  const project = getProjectBySlug(slug);
+  const project = getBlogBySlug(slug);
 
   if (!project) {
     return notFound();
@@ -101,7 +101,7 @@ export default async function Page({
   }>;
 }) {
   const slug = (await params).slug;
-  const post = getProjectBySlug(slug);
+  const post = getBlogBySlug(slug);
 
   if (!post) {
     notFound();
@@ -109,11 +109,11 @@ export default async function Page({
 
   const toc = getTableOfContents(post.content);
 
-  const allBlogs = getAllProjects();
+  const allBlogs = getAllBlogs();
   const { previous, next } = findNeighbour(allBlogs, slug);
 
   return (
-    <>
+    <div className="min-h-svh border-x border-edge">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -121,7 +121,7 @@ export default async function Page({
         }}
       />
 
-      <PostKeyboardShortcuts basePath="/blog" previous={previous} next={next} />
+      <KeyboardShortcuts basePath="/blog" previous={previous} next={next} />
 
       <div className="flex items-center justify-between p-2 pl-4">
         <Button
@@ -218,7 +218,7 @@ export default async function Page({
       </Prose>
 
       <div className="screen-line-before h-4 w-full" />
-    </>
+    </div>
   );
 }
 

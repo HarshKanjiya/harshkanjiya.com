@@ -9,15 +9,13 @@ import Link from "next/link";
 export function PostItem({
     post,
     shouldPreloadImage,
-    isProject = false,
 }: {
-    post: Blog | Project;
-    isProject?: boolean;
+    post: Blog;
     shouldPreloadImage?: boolean;
 }) {
     return (
         <Link
-            href={`/${isProject ? "projects" : "blog"}/${post.slug}`}
+            href={`/blog/${post.slug}`}
             className={cn(
                 "group/post flex flex-col gap-2 p-2",
                 "max-sm:screen-line-before max-sm:screen-line-after",

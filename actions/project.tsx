@@ -23,18 +23,3 @@ export function getProjectBySlug(slug: string) {
 export function getProjectsByCategory(category: string) {
     return getAllProjects().filter((project) => project.metadata?.category === category);
 }
-
-export function findNeighbour(posts: Project[], slug: string) {
-    const len = posts.length;
-
-    for (let i = 0; i < len; ++i) {
-        if (posts[i].slug === slug) {
-            return {
-                previous: i > 0 ? posts[i - 1] : null,
-                next: i < len - 1 ? posts[i + 1] : null,
-            };
-        }
-    }
-
-    return { previous: null, next: null };
-}

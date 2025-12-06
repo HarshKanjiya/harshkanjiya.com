@@ -1,20 +1,21 @@
-import { getAllBlogs } from "@/actions/blog";
+import { getAllProjects } from "@/actions/project";
 import { Panel, PanelHeader, PanelTitle } from "@/components/panel";
 import { Button } from "@/components/ui/button";
 import { ArrowRightIcon } from "lucide-react";
 import Link from "next/link";
 import { PostItem } from "../blog/post-item";
+import { ProjectItem } from "../project/project-item";
 
-export function Blog() {
-    const allPosts = getAllBlogs();
+export function Projects() {
+    const allPosts = getAllProjects();
 
     return (
-        <Panel id="blog">
+        <Panel id="projects">
             <PanelHeader>
                 <PanelTitle className="flex gap-2 items-center group">
-                    Blog
+                    Projects
                     <Link
-                        href="#blog"
+                        href="#projects"
                         className="opacity-0 group-hover:opacity-100 transition-opacity duration-200"
                     >
                         #
@@ -30,7 +31,7 @@ export function Blog() {
 
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     {allPosts.slice(0, 4).map((post) => (
-                        <PostItem key={post.slug} post={post} />
+                        <ProjectItem key={post.slug} project={post} />
                     ))}
                 </div>
             </div>
@@ -39,8 +40,8 @@ export function Blog() {
                 allPosts.length > 4 && (
                     <div className="screen-line-before flex justify-center py-2">
                         <Button variant="default" asChild>
-                            <Link href="/blog">
-                                All Posts
+                            <Link href="/projects">
+                                All Projects
                                 <ArrowRightIcon />
                             </Link>
                         </Button>

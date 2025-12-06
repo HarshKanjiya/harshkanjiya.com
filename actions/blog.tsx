@@ -23,18 +23,3 @@ export function getBlogBySlug(slug: string) {
 export function getBlogsByCategory(category: string) {
     return getAllBlogs().filter((blog) => blog.metadata?.category === category);
 }
-
-export function findNeighbour(posts: Blog[], slug: string) {
-    const len = posts.length;
-
-    for (let i = 0; i < len; ++i) {
-        if (posts[i].slug === slug) {
-            return {
-                previous: i > 0 ? posts[i - 1] : null,
-                next: i < len - 1 ? posts[i + 1] : null,
-            };
-        }
-    }
-
-    return { previous: null, next: null };
-}

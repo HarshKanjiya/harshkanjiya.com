@@ -5,10 +5,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { BlogPosting as PageSchema, WithContext } from "schema-dts";
 
-import { findNeighbour, getAllBlogs, getBlogBySlug } from "@/actions/blog";
 import { InlineTOC } from "@/components/blog/inline-toc";
 import { MDX } from "@/components/blog/mdx";
-import { PostKeyboardShortcuts } from "@/components/blog/post-keyboard-shortcuts";
+import { KeyboardShortcuts } from "@/components/keyboard-shortcuts";
 import { PostShareMenu } from "@/components/blog/post-share-menu";
 import { Button } from "@/components/ui/button";
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
@@ -20,11 +19,13 @@ import {
 import { Prose } from "@/components/ui/typography";
 import { SITE_INFO } from "@/config/site";
 import { USER } from "@/data/user";
-import { cn } from "@/lib/utils";
-import { Blog } from "@/types/blog";
+import { cn, findNeighbour } from "@/lib/utils";
+import { getAllProjects, getProjectBySlug } from "@/actions/project";
+import { Project } from "@/types/projects";
+import Image from "next/image";
 
 export async function generateStaticParams() {
-    const blogs = getAllBlogs();
+    const blogs = getAllProjects();
     return blogs.map((post) => ({
         slug: post.slug,
     }));
@@ -36,15 +37,15 @@ export async function generateMetadata({
     params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
     const slug = (await params).slug;
-    const blog = getBlogBySlug(slug);
+    const project = getProjectBySlug(slug);
 
-    if (!blog) {
+    if (!project) {
         return notFound();
     }
 
-    const { title, description, image, createdAt, updatedAt } = blog.metadata;
+    const { title, description, image, createdAt, updatedAt } = project.metadata;
 
-    const postUrl = getPostUrl(blog);
+    const postUrl = `/projects/${project.slug}`;
     const ogImage = image || `/og/simple?title=${encodeURIComponent(title)}`;
 
     return {
@@ -72,18 +73,18 @@ export async function generateMetadata({
     };
 }
 
-function getPageJsonLd(blog: Blog): WithContext<PageSchema> {
+function getPageJsonLd(project: Project): WithContext<PageSchema> {
     return {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
-        headline: blog.metadata.title,
-        description: blog.metadata.description,
+        headline: project.metadata.title,
+        description: project.metadata.description,
         image:
-            blog.metadata.image ||
-            `/og/simple?title=${encodeURIComponent(blog.metadata.title)}`,
-        url: `${SITE_INFO.url}${getPostUrl(blog)}`,
-        datePublished: new Date(blog.metadata.createdAt).toISOString(),
-        dateModified: new Date(blog.metadata.updatedAt).toISOString(),
+            project.metadata.image ||
+            `/og/simple?title=${encodeURIComponent(project.metadata.title)}`,
+        url: `${SITE_INFO.url}/projects/${project.slug}`,
+        datePublished: new Date(project.metadata.createdAt).toISOString(),
+        dateModified: new Date(project.metadata.updatedAt).toISOString(),
         author: {
             "@type": "Person",
             name: USER.displayName,
@@ -101,37 +102,36 @@ export default async function Page({
     }>;
 }) {
     const slug = (await params).slug;
-    const post = getBlogBySlug(slug);
+    const project = getProjectBySlug(slug);
 
-    if (!post) {
+    if (!project) {
         notFound();
     }
 
-    const toc = getTableOfContents(post.content);
+    const toc = getTableOfContents(project.content);
 
-    const allBlogs = getAllBlogs();
-    const { previous, next } = findNeighbour(allBlogs, slug);
+    const allProjects = getAllProjects();
+    const { previous, next } = findNeighbour(allProjects, slug);
 
     return (
-        <>
+        <div className="min-h-svh border-x border-edge">
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{
-                    __html: JSON.stringify(getPageJsonLd(post)).replace(/</g, "\\u003c"),
+                    __html: JSON.stringify(getPageJsonLd(project)).replace(/</g, "\\u003c"),
                 }}
             />
 
-            <PostKeyboardShortcuts basePath="/blog" previous={previous} next={next} />
-
+            <KeyboardShortcuts basePath="/projects" previous={previous} next={next} />
             <div className="flex items-center justify-between p-2 pl-4">
                 <Button
                     className="h-7 gap-2 rounded-lg px-0 font-mono text-muted-foreground"
                     variant="link"
                     asChild
                 >
-                    <Link href="/blog">
+                    <Link href="/projects">
                         <ArrowLeftIcon />
-                        Blog
+                        Projects
                     </Link>
                 </Button>
 
@@ -141,7 +141,7 @@ export default async function Page({
             isComponent={post.metadata.category === "components"}
           /> */}
 
-                    <PostShareMenu url={getPostUrl(post)} />
+                    <PostShareMenu url={`/projects/${project.slug}`} />
 
                     {previous && (
                         <Tooltip>
@@ -193,7 +193,7 @@ export default async function Page({
                 </div>
             </div>
 
-            <div className="screen-line-before screen-line-after">
+            <div className="screen-line-before">
                 <div
                     className={cn(
                         "h-8",
@@ -204,25 +204,64 @@ export default async function Page({
             </div>
 
             <Prose className="px-4">
-                <h1 className="screen-line-after text-3xl font-semibold">
-                    {post.metadata.title}
-                </h1>
+                <div className="flex items-center justify-between gap-3 screen-line-before screen-line-after">
+                    <div className="flex items-center gap-2">
+                        {
+                            project.metadata.logo && (
+                                <Image
+                                    src={project.metadata.logo}
+                                    alt={project.metadata.title}
+                                    width={30}
+                                    height={30}
+                                    className="rounded-xl select-none corner-squircle supports-corner-shape:rounded-[50%] object-cover m-0! border border-edge"
+                                />
+                            )
+                        }
+                        <h1 className="text-3xl font-semibold m-0!">
+                            {project.metadata.title}
+                        </h1>
+                    </div>
+                    <div className="flex items-center gap-3">
+                        {
+                            project.metadata.githubRepo && (
+                                <Link
+                                    href={project.metadata.githubRepo}
+                                    target="_blank">
+                                    <Image
+                                        src="https://assets.harshkanjiya.com/social/github.webp"
+                                        alt="GitHub Repository"
+                                        width={32}
+                                        height={32}
+                                        className="rounded-full object-cover m-0!"
+                                    />
+                                </Link>
+                            )
+                        }
+                    </div>
+                </div>
 
-                <p className="text-muted-foreground">{post.metadata.description}</p>
+                <p className="text-muted-foreground">{project.metadata.description}</p>
+
+                {
+                    project.metadata.image && (
+                        <Image
+                            src={project.metadata.image}
+                            alt={project.metadata.title}
+                            width={800}
+                            height={400}
+                            className="my-4 rounded-md border border-border object-cover"
+                        />
+                    )
+                }
 
                 <InlineTOC items={toc} />
 
                 <div>
-                    <MDX code={post.content} />
+                    <MDX code={project.content} />
                 </div>
             </Prose>
 
             <div className="screen-line-before h-4 w-full" />
-        </>
+        </div>
     );
-}
-
-function getPostUrl(post: Blog) {
-    const isComponent = post.metadata.category === "components";
-    return isComponent ? `/components/${post.slug}` : `/blog/${post.slug}`;
 }

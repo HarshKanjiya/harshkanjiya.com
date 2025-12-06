@@ -5,5 +5,7 @@ export const metadata = {
 };
 
 export default function NotFound() {
-  return <PageNotFound />;
+  return <div className="min-h-svh border-x border-edge">
+    <PageNotFound />
+  </div>;
 }

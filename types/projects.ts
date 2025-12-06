@@ -40,9 +40,11 @@ export type ProjectMetadata = {
   link?: string;
 
   /** Optional list of technologies used in the project. */
-  tech?: string[];
+  tech?: string;
 
   logo?: string;
+
+  githubRepo?: string;
 };
 
 export type Project = {
