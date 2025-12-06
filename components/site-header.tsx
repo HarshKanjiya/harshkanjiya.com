@@ -1,17 +1,12 @@
-
-// import { DesktopNav } from "@/components/desktop-nav";
-import { MAIN_NAV } from "@/config/site";
-// import { getAllPosts } from "@/features/blog/data/posts";
-import { cn } from "@/lib/utils";
-
-// import { SiteHeaderMark } from "./site-header-mark";
 import ThemeToggle from "@/components/theme-toggle";
-import { DesktopNav } from "./desktop-nav";
-import SiteHeaderWrapper from "./site-header-wrapper";
-import Link from "next/link";
-import { SiteHeaderMark } from "./site-header-mark";
-import { NavItemGitHub } from "./nav-item-github";
+import { MAIN_NAV } from "@/config/site";
+import { cn } from "@/lib/utils";
 import dynamic from "next/dynamic";
+import Link from "next/link";
+import { DesktopNav } from "./desktop-nav";
+import { NavItemGitHub } from "./nav-item-github";
+import { SiteHeaderMark } from "./site-header-mark";
+import SiteHeaderWrapper from "./site-header-wrapper";
 
 // const BrandContextMenu = dynamic(() =>
 //   import("@/components/brand-context-menu").then((mod) => mod.BrandContextMenu)
@@ -26,7 +21,6 @@ const MobileNav = dynamic(() =>
 );
 
 export function SiteHeader() {
-  // const posts = getAllPosts();
 
   return (
     <SiteHeaderWrapper
