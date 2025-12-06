@@ -1,11 +1,10 @@
-import { getAllBlogs } from "@/actions/blog";
-import { PostList } from "@/components/blog/post-list";
-import { PostListWithSearch } from "@/components/blog/post-list-with-search";
-import { PostSearchInput } from "@/components/blog/post-search-input";
-import type { Metadata } from "next";
+import { getAllProjects } from "@/actions/project";
+import { ProjectList } from "@/components/project/project-list";
+import { ProjectListWithSearch } from "@/components/project/project-list-with-search";
+import { ProjectSearchInput } from "@/components/project/project-search-input";
 import { SITE_INFO } from "@/config/site";
+import type { Metadata } from "next";
 import { Suspense } from "react";
-import { NotData } from "@/components/no-data";
 
 export const metadata: Metadata = {
     title: {
@@ -38,6 +37,7 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
+    const allProjects = getAllProjects();
 
     return (
         <div className="min-h-svh border-x">
@@ -51,26 +51,19 @@ export default function Page() {
                 </p>
             </div>
 
-            {/* <div className="screen-line-before screen-line-after p-2">
+            <div className="screen-line-before screen-line-after p-2">
                 <Suspense
                     fallback={
                         <div className="flex h-9 w-full rounded-lg border border-input shadow-xs dark:bg-input/30" />
                     }
                 >
-                    <PostSearchInput />
+                    <ProjectSearchInput />
                 </Suspense>
-            </div> */}
+            </div>
 
-            {/* <Suspense fallback={<PostList posts={allPosts} />}>
-                <PostListWithSearch posts={allPosts} />
-            </Suspense> */}
-
-            <NotData>
-                <div className="font-mono font-medium flex flex-row gap-2 w-full justify-center">
-                    <p className="text-muted-foreground">This space is empty for now. </p>
-                    <p className="underline underline-offset-1">Not for long.</p>
-                </div>
-            </NotData>
+            <Suspense fallback={<ProjectList projects={allProjects} />}>
+                <ProjectListWithSearch posts={allProjects} />
+            </Suspense>
 
             <div className="h-4" />
         </div>

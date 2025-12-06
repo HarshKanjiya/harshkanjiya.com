@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Blog } from "@/types/blog";
+import { Project } from "@/types/projects";
 import { format } from "date-fns";
 import { PinIcon } from "lucide-react";
 import Image from "next/image";
@@ -8,13 +9,15 @@ import Link from "next/link";
 export function PostItem({
     post,
     shouldPreloadImage,
+    isProject = false,
 }: {
-    post: Blog;
+    post: Blog | Project;
+    isProject?: boolean;
     shouldPreloadImage?: boolean;
 }) {
     return (
         <Link
-            href={`/blog/${post.slug}`}
+            href={`/${isProject ? "projects" : "blog"}/${post.slug}`}
             className={cn(
                 "group/post flex flex-col gap-2 p-2",
                 "max-sm:screen-line-before max-sm:screen-line-after",

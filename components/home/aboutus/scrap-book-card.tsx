@@ -1,12 +1,12 @@
 "use client";
 import { USER } from "@/data/user";
-import { getRandomNumberInRange } from "@/lib/getRandomNumberInRange";
-import { useElementBoundingRect } from "@/lib/useelementBoundingRect";
-import { useRotationVelocity } from "@/lib/useRotationVelocity";
+import { useElementBoundingRect } from "@/hooks/use-element-bounding-rect";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "motion/react";
 import { useRef, useState } from "react";
 import { useClickAnyWhere, useMediaQuery } from "usehooks-ts";
+import { getRandomNumberInRange } from "./get-random-number-in-range";
+import { useRotationVelocity } from "@/hooks/use-rotation-velocity";
 
 
 function Sticker({
@@ -115,7 +115,7 @@ function Sticker({
       <motion.div
         variants={stickerVariants}
         className={cn(
-          "flex-shrink-1 relative h-fit min-w-[96px] drop-shadow-lg",
+          "shrink relative h-fit min-w-24 drop-shadow-lg",
         )}
         drag={!matches}
         dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
@@ -156,7 +156,7 @@ function Sticker({
                 x: `-50%`,
               }}
               className={cn(
-                "pointer-events-none absolute top-full z-10 mx-auto mt-2 min-w-[160px] !text-base max-w-screen-sm select-none text-balance rounded-sm bg-white/95 px-3 py-2 text-center text-[10px] text-black backdrop-blur-3xl",
+                "pointer-events-none absolute top-full z-10 mx-auto mt-2 min-w-40 text-base! max-w-screen-sm select-none text-balance rounded-sm bg-white/95 px-3 py-2 text-center text-[10px] text-black backdrop-blur-3xl",
               )}
             >
               {caption}
@@ -186,7 +186,7 @@ const ScrapBookCard = () => {
       </h3>
       <div className="p-1.5 pt-0 flex-1 h-full rounded-md flex w-full">
         <div className="flex-1 px-3 py-2 flex flex-col border border-edge bg-accent dark:bg-accent/50 rounded-lg relative group w-full">
-          <div className="absolute top-0 left-0 h-full w-full bg-[radial-gradient(#e5e7eb_1px,transparent_2px)] [background-size:14px_14px] [mask-image:radial-gradient(ellipse_80%_70%_at_50%_50%,black_40%,transparent_100%)] dark:opacity-30"></div>
+          <div className="absolute top-0 left-0 h-full w-full bg-[radial-gradient(#e5e7eb_1px,transparent_2px)] bg-size:14px_14px mask-[radial-gradient(ellipse_80%_70%_at_50%_50%,black_40%,transparent_100%)] dark:opacity-30"></div>
           <motion.div
             variants={container}
             initial="hidden"

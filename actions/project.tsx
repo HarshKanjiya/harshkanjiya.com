@@ -1,9 +1,9 @@
 import { getMDXData } from "@/lib/mdx-reader";
-import { Blog, BlogMetadata } from "@/types/blog";
+import { Project, ProjectMetadata } from "@/types/projects";
 import path from "path";
 
-export function getAllBlogs() {
-    return getMDXData<BlogMetadata>(path.join(process.cwd(), "content/blog")).sort(
+export function getAllProjects() {
+    return getMDXData<ProjectMetadata>(path.join(process.cwd(), "content/project")).sort(
         (a, b) => {
             if (a.metadata.pinned && !b.metadata.pinned) return -1;
             if (!a.metadata.pinned && b.metadata.pinned) return 1;
@@ -16,15 +16,15 @@ export function getAllBlogs() {
     );
 }
 
-export function getBlogBySlug(slug: string) {
-    return getAllBlogs().find((blog) => blog.slug === slug);
+export function getProjectBySlug(slug: string) {
+    return getAllProjects().find((project) => project.slug === slug);
 }
 
-export function getBlogsByCategory(category: string) {
-    return getAllBlogs().filter((blog) => blog.metadata?.category === category);
+export function getProjectsByCategory(category: string) {
+    return getAllProjects().filter((project) => project.metadata?.category === category);
 }
 
-export function findNeighbour(posts: Blog[], slug: string) {
+export function findNeighbour(posts: Project[], slug: string) {
     const len = posts.length;
 
     for (let i = 0; i < len; ++i) {

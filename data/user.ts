@@ -39,6 +39,7 @@ export const USER: User = {
     keywords: ["Harsh Kanjiya", "Harsh", "Kanjiya", "harshkanjiya", "Full stack Developer", "React Developer", "Angular Developer", "Next.js Developer", "TypeScript Developer", "Web Developer", "Frontend Developer", "Backend Developer", "JavaScript Developer", "Portfolio", "Personal Website", "Minimalist Portfolio", "Developer Portfolio", "Modern portfolio", "Clean portfolio"],
     timeZone: "Asia/Kolkata",
     dateCreated: "2025-4-12",
+    resume: "https://assets.harshkanjiya.com/resume/Harsh%20Kanjiya%20Resume.pdf"
 }
 
 export const FAVORITE_SONG: FavoriteSong = {

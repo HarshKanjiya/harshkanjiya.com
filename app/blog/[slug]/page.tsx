@@ -5,7 +5,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { BlogPosting as PageSchema, WithContext } from "schema-dts";
 
-import { findNeighbour, getAllBlogs, getBlogBySlug } from "@/actions/blog";
+import { findNeighbour, getAllProjects, getProjectBySlug } from "@/actions/project";
 import { InlineTOC } from "@/components/blog/inline-toc";
 import { MDX } from "@/components/blog/mdx";
 import { PostKeyboardShortcuts } from "@/components/blog/post-keyboard-shortcuts";
@@ -24,7 +24,7 @@ import { cn } from "@/lib/utils";
 import { Blog } from "@/types/blog";
 
 export async function generateStaticParams() {
-  const blogs = getAllBlogs();
+  const blogs = getAllProjects();
   return blogs.map((post) => ({
     slug: post.slug,
   }));
@@ -36,15 +36,15 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const slug = (await params).slug;
-  const blog = getBlogBySlug(slug);
+  const project = getProjectBySlug(slug);
 
-  if (!blog) {
+  if (!project) {
     return notFound();
   }
 
-  const { title, description, image, createdAt, updatedAt } = blog.metadata;
+  const { title, description, image, createdAt, updatedAt } = project.metadata;
 
-  const postUrl = getPostUrl(blog);
+  const postUrl = getPostUrl(project);
   const ogImage = image || `/og/simple?title=${encodeURIComponent(title)}`;
 
   return {
@@ -101,7 +101,7 @@ export default async function Page({
   }>;
 }) {
   const slug = (await params).slug;
-  const post = getBlogBySlug(slug);
+  const post = getProjectBySlug(slug);
 
   if (!post) {
     notFound();
@@ -109,7 +109,7 @@ export default async function Page({
 
   const toc = getTableOfContents(post.content);
 
-  const allBlogs = getAllBlogs();
+  const allBlogs = getAllProjects();
   const { previous, next } = findNeighbour(allBlogs, slug);
 
   return (

@@ -42,6 +42,8 @@ export type User = {
     timeZone: string;
     /** Profile/site start date in YYYY-MM-DD */
     dateCreated: string;
+    /** Public URL to resume PDF */
+    resume: string;
 };
 
 export type FavoriteSong = {

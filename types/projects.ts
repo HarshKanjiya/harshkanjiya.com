@@ -1,25 +1,55 @@
-export type Project = {
-  /** Stable unique identifier (used as list key/anchor). */
-  id: string;
+export type ProjectMetadata = {
   title: string;
+  description: string;
   /**
-   * Project period for display and sorting.
-   * Use "MM.YYYY" format. Omit `end` for ongoing projects.
+   * Social/OG image URL for the post.
+   * Use an absolute URL or a path under /public. Recommended size: 1200x630.
    */
-  period: {
-    /** Start date (e.g., "05.2025"). */
-    start: string;
-    /** End date; leave undefined for "Present". */
-    end?: string;
-  };
-  /** Public URL (site, repository, demo, or video). */
-  link: string;
-  /** Tags/technologies for chips or filtering. */
-  skills: string[];
-  /** Optional rich description; Markdown and line breaks supported. */
-  description?: string;
-  /** Logo image URL (absolute or path under /public). */
+  image?: string;
+  /**
+   * Category identifier/slug used for filtering (see getPostsByCategory).
+   */
+  category?: string;
+  /**
+   * Custom icon name or a Lucide icon name.
+   * Used to visually represent the post in lists or navigation.
+   */
+  icon?: string;
+  /**
+   * Flag to show a "New" badge/highlight in the UI.
+   */
+  new?: boolean;
+  /**
+   * Flag to indicate the post is a work in progress.
+   */
+  workingOn?: boolean;
+  /**
+   * Flag to pin the post to the top of the list.
+   */
+  pinned?: boolean;
+  /**
+   * Post creation date as an ISO date string (e.g. YYYY-MM-DD). Used for sorting.
+   */
+  createdAt: string;
+  /**
+   * Last updated date as an ISO date string (e.g. YYYY-MM-DD).
+   */
+  updatedAt: string;
+
+  /** Optional project live/demo link. */
+  link?: string;
+
+  /** Optional list of technologies used in the project. */
+  tech?: string[];
+
   logo?: string;
-  /** Whether the project card is expanded by default in the UI. */
-  isExpanded?: boolean;
+};
+
+export type Project = {
+  /** Parsed frontmatter metadata from the MDX file. */
+  metadata: ProjectMetadata;
+  /** Slug derived from the MDX filename (without extension). */
+  slug: string;
+  /** MDX content body without frontmatter. */
+  content: string;
 };
