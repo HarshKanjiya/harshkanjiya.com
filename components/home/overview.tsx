@@ -15,15 +15,15 @@ import { EmailItem } from "./email-item";
 
 export default function Overview() {
     return (
-        <div className="sm:p-3 border-x border-edge p-0">
-            <Panel className="screen-line-before screen-line-after p-2 sm:p-3">
+        <div className="sm:p-3 p-0">
+            <Panel className="screen-line-before screen-line-after p-3 sm:p-3">
                 <h2 className="sr-only">Overview</h2>
                 <div className="flex items-center justify-between flex-1 flex-col border-edge border h-full rounded-xl overflow-hidden bg-accent dark:bg-accent/50">
                     <h3 className="w-full py-1.5 px-4 text-muted-foreground text-left">
-                        Quick Overview
+                        Overview
                     </h3>
                     <div className="p-0.5 pt-0 flex-1 h-full rounded-md flex w-full">
-                        <div className="flex-1 px-3 py-2 flex flex-col bg-background outline outline-muted/50 rounded-xl relative overflow-hidden group w-full">
+                        <div className="flex-1 px-3 py-2 flex flex-col bg-background outline outline-muted/50 rounded-[10px] relative overflow-hidden group w-full">
                             <PanelContent className="space-y-2.5 bg-background w-full p-0 sm:p-4">
                                 {USER.jobs.map((job, index) => {
                                     return (
@@ -63,14 +63,14 @@ export default function Overview() {
                                             </IntroItemLink>
                                         </IntroItemContent>
                                     </IntroItem>
-                                    <IntroItem>
+                                    {/* <IntroItem>
                                         <IntroItemIcon>
                                             {USER.gender === "male" ? <MarsIcon /> : <VenusIcon />}
                                         </IntroItemIcon>
                                         <IntroItemContent aria-label={`Pronouns: ${USER.pronouns}`}>
                                             {USER.pronouns}
                                         </IntroItemContent>
-                                    </IntroItem>
+                                    </IntroItem> */}
 
                                     <PhoneItem phoneNumber={USER.phoneNumber} />
 

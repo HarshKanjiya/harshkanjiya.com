@@ -185,7 +185,7 @@ const ScrapBookCard = () => {
         Scrap Book
       </h3>
       <div className="p-0.5 pt-0 flex-1 h-full rounded-md flex w-full">
-        <div className="flex-1 px-3 py-2 flex flex-col bg-background outline outline-muted/50 rounded-xl relative group w-full">
+        <div className="flex-1 px-3 py-2 flex flex-col bg-background outline outline-muted/50 rounded-[10px] relative group w-full">
           <div className="absolute top-0 left-0 h-full w-full overflow-hidden bg-[radial-gradient(#000_1px,transparent_2px)] dark:bg-[radial-gradient(#e5e7eb_1px,transparent_2px)] bg-size-[14px_14px] mask-[radial-gradient(ellipse_80%_70%_at_50%_50%,black_40%,transparent_100%)] opacity-30"></div>
           <motion.div
             variants={container}
@@ -194,7 +194,7 @@ const ScrapBookCard = () => {
             className="-mt-8 h-full w-full flex flex-col justify-center items-center gap-12"
           >
             <Sticker
-              caption="My first ever side project, learning a lot of things while building it along the way!"
+              caption="Working on this project right now & learning a lot of things while building it along the way!"
               index={0}
             >
               <img

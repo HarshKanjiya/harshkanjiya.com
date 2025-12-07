@@ -7,7 +7,7 @@ const CurrentBookCard = () => {
                 Currently Reading
             </h3>
             <div className="p-0.5 pt-0 flex-1 h-full rounded-md flex w-full">
-                <a className="flex-1 px-3 py-2 flex flex-col bg-background outline outline-muted/50 rounded-xl relative overflow-hidden group w-full"
+                <a className="flex-1 px-3 py-2 flex flex-col bg-background outline outline-muted/50 rounded-[10px] relative overflow-hidden group w-full"
                     href={BOOK.image} target="_blank" rel="noopener noreferrer">
                     <div className="relative h-full">
                         <div className="absolute left-10 top-6 h-full origin-bottom-left transition-transform duration-300 ease-in-out">

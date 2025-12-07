@@ -12,7 +12,7 @@ const FavSongCard = () => {
                 Recent Favorite
             </h3>
             <div className="p-0.5 pt-0 flex-1 h-full rounded-md flex w-full">
-                <div className="flex-1 px-3 py-2 flex flex-col bg-background outline outline-muted/50 rounded-xl relative overflow-hidden group w-full"
+                <div className="flex-1 px-3 py-2 flex flex-col bg-background outline outline-muted/50 rounded-[10px] relative overflow-hidden group w-full"
                     onMouseEnter={() => setHovered(true)}
                     onMouseLeave={() => setHovered(false)}>
                     <p className="max-h-[150px] overflow-hidden text-base mt-5 group-hover:-translate-y-2 ease-out transition-transform duration-300">
