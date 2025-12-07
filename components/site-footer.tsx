@@ -1,4 +1,5 @@
-import { SOURCE_CODE_GITHUB_URL } from "@/config/site";
+import { SITE_INFO, SOURCE_CODE_GITHUB_URL } from "@/config/site";
+import { BotIcon, RssIcon } from "lucide-react";
 
 // import { SITE_INFO, SOURCE_CODE_GITHUB_URL } from "@/config/site";
 
@@ -46,6 +47,33 @@ export function SiteFooter() {
           </a>
           .
         </p>
+        <div className="screen-line-before flex w-full before:z-1 after:z-1">
+          <div className="mx-auto flex items-center justify-center gap-3 border-x border-edge bg-background px-4">
+            <a
+              className="flex font-mono text-xs font-medium text-muted-foreground w-24 items-center justify-center"
+              href={`${SITE_INFO.url}/llms.txt`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <BotIcon className="size-4 mr-2" />
+              <span className="sr-only">llms.txt</span>
+              llms.txt
+            </a>
+
+            <Separator />
+
+            <a
+              className="flex font-mono text-xs font-medium text-muted-foreground w-24 items-center justify-center"
+              href={`${SITE_INFO.url}/rss`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <RssIcon className="size-4 mr-2" />
+              <span className="sr-only">RSS</span>
+              RSS
+            </a>
+          </div>
+        </div>
       </div>
       <div className="pb-[env(safe-area-inset-bottom,0px)]">
         <div className="flex h-2" />

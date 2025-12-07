@@ -10,7 +10,6 @@ import { ProfileHeader } from "@/components/home/profile-header";
 import { Projects } from "@/components/home/Projects";
 import { SocialLinks } from "@/components/home/social-links";
 import { TeckStack } from "@/components/home/teck-stack";
-import Script from "next/script";
 
 
 export default async function Page() {
