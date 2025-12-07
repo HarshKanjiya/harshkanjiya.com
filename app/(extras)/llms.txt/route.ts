@@ -5,9 +5,9 @@ import { SITE_INFO } from "@/config/site";
 const allPosts = getAllBlogs();
 const allProjects = getAllProjects();
 
-const content = `# chanhdai.com
+const content = `# harshkanjiya.com
 
-> A minimal, pixel-perfect dev portfolio, component registry, and blog to showcase my work as a Design Engineer.
+> Minimal & modern developer portfolio built with Next.js, MDX, & ShadCN. Designed for project documentation, technical blogs, & personal notes.
 
 - [About](${SITE_INFO.url}/about.md): A quick intro to me, my tech stack, and how to connect.
 - [Experience](${SITE_INFO.url}/experience.md): Highlights from my career and key roles I've taken on.

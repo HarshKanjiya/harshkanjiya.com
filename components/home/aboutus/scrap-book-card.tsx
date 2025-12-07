@@ -205,7 +205,7 @@ const ScrapBookCard = () => {
               />
             </Sticker>
             <Sticker
-              caption={`One Piece is real & has been my all-time favorite series. I'm eagerly awaiting to know what it really is!`}
+              caption={`One Piece has been my all-time favorite series. I'm eagerly awaiting to know what one piece it really is!`}
               index={1}
             >
               <img
