@@ -30,31 +30,23 @@ export function About() {
         </ProseMono>
       </PanelContent>
 
-      {/* <div className="relative border-t border-edge">
-        <div className="absolute inset-0 -z-1 grid grid-cols-1 gap-4 max-sm:hidden sm:grid-cols-2 px-4">
+      <div className="relative border-t border-edge">
+        <div className="absolute inset-0 -z-1 grid grid-cols-1 gap-4 sm:grid-cols-2 px-4">
           <div className="border-x border-edge" />
           <div className="border-x border-edge" />
-        </div>
-        <div className="absolute inset-0 -z-1 grid grid-cols-1 gap-4 max-sm:hidden sm:grid-cols-2 py-4">
-          <div className="border-t col-span-full border-edge" />
-          <div className="border-b col-span-full border-edge" />
-        </div>
-        <div className="absolute inset-0 -z-1 grid grid-cols-1 gap-4 max-sm:hidden sm:grid-cols-2 py-4">
-          <div className="border-y col-span-full max-w-[calc(50%+8px)] border-edge h-[239px]" />
-          <div className="border-y col-span-full max-w-[calc(50%+8px)] border-edge h-[359px]" />
         </div>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 p-4">
-          <div className="p-3 border-edge border aspect-3/2 flex">
+          <div className="p-3 h-[250px] sm:h-auto sm:aspect-3/2 flex screen-line-after screen-line-before">
             <CurrentBookCard />
           </div>
-          <div className="p-3 border-edge border row-span-2 flex">
+          <div className="p-3 row-span-2 flex h-[600px] sm:h-auto screen-line-after screen-line-before">
             <ScrapBookCard />
           </div>
-          <div className="p-3 border-edge border aspect-square flex">
+          <div className="p-3 h-[370px] sm:h-auto sm:aspect-square flex screen-line-after screen-line-before">
             <FavSongCard />
           </div>
         </div>
-      </div> */}
+      </div>
     </Panel>
   );
 }

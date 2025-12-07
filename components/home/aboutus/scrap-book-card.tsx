@@ -1,5 +1,5 @@
 "use client";
-import { USER } from "@/data/user";
+import { BOOK, USER } from "@/data/user";
 import { useElementBoundingRect } from "@/hooks/use-element-bounding-rect";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "motion/react";
@@ -180,13 +180,13 @@ const ScrapBookCard = () => {
     },
   };
   return (
-    <div className="flex items-center justify-between flex-1 flex-col border-edge border h-full rounded-xl bg-accent2">
-      <h3 className="font-medium w-full py-1.5 px-2 text-lg opacity-50 text-center">
+    <div className="flex items-center justify-between flex-1 flex-col border-edge border h-full rounded-xl bg-accent dark:bg-accent/50">
+      <h3 className="w-full py-1.5 px-4 text-muted-foreground text-left">
         Scrap Book
       </h3>
-      <div className="p-1.5 pt-0 flex-1 h-full rounded-md flex w-full">
-        <div className="flex-1 px-3 py-2 flex flex-col border border-edge bg-accent dark:bg-accent/50 rounded-lg relative group w-full">
-          <div className="absolute top-0 left-0 h-full w-full bg-[radial-gradient(#e5e7eb_1px,transparent_2px)] bg-size:14px_14px mask-[radial-gradient(ellipse_80%_70%_at_50%_50%,black_40%,transparent_100%)] dark:opacity-30"></div>
+      <div className="p-0.5 pt-0 flex-1 h-full rounded-md flex w-full">
+        <div className="flex-1 px-3 py-2 flex flex-col bg-background outline outline-muted/50 rounded-xl relative group w-full">
+          <div className="absolute top-0 left-0 h-full w-full overflow-hidden bg-[radial-gradient(#000_1px,transparent_2px)] dark:bg-[radial-gradient(#e5e7eb_1px,transparent_2px)] bg-size-[14px_14px] mask-[radial-gradient(ellipse_80%_70%_at_50%_50%,black_40%,transparent_100%)] opacity-30"></div>
           <motion.div
             variants={container}
             initial="hidden"
@@ -194,36 +194,36 @@ const ScrapBookCard = () => {
             className="-mt-8 h-full w-full flex flex-col justify-center items-center gap-12"
           >
             <Sticker
-              caption="THAT Conference was my favorite tech event of 2024! I even kicked off my speaking season with my very first talk of the year there!"
+              caption="My first ever side project, learning a lot of things while building it along the way!"
               index={0}
             >
               <img
-                width="80"
-                src={USER.avatar}
-                className="xs:max-w-none max-w-[100px]"
+                width="120"
+                src={'https://assets.harshkanjiya.com/general/esc-form-scrap-book.png'}
+                className="xs:max-w-none max-w-[100px] border border-muted rounded overflow-hidden"
                 draggable={false}
               />
             </Sticker>
             <Sticker
-              caption={`I became an international speaker at C3 Dev Fest, where I shared insights on "The Power of a Second Brain in a Developer's Workflow."`}
+              caption={`One Piece is real & has been my all-time favorite series. I'm eagerly awaiting to know what it really is!`}
               index={1}
             >
               <img
                 width="96"
-                src={USER.avatar}
-                className="xs:max-w-none max-w-[100px]"
+                src={'https://assets.harshkanjiya.com/general/one-piece-logo.webp'}
+                className="xs:max-w-none max-w-[100px] border border-muted rounded overflow-hidden"
                 draggable={false}
               />
             </Sticker>
             <Sticker
-              caption="I helped create, organize, and speak at the inaugural Commit Your Code Conference in 2024, where every penny went to charity!"
+              caption="A book that changed my perspective towards life and taught me the importance of taking action."
               index={3}
             >
               <img
-                width="70"
-                src={USER.avatar}
+                width="170"
+                src={'https://assets.harshkanjiya.com/general/do-ot-today-srap-book.png'}
                 draggable={false}
-                className="xs:max-w-none"
+                className="xs:max-w-none max-w-[100px] border border-muted rounded overflow-hidden"
               />
             </Sticker>
           </motion.div>

@@ -1,4 +1,4 @@
-import { FavoriteSong, User } from "@/types/user";
+import { Book, FavoriteSong, User } from "@/types/user";
 
 export const USER: User = {
     firstName: "Harsh",
@@ -52,3 +52,9 @@ export const FAVORITE_SONG: FavoriteSong = {
         "https://i.scdn.co/image/ab67616d00001e02e1b092b5f873a2afd324a98e",
     songUrl: "https://open.spotify.com/track/5qQIs3YxG66SUHK3KHhSIr",
 };
+
+export const BOOK: Book = {
+    title: "Steal Like an Artist",
+    src: "https://assets.harshkanjiya.com/general/618iLg6I3zL._SY342_.jpg",
+    image: "https://austinkleon.com/steal/"
+}

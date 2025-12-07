@@ -10,33 +10,36 @@ export function CirclePattern({ isHovered }: { isHovered?: boolean }) {
     ];
 
     return (
-        <svg
-            className="h-full w-[400px]"
-            viewBox="0 0 368 256"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-            {rings.map((ring, index) => (
-                <motion.rect
-                    key={index}
-                    x={ring.x}
-                    y={ring.y}
-                    width={ring.width}
-                    height={ring.height}
-                    rx={ring.width / 2}
-                    fill="none"
-                    initial={{ stroke: "#D6DADE", strokeOpacity: 0.5 }}
-                    animate={{
-                        stroke: isHovered ? "#818cf8" : "#D6DADE",
-                        strokeOpacity: isHovered ? 1 : 0.5,
-                    }}
-                    transition={{
-                        duration: 0.3,
-                        delay: isHovered ? ring.delay : 0.45 - ring.delay, // Reverse delay when unhovered
-                        ease: "easeInOut",
-                    }}
-                />
-            ))}
-        </svg>
+        <div className="py-4">
+            <svg
+                className="h-full w-[400px] overflow-visible"
+                viewBox="0 0 368 256"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                {rings.map((ring, index) => (
+                    <motion.rect
+                        key={index}
+                        x={ring.x}
+                        y={ring.y}
+                        width={ring.width}
+                        height={ring.height}
+                        rx={ring.width / 2}
+                        fill="none"
+                        initial={{ stroke: "#D6DADE", strokeOpacity: 0.5 }}
+                        animate={{
+                            stroke: isHovered ? "#818cf8" : "#D6DADE",
+                            strokeOpacity: isHovered ? 1 : 0.5,
+                            transform: isHovered ? "translateY(-2%)" : "translateY(0%)",
+                        }}
+                        transition={{
+                            duration: 0.3,
+                            delay: isHovered ? ring.delay : 0.45 - ring.delay, // Reverse delay when unhovered
+                            ease: "easeInOut",
+                        }}
+                    />
+                ))}
+            </svg>
+        </div>
     );
 }

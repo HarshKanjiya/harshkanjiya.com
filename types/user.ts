@@ -55,3 +55,9 @@ export type FavoriteSong = {
     songUrl: string;
     title: string;
 };
+
+export type Book = {
+    title: string;
+    src: string;
+    image: string;
+}
