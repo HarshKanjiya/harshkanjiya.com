@@ -1,14 +1,10 @@
 import { SITE_INFO, SOURCE_CODE_GITHUB_URL } from "@/config/site";
 import { BotIcon, RssIcon } from "lucide-react";
 
-// import { SITE_INFO, SOURCE_CODE_GITHUB_URL } from "@/config/site";
-
-// import { Icons } from "./icons";
-
 export function SiteFooter() {
   return (
     <footer className="max-w-screen overflow-x-hidden px-4 sm:px-2">
-      <div className="screen-line-before mx-auto border-x border-edge pt-4 md:max-w-216">
+      <div className="screen-line-before mx-auto pt-4 md:max-w-216 border-x border-edge">
         <figure className="relative mx-auto flex flex-col items-center sm:items-end px-4 text-center z-10 pb-3">
           <blockquote className="w-full text-center sm:text-right">
             <p className="font-serif italic tracking-tight text-lg sm:text-2xl md:text-3xl">

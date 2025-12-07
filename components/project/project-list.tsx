@@ -19,13 +19,15 @@ export function ProjectList({ projects }: { projects: Project[] }) {
               <div className="border-l border-edge" />
             </div>
 
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 screen-line-after pb-4">
               {projects.map((project, index) => (
-                <ProjectItem
-                  key={project.slug}
-                  project={project}
-                  shouldPreloadImage={index <= 4}
-                />
+                <div className="screen-line-after screen-line-before py-4">
+                  <ProjectItem
+                    key={project.slug}
+                    project={project}
+                    shouldPreloadImage={index <= 4}
+                  />
+                </div>
               ))}
             </div>
           </>

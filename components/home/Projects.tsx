@@ -39,8 +39,11 @@ export function Projects() {
                 </div>
 
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+
                     {allPosts.slice(0, 4).map((post) => (
-                        <ProjectItem key={post.slug} project={post} />
+                        <div className="screen-line-after screen-line-before py-4">
+                            <ProjectItem key={post.slug} project={post} />
+                        </div>
                     ))}
                 </div>
             </div>
