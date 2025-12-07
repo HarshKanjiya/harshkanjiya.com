@@ -15,64 +15,73 @@ import { EmailItem } from "./email-item";
 
 export default function Overview() {
     return (
-        <Panel>
-            <h2 className="sr-only">Overview</h2>
+        <div className="sm:p-3 border-x border-edge p-0">
+            <Panel className="screen-line-before screen-line-after p-2 sm:p-3">
+                <h2 className="sr-only">Overview</h2>
+                <div className="flex items-center justify-between flex-1 flex-col border-edge border h-full rounded-xl overflow-hidden bg-accent dark:bg-accent/50">
+                    <h3 className="w-full py-1.5 px-4 text-muted-foreground text-left">
+                        Quick Overview
+                    </h3>
+                    <div className="p-0.5 pt-0 flex-1 h-full rounded-md flex w-full">
+                        <div className="flex-1 px-3 py-2 flex flex-col bg-background outline outline-muted/50 rounded-xl relative overflow-hidden group w-full">
+                            <PanelContent className="space-y-2.5 bg-background w-full p-0 sm:p-4">
+                                {USER.jobs.map((job, index) => {
+                                    return (
+                                        <JobItem
+                                            key={index}
+                                            title={job.title}
+                                            company={job.company}
+                                            website={job.website}
+                                        />
+                                    );
+                                })}
+                                <div className="grid gap-x-12 gap-y-2.5 sm:grid-cols-2">
+                                    <IntroItem>
+                                        <IntroItemIcon>
+                                            <FileUserIcon />
+                                        </IntroItemIcon>
+                                        <IntroItemContent>
+                                            <IntroItemLink
+                                                href={USER.resume}
+                                                aria-label={`Resume: ${USER.resume}`}
+                                                className="flex gap-2 items-baseline"
+                                            >
+                                                Resume <ExternalLinkIcon size={12} />
+                                            </IntroItemLink>
+                                        </IntroItemContent>
+                                    </IntroItem>
+                                    <IntroItem>
+                                        <IntroItemIcon>
+                                            <MapPinIcon />
+                                        </IntroItemIcon>
+                                        <IntroItemContent>
+                                            <IntroItemLink
+                                                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(USER.address)}`}
+                                                aria-label={`Location: ${USER.address}`}
+                                            >
+                                                {USER.address}
+                                            </IntroItemLink>
+                                        </IntroItemContent>
+                                    </IntroItem>
+                                    <IntroItem>
+                                        <IntroItemIcon>
+                                            {USER.gender === "male" ? <MarsIcon /> : <VenusIcon />}
+                                        </IntroItemIcon>
+                                        <IntroItemContent aria-label={`Pronouns: ${USER.pronouns}`}>
+                                            {USER.pronouns}
+                                        </IntroItemContent>
+                                    </IntroItem>
 
-            <PanelContent className="space-y-2.5">
+                                    <PhoneItem phoneNumber={USER.phoneNumber} />
 
-                <div className="grid gap-x-12 gap-y-2.5 sm:grid-cols-2">
-                    {USER.jobs.map((job, index) => {
-                        return (
-                            <JobItem
-                                key={index}
-                                title={job.title}
-                                company={job.company}
-                                website={job.website}
-                            />
-                        );
-                    })}
-                    <IntroItem>
-                        <IntroItemIcon>
-                            <FileUserIcon />
-                        </IntroItemIcon>
-                        <IntroItemContent>
-                            <IntroItemLink
-                                href={USER.resume}
-                                aria-label={`Resume: ${USER.resume}`}
-                                className="flex gap-2 items-baseline"
-                            >
-                                Resume <ExternalLinkIcon size={12} />
-                            </IntroItemLink>
-                        </IntroItemContent>
-                    </IntroItem>
-                    <IntroItem>
-                        <IntroItemIcon>
-                            <MapPinIcon />
-                        </IntroItemIcon>
-                        <IntroItemContent>
-                            <IntroItemLink
-                                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(USER.address)}`}
-                                aria-label={`Location: ${USER.address}`}
-                            >
-                                {USER.address}
-                            </IntroItemLink>
-                        </IntroItemContent>
-                    </IntroItem>
-                    <IntroItem>
-                        <IntroItemIcon>
-                            {USER.gender === "male" ? <MarsIcon /> : <VenusIcon />}
-                        </IntroItemIcon>
-                        <IntroItemContent aria-label={`Pronouns: ${USER.pronouns}`}>
-                            {USER.pronouns}
-                        </IntroItemContent>
-                    </IntroItem>
+                                    <EmailItem email={USER.email} />
 
-                    <PhoneItem phoneNumber={USER.phoneNumber} />
-
-                    <EmailItem email={USER.email} />
-
+                                </div>
+                            </PanelContent>
+                        </div>
+                    </div>
                 </div>
-            </PanelContent>
-        </Panel>
+            </Panel>
+        </div>
     );
 }
