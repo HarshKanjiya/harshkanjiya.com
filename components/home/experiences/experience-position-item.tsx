@@ -35,7 +35,7 @@ export function ExperiencePositionItem({
           <div className="relative z-1 mb-1 flex items-center gap-3">
             <div
               className={cn(
-                "flex size-6 shrink-0 items-center justify-center rounded-lg",
+                "flex size-6 shrink-0 items-center justify-center rounded-sm",
                 "bg-muted text-muted-foreground",
                 "border border-muted-foreground/15 ring-1 ring-edge ring-offset-1 ring-offset-background"
               )}

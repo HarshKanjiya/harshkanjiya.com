@@ -180,12 +180,12 @@ const ScrapBookCard = () => {
     },
   };
   return (
-    <div className="flex items-center justify-between flex-1 flex-col border-edge border h-full rounded-xl bg-accent dark:bg-accent/50">
+    <div className="flex items-center justify-between flex-1 flex-col border-edge border h-full bg-accent dark:bg-accent/50">
       <h3 className="w-full py-1.5 px-4 text-muted-foreground text-left">
         Scrap Book
       </h3>
       <div className="p-0.5 pt-0 flex-1 h-full rounded-md flex w-full">
-        <div className="flex-1 px-3 py-2 flex flex-col bg-background outline outline-muted/50 rounded-[10px] relative group w-full">
+        <div className="flex-1 px-3 py-2 flex flex-col bg-background outline outline-muted/50 rounded-sm relative group w-full">
           <div className="absolute top-0 left-0 h-full w-full overflow-hidden bg-[radial-gradient(#000_1px,transparent_2px)] dark:bg-[radial-gradient(#e5e7eb_1px,transparent_2px)] bg-size-[14px_14px] mask-[radial-gradient(ellipse_80%_70%_at_50%_50%,black_40%,transparent_100%)] opacity-30"></div>
           <motion.div
             variants={container}
@@ -205,7 +205,7 @@ const ScrapBookCard = () => {
               />
             </Sticker>
             <Sticker
-              caption={`One Piece has been my all-time favorite series. I'm eagerly awaiting to know what one piece it really is!`}
+              caption={`My all-time favorite series. I'm eagerly awaiting to know what one piece it really is!`}
               index={1}
             >
               <img

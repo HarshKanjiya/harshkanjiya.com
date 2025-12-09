@@ -7,15 +7,23 @@ import { useState } from 'react';
 const FavSongCard = () => {
     const [hovered, setHovered] = useState(false);
     return (
-        <div className="flex items-center justify-between flex-1 flex-col border-edge border h-full rounded-xl overflow-hidden bg-accent dark:bg-accent/50">
+        <div className="flex items-center justify-between flex-1 flex-col border-edge border h-full overflow-hidden bg-accent dark:bg-accent/50">
             <h3 className="w-full py-1.5 px-4 text-muted-foreground text-left">
                 Recent Favorite
             </h3>
             <div className="p-0.5 pt-0 flex-1 h-full rounded-md flex w-full">
-                <div className="flex-1 px-3 py-2 flex flex-col bg-background outline outline-muted/50 rounded-[10px] relative overflow-hidden group w-full"
-                    onMouseEnter={() => setHovered(true)}
-                    onMouseLeave={() => setHovered(false)}>
-                    <p className="max-h-[150px] overflow-hidden text-base mt-5 group-hover:-translate-y-2 ease-out transition-transform duration-300">
+                <div className="flex-1 px-3 py-2 flex flex-col bg-background outline outline-muted/50 rounded-sm relative overflow-hidden group w-full"
+                    onPointerEnter={(e) => {
+                        if (e.pointerType === 'mouse') setHovered(true);
+                    }}
+                    onPointerLeave={() => setHovered(false)}
+                    onPointerDown={(e) => {
+                        if (e.pointerType !== 'mouse') setHovered(true);
+                    }}
+                    onPointerUp={() => setHovered(false)}
+                    onPointerCancel={() => setHovered(false)}
+                >
+                    <p className="max-h-[150px] overflow-hidden text-base mt-5 group-hover:-translate-y-2 group-active:-translate-y-2 ease-out transition-transform duration-300">
                         <span className="line-clamp-4 text-ellipsis text-center text-base sm:text-lg text-muted-foreground">
                             I&apos;m enjoying {" "}
                             <a className="font-semibold underline" href={FAVORITE_SONG.songUrl}>
@@ -37,10 +45,10 @@ const FavSongCard = () => {
                             </a>
                         </span>
                     </p>
-                    <div className="user-select-none pointer-events-none absolute z-2 -bottom-8 left-1/2 -translate-x-1/2 translate-y-6 transition-transform duration-500 group-hover:-translate-y-6 ease-out">
+                    <div className="user-select-none pointer-events-none absolute z-2 -bottom-8 left-1/2 -translate-x-1/2 translate-y-6 transition-transform duration-500 group-hover:-translate-y-6 group-active:-translate-y-6 ease-out">
                         <Record albumImageUrl={FAVORITE_SONG.albumImageUrl} />
                     </div>
-                    <div className="absolute -bottom-36 left-1/2 -translate-x-1/2 z-4 group-hover:translate-y-6 ease-out transition-transform duration-500">
+                    <div className="absolute -bottom-36 left-1/2 -translate-x-1/2 z-4 group-hover:translate-y-6 group-active:translate-y-6 ease-out transition-transform duration-500">
                         <div
                             className="h-[210px] w-[210px] rounded-sm bg-cover bg-center shadow-md"
                             style={{ backgroundImage: `url(${FAVORITE_SONG.albumImageUrl})` }}

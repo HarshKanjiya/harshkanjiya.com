@@ -7,15 +7,12 @@ export function Experiences() {
   return (
     <Panel id="experience">
       <PanelHeader>
-        <PanelTitle className="flex gap-2 items-center group">
-          Experience
-          <a
-            href="#experience"
-            className="opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-          >
-            #
-          </a>
-        </PanelTitle>
+        <a href="#experience">
+          <PanelTitle className="flex gap-2 items-center group">
+            Experience
+            <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">#</span>
+          </PanelTitle>
+        </a>
       </PanelHeader>
 
       <div className="pr-2 pl-4">

@@ -21,8 +21,8 @@ export default function Overview() {
                 <h3 className="w-full py-1.5 px-4 text-muted-foreground text-left">
                     Overview
                 </h3>
-                <div className="p-0.5 pt-0 flex-1 h-full flex w-full pb-[2.5px]">
-                    <div className="flex-1 px-3 py-2 flex flex-col bg-background outline rounded-sm outline-muted/50 relative overflow-hidden group w-full">
+                <div className="p-0.5 pt-0 flex-1 h-full flex w-full pb-[3px]">
+                    <div className="flex-1 px-3 py-2 max-sm:pb-3 flex flex-col bg-background outline rounded-sm outline-muted/50 relative overflow-hidden group w-full">
                         <PanelContent className="space-y-2.5 bg-background w-full p-0 sm:p-4">
                             {USER.jobs.map((job, index) => {
                                 return (

@@ -29,7 +29,7 @@ export function PostItem({
                     </span>
                 )}
                 <div className="p-0.5 pt-0 flex-1 h-full flex w-full">
-                    <div className="flex-1 p-1.5 flex flex-col bg-background outline outline-muted/50 rounded-lg relative overflow-hidden group w-full">
+                    <div className="flex-1 p-1.5 flex flex-col bg-background outline outline-muted/50 rounded-sm relative overflow-hidden group w-full">
                         {post.metadata.image && (
                             <div className="relative select-none [&_img]:aspect-1200/630 [&_img]:rounded-sm">
                                 <Image
@@ -41,7 +41,7 @@ export function PostItem({
                                     priority={shouldPreloadImage}
                                     unoptimized
                                 />
-                                <div className="pointer-events-none absolute inset-0 rounded-lg outline outline-muted/50 ring-inset dark:ring-white/10" />
+                                <div className="pointer-events-none absolute inset-0 rounded-sm outline outline-muted/50 ring-inset dark:ring-white/10" />
                             </div>
                         )}
 

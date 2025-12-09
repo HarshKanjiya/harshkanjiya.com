@@ -12,15 +12,12 @@ export function About() {
   return (
     <Panel id="about">
       <PanelHeader>
-        <PanelTitle className="flex gap-2 items-center group">
-          About
-          <a
-            href="#about"
-            className="opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-          >
-            #
-          </a>
-        </PanelTitle>
+        <a href="#about">
+          <PanelTitle className="flex gap-2 items-center group">
+            About
+            <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">#</span>
+          </PanelTitle>
+        </a>
       </PanelHeader>
 
       <PanelContent>
@@ -35,13 +32,13 @@ export function About() {
           <div className="border-x border-edge" />
         </div>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 p-4">
-          <div className="p-3 h-[250px] sm:h-auto sm:aspect-3/2 flex screen-line-after screen-line-before">
+          <div className="h-[250px] sm:h-auto sm:aspect-3/2 flex screen-line-after screen-line-before">
             <CurrentBookCard />
           </div>
-          <div className="p-3 row-span-2 flex h-[600px] sm:h-auto screen-line-after screen-line-before">
+          <div className="row-span-2 flex h-[600px] sm:h-auto screen-line-after screen-line-before">
             <ScrapBookCard />
           </div>
-          <div className="p-3 h-[370px] sm:h-auto sm:aspect-square flex screen-line-after screen-line-before">
+          <div className="h-[370px] sm:h-auto sm:aspect-square flex screen-line-after screen-line-before">
             <FavSongCard />
           </div>
         </div>

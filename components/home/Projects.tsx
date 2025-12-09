@@ -14,9 +14,7 @@ export function Projects() {
                 <PanelTitle className="flex gap-2 items-center justify-between">
                     <a href="#projects" className="flex gap-2 group">
                         Projects
-                        <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                            #
-                        </span>
+                        <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">#</span>
                     </a>
                     {
                         allPosts.length > 0 && (
@@ -32,8 +30,8 @@ export function Projects() {
             </PanelHeader>
 
 
-            <div className="relative py-4 px-2 sm:px-0">
-                <div className="pointer-events-none absolute inset-0 -z-1 grid grid-cols-1 gap-4 max-sm:hidden sm:grid-cols-2 px-4">
+            <div className="relative py-4 px-0">
+                <div className="pointer-events-none absolute inset-0 -z-1 grid grid-cols-1 gap-4 sm:grid-cols-2 px-4">
                     <div className="border-x border-edge"></div>
                     <div className="border-x border-edge"></div>
                 </div>

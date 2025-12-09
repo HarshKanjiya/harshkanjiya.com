@@ -13,15 +13,12 @@ export function Bookmarks() {
   return (
     <Panel id="bookmarks">
       <PanelHeader>
-        <PanelTitle className="flex gap-2 items-center group">
-          Bookmarks
-          <a
-            href="#bookmarks"
-            className="opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-          >
-            #
-          </a>
-        </PanelTitle>
+        <a href="#bookmarks">
+          <PanelTitle className="flex gap-2 items-center group">
+            Bookmarks
+            <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">#</span>
+          </PanelTitle>
+        </a>
       </PanelHeader>
 
       <CollapsibleList

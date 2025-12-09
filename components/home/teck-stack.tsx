@@ -14,15 +14,12 @@ export function TeckStack() {
   return (
     <Panel id="stack">
       <PanelHeader>
-        <PanelTitle className="flex gap-2 items-center group">
-          Stack
-          <a
-            href="#stack"
-            className="opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-          >
-            #
-          </a>
-        </PanelTitle>
+        <a href="#stack">
+          <PanelTitle className="flex gap-2 items-center group">
+            Stack
+            <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">#</span>
+          </PanelTitle>
+        </a>
       </PanelHeader>
 
       <PanelContent
