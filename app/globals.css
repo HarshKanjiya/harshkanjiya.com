@@ -579,3 +579,22 @@ body {
   --gradient-color-3: var(--mesh-color-3);
   --gradient-color-4: var(--mesh-color-4);
 }
+
+
+.tooltip {
+  transition:
+    transform 0.125s ease-out,
+    opacity 0.125s ease-out;
+  transform-origin: var(--transform-origin);
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+
+  /** This takes care of disabling subsequent animations */
+  &[data-instant] {
+    transition-duration: 0ms;
+  }
+}

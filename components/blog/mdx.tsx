@@ -35,6 +35,9 @@ import { CopyButton } from "@/components/copy-button";
 import { FramedImage, YouTubeEmbed } from "@/components/embed";
 import { getIconForLanguageExtension, Icons } from "@/components/icons";
 
+// QUICK UX WINS COMPONENTS
+import * as quickUxWinsComponents from "./content/quick-ux-wins";
+
 const components: MDXRemoteProps["components"] = {
   h1: (props: React.ComponentProps<"h1">) => <Heading as="h1" {...props} />,
   h2: (props: React.ComponentProps<"h2">) => <Heading as="h2" {...props} />,
@@ -145,6 +148,9 @@ const components: MDXRemoteProps["components"] = {
   ),
   YouTubeEmbed,
   FramedImage,
+
+  ...quickUxWinsComponents
+
 };
 
 const options: MDXRemoteProps["options"] = {

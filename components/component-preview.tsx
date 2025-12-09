@@ -10,7 +10,6 @@ import { Button } from "./ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { Code as CodeInline } from "./ui/typography";
-import { Index } from "@/__registry__";
 // import { OpenInV0Button } from "./v0-open-button";
 
 export function ComponentPreview({
@@ -39,17 +38,17 @@ export function ComponentPreview({
   const Code = Codes[0];
 
   const Preview = useMemo(() => {
-    const Component = Index[name]?.component;
+    // const Component = Index[name]?.component;
 
-    if (!Component) {
-      return (
-        <p className="text-sm text-muted-foreground">
-          Component <CodeInline>{name}</CodeInline> not found in registry.
-        </p>
-      );
-    }
+    // if (!Component) {
+    //   return (
+    //     <p className="text-sm text-muted-foreground">
+    //       Component <CodeInline>{name}</CodeInline> not found in registry.
+    //     </p>
+    //   );
+    // }
 
-    return <Component />;
+    // return <Component />;
   }, [name]);
 
   return (
@@ -112,7 +111,7 @@ export function ComponentPreview({
                   </div>
                 }
               >
-                {Preview}
+                {/* {Preview} */}
               </React.Suspense>
             </div>
 
