@@ -6,10 +6,10 @@ import { Tag } from "../ui/tag";
 
 export function ProjectItem({ project, shouldPreloadImage }: { project: Project; shouldPreloadImage?: boolean }) {
     return (
-        <div className="px-2 sm:px-4">
+        // <div className="group">
             <Link
-                href={`/projects/${project.slug}`} className="flex items-center justify-between flex-1 flex-col border-edge border h-full rounded-xl overflow-hidden bg-accent dark:bg-accent/50 relative">
-                <h3 className="w-full py-1.5 px-4 text-muted-foreground text-left">
+                href={`/projects/${project.slug}`} className="flex items-center justify-between flex-1 flex-col border-edge border h-full overflow-hidden bg-accent dark:bg-accent/50 relative group">
+            <h3 className="w-full py-1.5 px-4 text-muted-foreground text-left group-hover:underline">
                     {project.metadata.title}
                     {project.metadata.new && (
                         <span className="ml-2 inline-block size-2 -translate-y-px rounded-full bg-info">
@@ -23,10 +23,10 @@ export function ProjectItem({ project, shouldPreloadImage }: { project: Project;
                         <span className="sr-only">Pinned</span>
                     </span>
                 )}
-                <div className="p-0.5 pt-0 flex-1 h-full rounded-md flex w-full">
-                    <div className="flex-1 p-1.5 flex flex-col bg-background outline outline-muted/50 rounded-[10px] relative overflow-hidden group w-full">
+                <div className="p-0.5 pt-0 flex-1 h-full flex w-full">
+                    <div className="flex-1 rounded-lg p-1.5 flex flex-col bg-background outline outline-muted/50  relative overflow-hidden group w-full">
                         {project.metadata.image && (
-                            <div className="relative select-none [&_img]:aspect-1200/630 [&_img]:rounded-lg">
+                            <div className="relative select-none [&_img]:aspect-1200/630 [&_img]:rounded-sm">
                                 <Image
                                     src={project.metadata.image}
                                     alt={project.metadata.title}
@@ -39,8 +39,7 @@ export function ProjectItem({ project, shouldPreloadImage }: { project: Project;
                                 <div className="pointer-events-none absolute inset-0 rounded-lg outline outline-muted/50 ring-inset dark:ring-white/10" />
                             </div>
                         )}
-
-                        <div className="flex flex-col gap-2 pt-2">
+                        <div className="flex flex-col gap-2 pt-2.5 px-1 pb-1">
                             <p className="text-sm text-muted-foreground leading-snug text-ellipsis line-clamp-2  underline-offset-4 group-hover/post:underline">
                                 {project.metadata.description}
                             </p>
@@ -58,6 +57,6 @@ export function ProjectItem({ project, shouldPreloadImage }: { project: Project;
                     </div>
                 </div>
             </Link>
-        </div>
+        // </div>
     );
 }

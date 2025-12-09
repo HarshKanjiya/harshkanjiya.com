@@ -12,9 +12,9 @@ export function PostItem({
     shouldPreloadImage?: boolean;
 }) {
     return (
-        <div className="px-2 sm:px-4">
-            <Link href={`/blog/${post.slug}`} className="flex items-center justify-between flex-1 flex-col border-edge border h-full rounded-xl overflow-hidden bg-accent dark:bg-accent/50 relative">
-                <h3 className="w-full py-1.5 px-4 text-muted-foreground text-left">
+        // <div className="">
+            <Link href={`/blog/${post.slug}`} className="flex items-center justify-between flex-1 flex-col border-edge border h-full overflow-hidden bg-accent dark:bg-accent/50 relative group">
+                <h3 className="w-full py-1.5 px-4 text-muted-foreground text-left group-hover:underline">
                     {post.metadata.title}
                     {post.metadata.new && (
                         <span className="ml-2 inline-block size-2 -translate-y-px rounded-full bg-info">
@@ -28,10 +28,10 @@ export function PostItem({
                         <span className="sr-only">Pinned</span>
                     </span>
                 )}
-                <div className="p-0.5 pt-0 flex-1 h-full rounded-md flex w-full">
-                    <div className="flex-1 p-1.5 flex flex-col bg-background outline outline-muted/50 rounded-[10px] relative overflow-hidden group w-full">
+                <div className="p-0.5 pt-0 flex-1 h-full flex w-full">
+                    <div className="flex-1 p-1.5 flex flex-col bg-background outline outline-muted/50 rounded-lg relative overflow-hidden group w-full">
                         {post.metadata.image && (
-                            <div className="relative select-none [&_img]:aspect-1200/630 [&_img]:rounded-lg">
+                            <div className="relative select-none [&_img]:aspect-1200/630 [&_img]:rounded-sm">
                                 <Image
                                     src={post.metadata.image}
                                     alt={post.metadata.title}
@@ -45,7 +45,7 @@ export function PostItem({
                             </div>
                         )}
 
-                        <div className="flex flex-col gap-2 pt-2">
+                        <div className="flex flex-col gap-2 pt-2.5 px-1 pb-1">
                             <p className="text-sm text-muted-foreground leading-snug text-ellipsis line-clamp-2 underline-offset-4 w-full">
                                 {post.metadata.description}
                             </p>
@@ -53,7 +53,7 @@ export function PostItem({
                                 <dt className="sr-only">Published on</dt>
                                 <dd className="text-sm text-muted-foreground">
                                     <time dateTime={new Date(post.metadata.createdAt).toISOString()}>
-                                        {format(new Date(post.metadata.createdAt), "dd.MM.yyyy")}
+                                        {format(new Date(post.metadata.createdAt), "d MMM yyyy")}
                                     </time>
                                 </dd>
                             </dl>
@@ -61,6 +61,6 @@ export function PostItem({
                     </div>
                 </div>
             </Link>
-        </div>
+        // </div>
     );
 }

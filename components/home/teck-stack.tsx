@@ -9,8 +9,6 @@ import { cn } from "@/lib/utils";
 
 import { Panel, PanelContent, PanelHeader, PanelTitle } from "@/components/panel";
 import { TECH_STACK } from "@/data/tech-stack";
-import Link from "next/link";
-import { HashIcon } from "lucide-react";
 
 export function TeckStack() {
   return (
@@ -18,12 +16,12 @@ export function TeckStack() {
       <PanelHeader>
         <PanelTitle className="flex gap-2 items-center group">
           Stack
-          <Link
+          <a
             href="#stack"
             className="opacity-0 group-hover:opacity-100 transition-opacity duration-200"
           >
             #
-          </Link>
+          </a>
         </PanelTitle>
       </PanelHeader>
 

@@ -33,15 +33,14 @@ export function Projects() {
 
 
             <div className="relative py-4 px-2 sm:px-0">
-                <div className="pointer-events-none absolute inset-0 -z-1 grid grid-cols-1 gap-4 max-sm:hidden sm:grid-cols-2">
-                    <div className="border-r border-edge"></div>
-                    <div className="border-l border-edge"></div>
+                <div className="pointer-events-none absolute inset-0 -z-1 grid grid-cols-1 gap-4 max-sm:hidden sm:grid-cols-2 px-4">
+                    <div className="border-x border-edge"></div>
+                    <div className="border-x border-edge"></div>
                 </div>
 
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-
-                    {allPosts.slice(0, 4).map((post) => (
-                        <div className="screen-line-after screen-line-before py-4">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 px-4">
+                    {allPosts.slice(0, 4).map((post, id) => (
+                        <div className="screen-line-after screen-line-before" key={id}>
                             <ProjectItem key={post.slug} project={post} />
                         </div>
                     ))}

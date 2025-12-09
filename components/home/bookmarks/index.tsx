@@ -1,10 +1,9 @@
 import { compareDesc } from "date-fns";
 
-import { Panel, PanelHeader, PanelTitle } from "@/components/panel";
-import { BookmarkItem } from "./bookmark-item";
-import { BOOKMARKS } from "@/data/bookmarks";
 import { CollapsibleList } from "@/components/collapsible-list";
-import Link from "next/link";
+import { Panel, PanelHeader, PanelTitle } from "@/components/panel";
+import { BOOKMARKS } from "@/data/bookmarks";
+import { BookmarkItem } from "./bookmark-item";
 
 const SORTED_BOOKMARKS = [...BOOKMARKS].sort((a, b) => {
   return compareDesc(new Date(a.createdAt), new Date(b.createdAt));
@@ -16,12 +15,12 @@ export function Bookmarks() {
       <PanelHeader>
         <PanelTitle className="flex gap-2 items-center group">
           Bookmarks
-          <Link
+          <a
             href="#bookmarks"
             className="opacity-0 group-hover:opacity-100 transition-opacity duration-200"
           >
             #
-          </Link>
+          </a>
         </PanelTitle>
       </PanelHeader>
 

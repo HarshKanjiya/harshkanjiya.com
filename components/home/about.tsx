@@ -4,7 +4,6 @@ import { USER } from "@/data/user";
 
 import { Panel, PanelContent, PanelHeader, PanelTitle } from "@/components/panel";
 
-import Link from "next/link";
 import CurrentBookCard from "./aboutus/current-book-card";
 import FavSongCard from "./aboutus/fav-song-card";
 import ScrapBookCard from "./aboutus/scrap-book-card";
@@ -15,12 +14,12 @@ export function About() {
       <PanelHeader>
         <PanelTitle className="flex gap-2 items-center group">
           About
-          <Link
+          <a
             href="#about"
             className="opacity-0 group-hover:opacity-100 transition-opacity duration-200"
           >
             #
-          </Link>
+          </a>
         </PanelTitle>
       </PanelHeader>
 

@@ -2,7 +2,6 @@
 import { Panel, PanelHeader, PanelTitle } from "@/components/panel";
 import { EXPERIENCES } from "@/data/experiences";
 import { ExperienceItem } from "./experience-item";
-import Link from "next/link";
 
 export function Experiences() {
   return (
@@ -10,12 +9,12 @@ export function Experiences() {
       <PanelHeader>
         <PanelTitle className="flex gap-2 items-center group">
           Experience
-          <Link
+          <a
             href="#experience"
             className="opacity-0 group-hover:opacity-100 transition-opacity duration-200"
           >
             #
-          </Link>
+          </a>
         </PanelTitle>
       </PanelHeader>
 
