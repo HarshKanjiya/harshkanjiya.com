@@ -26,7 +26,7 @@ export default function NoDeadZoneDemo() {
 
             <div className="grid gap-4 sm:grid-cols-2">
                 {/* A: Dead zones (only tiny checkbox is clickable) */}
-                <div className="h-[170px] border border-edge bg-background p-4 max-sm:p-3 flex flex-col justify-evenly">
+                <div className="h-[160px] border border-edge bg-background p-4 max-sm:p-3 flex flex-col justify-between">
                     <div className="mb-4 flex items-center justify-between max-sm:flex-col-reverse max-sm:items-start gap-3">
                         <p className="text-sm font-medium m-0! flex items-center gap-2">
                             <span className="flex size-5 shrink-0 items-center justify-center rounded-sm border border-muted-foreground/15 bg-muted ring-1 ring-edge ring-offset-1 ring-offset-background">A</span>
@@ -36,7 +36,7 @@ export default function NoDeadZoneDemo() {
                     </div>
 
                     <div className="flex items-center justify-between gap-3">
-                        <div className="flex min-h-12 flex-1 items-center gap-3 rounded-md border border-transparent sm:px-3">
+                        <div className="flex min-h-12 flex-1 items-center gap-4 rounded-md border border-transparent sm:px-3 group w-full justify-between py-2">
                             <Checkbox
                                 checked={isOnA}
                                 onCheckedChange={(v) => setIsOnA(Boolean(v))}
@@ -46,7 +46,7 @@ export default function NoDeadZoneDemo() {
                             <div className="max-sm:hidden">
                                 <AvatarCircle label="AB" />
                             </div>
-                            <div className="leading-tight flex flex-col gap-2">
+                            <div className="leading-tight flex flex-col gap-2 flex-1">
                                 <p className="text-sm font-medium m-0!">Project notifications</p>
                                 <p className="text-xs text-muted-foreground m-0!">Only checkbox is clickable</p>
                             </div>
@@ -57,7 +57,7 @@ export default function NoDeadZoneDemo() {
                 </div>
 
                 {/* B: No dead zones (entire visible row is interactive) */}
-                <div className="h-[170px] border border-edge bg-background p-4 flex flex-col justify-evenly">
+                <div className="h-[160px] border border-edge bg-background p-4 flex flex-col justify-between">
                     <div className="mb-4 flex items-center justify-between max-sm:flex-col-reverse max-sm:items-start gap-3">
                         <p className="text-sm font-medium m-0! flex items-center gap-2">
                             <span className="flex size-5 shrink-0 items-center justify-center rounded-sm border border-muted-foreground/15 bg-muted ring-1 ring-edge ring-offset-1 ring-offset-background">B</span>
@@ -71,7 +71,7 @@ export default function NoDeadZoneDemo() {
                         role="checkbox"
                         aria-checked={isOnB}
                         tabIndex={0}
-                        className="group flex w-full items-center justify-between gap-3 rounded-md border border-transparent sm:px-3 py-2 text-left transition-colors hover:bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500 dark:focus-visible:outline-zinc-400"
+                        className="group flex w-full items-center justify-between gap-4 rounded-md border border-transparent sm:px-3 py-2 text-left transition-colors hover:bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500 dark:focus-visible:outline-zinc-400"
                         onClick={() => setIsOnB((v) => !v)}
                         onKeyDown={(e) => {
                             if (e.key === " " || e.key === "Enter") {
@@ -98,8 +98,7 @@ export default function NoDeadZoneDemo() {
                             </div>
                         </div>
 
-                        {/* Visual affordance placeholder to balance layout */}
-                        <div className="h-8 w-8" aria-hidden />
+                        {/* <div className="h-8 w-8" aria-hidden /> */}
                     </div>
                 </div>
             </div>

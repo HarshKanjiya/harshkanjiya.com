@@ -20,7 +20,7 @@ export default function ScaleButtonDemo() {
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
-                <div className="border border-edge bg-background p-4 flex items-center justify-center">
+                <div className="border border-edge bg-background p-4 flex items-center justify-center py-9">
                     <Button
                         type="button"
                         aria-live="polite"
@@ -30,7 +30,7 @@ export default function ScaleButtonDemo() {
                     </Button>
                 </div>
 
-                <div className="border border-edge bg-background p-4 flex items-center justify-center">
+                <div className="border border-edge bg-background p-4 flex items-center justify-center py-9">
                     <Button
                         className="active:scale-[0.97] transition-transform"
                         type="button"

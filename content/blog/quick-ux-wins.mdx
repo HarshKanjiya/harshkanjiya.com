@@ -1,0 +1,596 @@
+---
+title: Quick UX Wins
+description: This guide focuses on simple, high-leverage UX improvements inspired by Vercel’s product design principles. These are changes you can apply in minutes—cleaner focus states, better input behaviors, clearer interactions, safer defaults, and small accessibility fixes. Even without advanced skills or refactoring, these low-effort updates noticeably improve usability and perceived quality.
+image: 
+createdAt: 2025-12-9
+updatedAt: 2025-12-9
+---
+
+# <span className="mt-4 block">easy — quick ux wins</span>
+
+Below is the **easy-level checklist** based on Vercel’s UX guidance. Each item takes **2–5 minutes** to implement and provides a quick, noticeable improvement. The reference for all guidelines is [Vercel’s design principles](https://vercel.com/design/guidelines).
+
+## interactions
+
+### Scale your buttons
+
+<ScaleButtonDemo />
+
+One easy way to make your interface feel instantly more responsive is to add a subtle scale down effect when a button is pressed. A scale of 0.97 on the :active pseudo-class should do the job
+
+\
+**Why it matters:** It provides immediate tactile feedback, making interactions feel
+faster and more satisfying.
+
+---
+
+### loading buttons keep their label
+
+<LoadingButtonDemo />
+
+Show a spinner while maintaining the original button label.
+
+\
+**Why it matters:** Prevents layout shift and lets users know which action is in
+progress without losing context.
+
+---
+
+### no dead zones
+
+<NoDeadZoneDemo />
+
+Make the entire visible area of a control interactive.
+
+\
+**Why it matters:** Users shouldn’t guess where to tap; a larger clickable area prevents
+frustration and improves usability.
+
+---
+
+### clear focus states
+
+Make keyboard navigation obvious by using `:focus-visible` for single controls and `:focus-within` for grouped controls.
+
+\
+**Why it matters:** Users navigating via keyboard or assistive devices can clearly
+see where focus is, improving accessibility and reducing confusion.
+
+---
+
+### larger, forgiving hit targets
+
+Ensure every clickable element has a hit area of **at least 24px**, even if the visual icon is smaller.
+
+\
+**Why it matters:** Small targets frustrate users, especially on mobile. Expanding
+the touch area improves interaction reliability.
+
+---
+
+### mobile-friendly input sizing
+
+Set mobile `<input>` font-size to **16px or larger**.
+
+\
+**Why it matters:** Prevents iOS Safari auto-zoom when inputs are focused, ensuring
+layout stability and a smoother typing experience.
+
+---
+
+### respect browser zoom
+
+Never disable pinch-zoom or viewport scaling.
+
+\
+**Why it matters:** Users with low vision or specific accessibility needs rely on
+zooming. Disabling it can harm accessibility.
+
+---
+
+### allow paste everywhere
+
+Never block pasting into `<input>` or `<textarea>` fields.
+
+\
+**Why it matters:** Blocking paste interrupts users, slows workflows, and can break
+accessibility.
+
+---
+
+### use ellipsis correctly
+
+For follow-up or loading actions, use an ellipsis: `Rename…`, `Saving…`.
+
+\
+**Why it matters:** Communicates that an action is ongoing or continues, creating
+a familiar UX pattern.
+
+---
+
+### prevent double-tap zoom
+
+Add `touch-action: manipulation;` to interactive elements on mobile.
+
+\
+**Why it matters:** Stops accidental zooming during taps, making controls feel more
+responsive.
+
+---
+
+### customized tap highlight
+
+Set `-webkit-tap-highlight-color` to match your theme.
+
+\
+**Why it matters:** Ensures the touch highlight aligns with your design, avoiding
+jarring visual feedback on mobile.
+
+---
+
+### use real links for navigation
+
+Always use `<a>` or `<Link>` for navigation instead of buttons or divs.
+
+\
+**Why it matters:** Maintains standard browser behaviors like middle-click, Cmd/Ctrl+Click,
+and open-in-new-tab functionality.
+
+---
+
+### controlled overscroll
+
+Use `overscroll-behavior: contain;` in modals or drawers.
+
+\
+**Why it matters:** Stops the background page from scrolling when users interact
+with overlay content, keeping interactions predictable.
+
+---
+
+### autofocus where it makes sense
+
+Enable autofocus on desktop when there’s a single primary input. Avoid on mobile.
+
+\
+**Why it matters:** Improves efficiency for desktop users without causing layout
+shift or unexpected keyboard opening on mobile.
+
+---
+
+## animations
+
+### respect prefers-reduced-motion
+
+Provide reduced-motion variants for users who prefer minimal animation.
+
+\
+**Why it matters:** Supports accessibility preferences and reduces motion sickness
+or distraction.
+
+---
+
+### prefer css-based animations
+
+Use CSS transitions instead of JavaScript for simple motion.
+
+\
+**Why it matters:** CSS animations are smoother and less likely to block the main
+thread.
+
+---
+
+### avoid `transition: all`
+
+List only the properties you want to animate, such as `opacity` or `transform`.
+
+\
+**Why it matters:** Avoids unintended layout recalculations that can cause jank.
+
+---
+
+### compositor-friendly motion
+
+Animate only GPU-accelerated properties like `transform` and `opacity`.
+
+\
+**Why it matters:** Ensures smoother animations and reduces performance issues.
+
+---
+
+### svg transform reliability
+
+Wrap SVG elements in `<g>` and use `transform-box: fill-box;`.
+
+\
+**Why it matters:** Prevents inconsistent scaling and transform-origin issues across
+browsers, especially Safari.
+
+---
+
+## layout
+
+### optical alignment
+
+Adjust ±1px when visual alignment feels better than strict geometric alignment.
+
+\
+**Why it matters:** Small tweaks improve perceived precision and aesthetic harmony.
+
+---
+
+### respect safe areas
+
+Use CSS environment variables (`env(safe-area-inset-*)`) for devices with notches.
+
+\
+**Why it matters:** Prevents content from being hidden or clipped on modern devices.
+
+---
+
+### remove accidental scrollbars
+
+Fix unintentional overflow issues.
+
+\
+**Why it matters:** Avoids visual clutter and unexpected scroll behavior, keeping
+the interface clean.
+
+---
+
+### let css do the sizing
+
+Use `display: flex` or `grid` rather than measuring with JavaScript.
+
+\
+**Why it matters:** Reduces layout thrashing and ensures responsive layouts without
+heavy scripting.
+
+---
+
+## content
+
+### curly quotes
+
+Use “smart” quotes instead of straight quotes.
+
+\
+**Why it matters:** Improves typographic polish and readability.
+
+---
+
+### avoid widows/orphans
+
+Use CSS or manual edits to prevent single words on new lines.
+
+\
+**Why it matters:** Keeps text visually pleasing and readable.
+
+---
+
+### tabular numbers
+
+Use `font-variant-numeric: tabular-nums;` for aligned numeric data.
+
+\
+**Why it matters:** Helps users compare numbers easily in tables or financial data.
+
+---
+
+### color + text for status
+
+Don’t rely solely on color—add text labels.
+
+\
+**Why it matters:** Ensures status is accessible to colorblind users.
+
+---
+
+### proper ellipsis character
+
+Use `…` instead of `...`.
+
+\
+**Why it matters:** Maintains typographic consistency.
+
+---
+
+### anchored headings
+
+Use `scroll-margin-top` for in-page links.
+
+\
+**Why it matters:** Linked headings don’t get hidden under fixed headers.
+
+---
+
+### locale-aware formatting
+
+Use the `Intl` API for dates, times, and numbers.
+
+\
+**Why it matters:** Displays content in user-friendly formats for different regions.
+
+---
+
+### name icon-only buttons
+
+Always provide `aria-label`.
+
+\
+**Why it matters:** Improves accessibility for screen readers.
+
+---
+
+### prefer native elements
+
+Use `<button>`, `<label>` and `<a>` before ARIA attributes.
+
+\
+**Why it matters:** Native elements provide better browser behavior and accessibility.
+
+---
+
+### add a skip link
+
+Include a “Skip to content” link at the top of pages.
+
+\
+**Why it matters:** Allows keyboard users to bypass repetitive navigation links.
+
+---
+
+### non-breaking spaces
+
+Use `&nbsp;` for units and shortcuts, e.g., `10&nbsp;MB`.
+
+\
+**Why it matters:** Keeps important elements together for readability.
+
+---
+
+## forms
+
+### enter submits single-field forms
+
+Pressing Enter should submit forms with a single input.
+
+\
+**Why it matters:** Improves efficiency and follows user expectations.
+
+---
+
+### textarea shortcuts
+
+Allow Cmd/Ctrl + Enter for submission in `<textarea>`.
+
+\
+**Why it matters:** Prevents accidental line breaks from causing confusion.
+
+---
+
+### labels for every control
+
+Every input must have a visible `<label>` or accessible label.
+
+\
+**Why it matters:** Essential for screen reader accessibility.
+
+---
+
+### label activates input
+
+Clicking the label should focus the input.
+
+\
+**Why it matters:** Provides a larger, more user-friendly click target.
+
+---
+
+### don’t block typing
+
+Allow users to type anything; validate after input.
+
+\
+**Why it matters:** Reduces frustration and makes error messages clear.
+
+---
+
+### never disable submit early
+
+Keep submit enabled until the request is in-flight.
+
+\
+**Why it matters:** Shows users errors immediately without preventing interaction.
+
+---
+
+### place errors next to fields
+
+Show validation messages next to the relevant input.
+
+\
+**Why it matters:** Users immediately know what needs correction.
+
+---
+
+### correct autocomplete attributes
+
+Set meaningful `autocomplete` values.
+
+\
+**Why it matters:** Enables autofill and speeds up data entry.
+
+---
+
+### disable spellcheck where unnecessary
+
+Turn off spellcheck for emails, usernames, codes.
+
+\
+**Why it matters:** Reduces false warnings and visual noise.
+
+---
+
+### correct types + inputmode
+
+Use proper `type` and `inputmode` for better keyboards and validation.
+
+\
+**Why it matters:** Improves mobile input efficiency and prevents errors.
+
+---
+
+### placeholders end with ellipsis
+
+Use placeholders to indicate example values like `+1 (123) 456-7890…`.
+
+\
+**Why it matters:** Signals to users that input is expected.
+
+---
+
+### avoid triggering password managers accidentally
+
+Give non-auth fields unique names.
+
+\
+**Why it matters:** Prevents autofill confusion for password managers.
+
+---
+
+### trim trailing whitespace
+
+Automatically trim input values.
+
+\
+**Why it matters:** Avoids validation errors due to accidental spaces.
+
+---
+
+### windows select fix
+
+Set explicit background and text color for native `<select>` on Windows.
+
+\
+**Why it matters:** Prevents contrast issues in dark mode.
+
+---
+
+## performance
+
+### preconnect to cdns
+
+Use `<link rel="preconnect">` for key assets.
+
+\
+**Why it matters:** Reduces DNS/TLS latency and improves perceived load time.
+
+---
+
+### preload fonts
+
+Preload essential fonts for first-view text.
+
+\
+**Why it matters:** Avoids flashes of unstyled text and layout shifts.
+
+---
+
+### subset fonts
+
+Ship only the necessary Unicode characters.
+
+\
+**Why it matters:** Reduces bundle size and speeds up load time.
+
+---
+
+### preload above-the-fold images
+
+Prioritize images visible on the first screen.
+
+\
+**Why it matters:** Improves perceived page speed.
+
+---
+
+### prevent image cls
+
+Always set width and height on images.
+
+\
+**Why it matters:** Avoids layout shifts that confuse users.
+
+---
+
+### quick performance testing
+
+Throttle CPU/network to simulate real-world conditions.
+
+\
+**Why it matters:** Ensures your site performs well for all users.
+
+---
+
+## design
+
+### crisp borders
+
+Use semi-transparent borders and shadows for sharper edges.
+
+\
+**Why it matters:** Adds subtle depth and visual clarity.
+
+---
+
+### nested radii
+
+Ensure child elements have equal or smaller radii than parents.
+
+\
+**Why it matters:** Maintains harmonious curves and clean UI.
+
+---
+
+### hue-consistent shadows
+
+Match shadow colors to background hue.
+
+\
+**Why it matters:** Creates a cohesive, polished appearance.
+
+---
+
+### higher contrast on interaction
+
+Hover, focus, and active states should increase contrast.
+
+\
+**Why it matters:** Gives clear visual feedback to users.
+
+---
+
+### match browser theme color
+
+Set `<meta name="theme-color">` to align browser UI.
+
+\
+**Why it matters:** Provides a seamless experience on mobile devices.
+
+---
+
+### color-scheme for dark/light
+
+Use `color-scheme` on `<html>` for scrollbars and built-in UI.
+
+\
+**Why it matters:** Ensures consistency across themes and system UIs.
+
+---
+
+## License
+
+Licensed under the [MIT license](https://github.com/harshkanjiya/harshkanjiya.com/blob/main/LICENSE).
+
+The source code is available on [GitHub](https://github.com/harshkanjiya/harshkanjiya.com). You're free to use my code! Just remove personal information before publishing. It's great to see these UX improvements being helpful.

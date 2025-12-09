@@ -36,11 +36,11 @@ export default function LoadingButtonDemo() {
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
-                <div className="border border-edge bg-background p-4">
+                <div className="border border-edge bg-background p-4 flex flex-col justify-between">
                     <div className="mb-4 flex items-center justify-between max-sm:flex-col-reverse max-sm:items-start gap-3">
                         <p className="text-sm font-medium m-0! flex items-center gap-2">
                             <span className="flex size-5 shrink-0 items-center justify-center rounded-sm border border-muted-foreground/15 bg-muted ring-1 ring-edge ring-offset-1 ring-offset-background">A</span>
-                            <span>Clears label while loading</span>
+                            <span>Clears label</span>
                         </p>
                         <Tag>Not recommended</Tag>
                     </div>
@@ -72,7 +72,7 @@ export default function LoadingButtonDemo() {
                     </div>
                 </div>
 
-                <div className="border border-edge bg-background p-4">
+                <div className="border border-edge bg-background p-4 flex flex-col justify-between">
                     <div className="mb-4 flex items-center justify-between max-sm:flex-col-reverse max-sm:items-start gap-3">
                         <p className="text-sm font-medium m-0! flex items-center gap-2">
                             <span className="flex size-5 shrink-0 items-center justify-center rounded-sm border border-muted-foreground/15 bg-muted ring-1 ring-edge ring-offset-1 ring-offset-background">B</span>
