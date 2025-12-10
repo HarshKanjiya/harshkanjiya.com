@@ -30,7 +30,7 @@ export const USER: User = {
 - Proven track record in modernizing legacy systems & optimizing performance.
 - Learning in **Golang**, **GenAI** & **System Design**.
     `,
-    avatar: "https://assets.harshkanjiya.com/general/profile.png",
+    avatar: "https://assets.harshkanjiya.com/general/profile-real.webp",
 
     // METADATA
     bio: "Minimal & modern developer portfolio built with Next.js, MDX, & ShadCN. Designed for project documentation, technical blogs, & personal notes.",
