@@ -1,5 +1,7 @@
+"use client";
+
 import { Project } from "@/types/projects";
-import { PinIcon } from "lucide-react";
+import { PinIcon, SquareArrowOutUpRightIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Tag } from "../ui/tag";
@@ -17,12 +19,20 @@ export function ProjectItem({ project, shouldPreloadImage }: { project: Project;
                     </span>
                 )}
             </h3>
-            {project.metadata.pinned && (
-                <span className="absolute top-1.5 right-1.5 flex size-6 items-center justify-center rounded-md bg-secondary">
-                    <PinIcon className="size-4 rotate-45 text-secondary-foreground" />
-                    <span className="sr-only">Pinned</span>
-                </span>
-            )}
+            <div className="absolute top-1.5 right-1.5 flex items-center justify-center gap-2">
+                {project.metadata.link && (
+                    <a onClick={(e) => { e.stopPropagation(); }} href={project.metadata.link} target="_blank" rel="noopener noreferrer" className="flex size-6 items-center justify-center rounded-md bg-secondary">
+                        <SquareArrowOutUpRightIcon className="size-4 text-secondary-foreground" />
+                        <span className="sr-only">External link</span>
+                    </a>
+                )}
+                {project.metadata.pinned && (
+                    <span className="flex size-6 items-center justify-center rounded-md bg-secondary">
+                        <PinIcon className="size-4 rotate-45 text-secondary-foreground" />
+                        <span className="sr-only">Pinned</span>
+                    </span>
+                )}
+            </div>
             <div className="p-0.5 pt-0 flex-1 h-full flex w-full">
                 <div className="flex-1 rounded-sm p-1.5 flex flex-col bg-background outline outline-muted/50  relative overflow-hidden group w-full">
                     {project.metadata.image && (
@@ -56,7 +66,7 @@ export function ProjectItem({ project, shouldPreloadImage }: { project: Project;
                     </div>
                 </div>
             </div>
-        </Link>
+        </Link >
         // </div>
     );
 }

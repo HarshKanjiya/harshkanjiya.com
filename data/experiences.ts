@@ -15,10 +15,10 @@ export const EXPERIENCES: Experience[] = [
         employmentType: "Full-time",
         icon: "code",
         description: `
--	Modernized multiple legacy apps, migrating AngularJS to Angular, improving maintainability and UX.
--	Designed and built a reusable grid solution with virtual scrolling, data chunking and dynamic styling.
--	Integrated REST and GraphQL APIs across 4 enterprise projects, ensuring scalable and secure data flow.
--	Actively contributed to architecture discussions, performance optimizations, and adoption of best practices.
+-	Modernized legacy applications by migrating AngularJS to Angular and improving maintainability & UX.
+-	Engineered a high-performance custom data grid rendering 15,000+ cells with zero latency.
+-	Improved application startup performance by ~80% by implementing custom lazy loading strategies.
+-	Worked on Angular, React & Next.js frontends integrated with .NET Core & PostgreSQL services.
 `,
         skills: [
           "Angular",
@@ -67,9 +67,9 @@ export const EXPERIENCES: Experience[] = [
         employmentType: "Remote",
         icon: "code",
         description: `
-- Worked on designing and developing a scalable monitoring platform, focusing on real-time data handling, role-based access, and system performance improvements.
-- Contributed to building features that streamlined plant management workflows, improved fault detection, and enhanced collaboration through better communication channels.
-- Implemented real-time communication and alert mechanisms to ensure quicker response and smoother system operations.
+- Built features for a real-time resource monitoring platform, focusing on performance and reliability.
+- Worked with Node.js microservices to implement WhatsApp-based alerting for faster fault detection.
+- Implemented complex, high-performance UI workflows using React & Redux Toolkit.
         `,
         skills: [
           "React",

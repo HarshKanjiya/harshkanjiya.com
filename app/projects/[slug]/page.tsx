@@ -1,14 +1,15 @@
 import { getTableOfContents } from "fumadocs-core/content/toc";
-import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
+import { ArrowLeftIcon, ArrowRightIcon, ExternalLinkIcon } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { BlogPosting as PageSchema, WithContext } from "schema-dts";
 
+import { getAllProjects, getProjectBySlug } from "@/actions/project";
 import { InlineTOC } from "@/components/blog/inline-toc";
 import { MDX } from "@/components/blog/mdx";
-import { KeyboardShortcuts } from "@/components/keyboard-shortcuts";
 import { PostShareMenu } from "@/components/blog/post-share-menu";
+import { KeyboardShortcuts } from "@/components/keyboard-shortcuts";
 import { Button } from "@/components/ui/button";
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
 import {
@@ -20,7 +21,6 @@ import { Prose } from "@/components/ui/typography";
 import { SITE_INFO } from "@/config/site";
 import { USER } from "@/data/user";
 import { cn, findNeighbour } from "@/lib/utils";
-import { getAllProjects, getProjectBySlug } from "@/actions/project";
 import { Project } from "@/types/projects";
 import Image from "next/image";
 
@@ -205,7 +205,7 @@ export default async function Page({
 
             <Prose className="px-4">
                 <div className="flex items-center justify-between gap-3 screen-line-before screen-line-after">
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-3">
                         {
                             project.metadata.logo && (
                                 <Image
@@ -213,28 +213,52 @@ export default async function Page({
                                     alt={project.metadata.title}
                                     width={30}
                                     height={30}
-                                    className="rounded-xl select-none corner-squircle supports-corner-shape:rounded-[50%] object-cover m-0! border border-edge"
+                                    className="rounded-xl select-none corner-squircle supports-corner-shape:rounded-[50%] object-cover m-0! border ring ring-offset-1 ring-edge ring-offset-background"
                                 />
                             )
                         }
                         <h1 className="text-3xl font-semibold m-0!">
                             {project.metadata.title}
                         </h1>
+                        {
+                            project.metadata.link && (
+                                <Tooltip delayDuration={300}>
+                                    <TooltipTrigger asChild>
+                                        <Link
+                                            href={project.metadata.link}
+                                            target="_blank">
+                                            <ExternalLinkIcon size={16} />
+                                        </Link>
+                                    </TooltipTrigger>
+                                    <TooltipContent className="px-2 py-1 text-xs">
+                                        Visit Website
+                                    </TooltipContent>
+                                </Tooltip>
+                            )
+                        }
                     </div>
+
                     <div className="flex items-center gap-3">
                         {
                             project.metadata.githubRepo && (
-                                <Link
-                                    href={project.metadata.githubRepo}
-                                    target="_blank">
-                                    <Image
-                                        src="https://assets.harshkanjiya.com/social/github.webp"
-                                        alt="GitHub Repository"
-                                        width={32}
-                                        height={32}
-                                        className="rounded-full object-cover m-0!"
-                                    />
-                                </Link>
+                                <Tooltip delayDuration={300}>
+                                    <TooltipTrigger asChild>
+                                        <Link
+                                            href={project.metadata.githubRepo}
+                                            target="_blank">
+                                            <Image
+                                                src="https://assets.harshkanjiya.com/social/github.webp"
+                                                alt="GitHub Repository"
+                                                width={32}
+                                                height={32}
+                                                className="rounded-full object-cover m-0!"
+                                            />
+                                        </Link>
+                                    </TooltipTrigger>
+                                    <TooltipContent className="px-2 py-1 text-xs">
+                                        Visit GitHub Repository
+                                    </TooltipContent>
+                                </Tooltip>
                             )
                         }
                     </div>

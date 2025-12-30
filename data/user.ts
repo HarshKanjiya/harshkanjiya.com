@@ -25,10 +25,9 @@ export const USER: User = {
     ],
     about: `
 - **Full Stack Developer** with **3+ years of experience**,
-- Skilled in **Next.js**, **React**, **Angular**, **TypeScript**, & modern technologies; building high-quality, user-centric web applications.
+- Skilled in **Next.js**, **React**, **Angular**, **TypeScript** & Golang.
 - Passionate about exploring new technologies & learning design philosophy.
-- Proven track record in modernizing legacy systems & optimizing performance.
-- Learning in **Golang**, **GenAI** & **System Design**.
+- Learning in **System Design** & **GenAI**.
     `,
     avatar: "https://assets.harshkanjiya.com/general/profile-real.webp",
 
