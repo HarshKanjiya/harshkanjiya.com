@@ -7,7 +7,7 @@ type GitHubContributionsResponse = {
 
 export async function getGitHubContributions() {
     const res = await fetch(
-        `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=last`,
+        `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=2026`,
         {
             next: { revalidate: 86400 }, // Cache for 1 day (86400 seconds)
         }
