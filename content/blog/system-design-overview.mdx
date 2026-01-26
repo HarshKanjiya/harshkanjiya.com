@@ -1,0 +1,86 @@
+---
+title: CAP Theorem in System Design
+description: A clear, practical explanation of the CAP Theorem and its implications for building distributed systems.
+image: https://assets.harshkanjiya.com/blog/castle.webp
+createdAt: 2026-01-26
+updatedAt: 2026-01-26
+---
+
+
+The **CAP Theorem** is a foundational concept in distributed systems design, often discussed in system design interviews and real-world architecture decisions. It explains why distributed systems must make trade-offs between key properties when failures occur.
+
+## What is the CAP Theorem?
+
+In a distributed system, **CAP** stands for:
+
+- **Consistency** – Every read returns the _most recent write_ or an error.
+- **Availability** – Every request receives _a response_ (success or failure) without guaranteed freshness.
+- **Partition Tolerance** – The system continues to operate even when network partitions (failures in communication between nodes) occur.
+
+The CAP Theorem states that **in the presence of a network partition, a distributed system can only guarantee at most two of these three properties simultaneously**. You cannot fully achieve all three at the same time.
+
+## Why CAP Matters
+
+Distributed systems run across multiple machines or data centers. Network issues such as dropped messages or delayed communication are inevitable in real environments. The CAP Theorem shows that when such _partitions_ happen, a system must choose:
+
+- **Consistency**: make sure data is correct everywhere, even if some parts stop responding.
+- **Availability**: always respond to client requests, even if some responses may be outdated.
+
+This trade-off influences how systems behave under failure and how users experience data correctness and availability.
+
+---
+
+## The Three Properties in Detail
+
+### Consistency
+
+Consistency in CAP means:
+
+> After a write completes, _all future reads_ will return that write from _every node_.
+
+This is stronger than typical ACID consistency — it’s about _global visibility_ of the latest data across every node. Strong consistency ensures correctness but can reduce availability when parts of the network fail.
+
+---
+
+### Availability
+
+Availability means the system will _always respond_ to client requests, even if some parts of the system are unreachable.
+
+However, an available response doesn’t guarantee that the data is up-to-date when partitions occur. Some nodes may return stale data.
+
+---
+
+### Partition Tolerance
+
+Partition tolerance is the system’s ability to continue functioning even when communication breaks between nodes due to network faults.
+
+In practice, partition tolerance isn’t optional — network failures happen — so real-world distributed systems almost always have to tolerate partitions.
+
+---
+
+## CAP Trade-Offs
+
+When a network partition occurs, a system must _compromise_ one property:
+
+### CP: Consistency + Partition Tolerance
+
+- Ensures correct, synchronized data across nodes.
+- May _sacrifice availability_ by rejecting requests during partitions.
+
+> Example: Banking systems where data accuracy matters even if some requests are delayed.
+
+---
+
+### AP: Availability + Partition Tolerance
+
+- Always responds to requests.
+- May _serve stale or inconsistent data_ during partitions.
+
+> Example: Social media feeds where responsiveness matters more than immediate global consistency.
+
+---
+
+### CA: Consistency + Availability
+
+- In theory, serves up-to-date data and responds to requests.
+- **Not realistic in distributed systems with partitions**, because partition tolerance can’t be ignored.

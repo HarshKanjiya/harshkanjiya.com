@@ -136,11 +136,6 @@ export default async function Page({
         </Button>
 
         <div className="flex items-center gap-2">
-          {/* <LLMCopyButtonWithViewOptions
-            markdownUrl={`${getPostUrl(post)}.mdx`}
-            isComponent={post.metadata.category === "components"}
-          /> */}
-
           <PostShareMenu url={getPostUrl(post)} />
 
           {previous && (
@@ -217,7 +212,8 @@ export default async function Page({
         </div>
       </Prose>
 
-      <div className="screen-line-before h-4 w-full" />
+      <div className="screen-line-before w-full h-4" />
+
     </div>
   );
 }

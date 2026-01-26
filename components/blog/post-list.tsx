@@ -13,19 +13,19 @@ export function PostList({ posts }: { posts: Blog[] }) {
         </NotData>
       ) : (
         <>
-          <div className="absolute inset-0 -z-1 grid grid-cols-1 gap-4 max-sm:hidden sm:grid-cols-2">
-            <div className="border-r border-edge" />
-            <div className="border-l border-edge" />
-          </div>
+          <div className="relative py-4 px-0 screen-line-before screen-line-after">
+            <div className="pointer-events-none absolute inset-0 -z-1 grid grid-cols-1 gap-4 sm:grid-cols-2 px-4">
+              <div className="border-x border-edge"></div>
+              <div className="border-x border-edge"></div>
+            </div>
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {posts.map((post, index) => (
-              <PostItem
-                key={post.slug}
-                post={post}
-                shouldPreloadImage={index <= 4}
-              />
-            ))}
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 px-4">
+              {posts.map((post, id) => (
+                <div className="screen-line-after screen-line-before" key={id}>
+                  <PostItem key={post.slug} post={post} />
+                </div>
+              ))}
+            </div>
           </div>
         </>
       )}
