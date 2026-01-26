@@ -10,7 +10,21 @@ import { ProfileHeader } from "@/components/home/profile-header";
 import { Projects } from "@/components/home/Projects";
 import { SocialLinks } from "@/components/home/social-links";
 import { TeckStack } from "@/components/home/teck-stack";
+import { SITE_INFO } from "@/config/site";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+    description: SITE_INFO.description,
+    applicationName: SITE_INFO.name,
+    keywords: SITE_INFO.keywords,
+    creator: SITE_INFO.name,
+    authors: [{ name: SITE_INFO.name, url: SITE_INFO.url }],
+    publisher: SITE_INFO.name,
+    metadataBase: new URL(SITE_INFO.url),
+    alternates: {
+        canonical: SITE_INFO.url,
+    },
+}
 
 export default async function Page() {
     return (
