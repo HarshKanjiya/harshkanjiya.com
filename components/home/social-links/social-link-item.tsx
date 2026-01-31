@@ -9,9 +9,7 @@ export function SocialLinkItem({ icon, title, description, href }: SocialLink) {
   return (
     <Link
       className={cn(
-        "group/link flex cursor-pointer items-center gap-4 p-4 pr-2 transition-colors hover:bg-accent2 border-x border-edge",
-        "max-sm:screen-line-before max-sm:screen-line-after",
-        "sm:nth-[2n+1]:screen-line-before sm:nth-[2n+1]:screen-line-after"
+        "group/link flex cursor-pointer items-center gap-4 pr-2 p-4 transition-colors hover:bg-accent2 corner-squircle rounded-xl",
       )}
       href={href}
       target="_blank"

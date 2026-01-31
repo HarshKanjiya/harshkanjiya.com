@@ -8,17 +8,17 @@ export const EXPERIENCES: Experience[] = [
     positions: [
       {
         id: "20f8bfe5-b6a3-4b0d-ac2f-6fccd50d417e",
-        title: "Frontend Developer",
+        title: "Full Stack Developer",
         employmentPeriod: {
           start: "Dec 2023",
         },
         employmentType: "Full-time",
         icon: "code",
         description: `
--	Modernized legacy applications by migrating AngularJS to Angular and improving maintainability & UX.
--	Engineered a high-performance custom data grid rendering 15,000+ cells with zero latency.
--	Improved application startup performance by ~80% by implementing custom lazy loading strategies.
--	Worked on Angular, React & Next.js frontends integrated with .NET Core & PostgreSQL services.
+- Modernized legacy applications by migrating AngularJS to Angular and improving maintainability & UX.
+- Engineered a high-performance custom data grid rendering 15,000+ cells with minimum latency.
+- Improved application startup performance by ~80% by implementing custom lazy loading strategies.
+- Worked on Angular, React & Next.js frontends integrated with .NET Core & PostgreSQL services.
 `,
         skills: [
           "Angular",
@@ -59,17 +59,18 @@ export const EXPERIENCES: Experience[] = [
     positions: [
       {
         id: "30d3a9fb-021d-452a-9d27-83655369b4b9",
-        title: "Junior Full-stack Developer",
+        title: "Jr. Full Stack Developer",
         employmentPeriod: {
-          start: "Dec 2022",
+          start: "Sept 2022",
           end: "Oct 2023",
         },
         employmentType: "Remote",
         icon: "code",
         description: `
-- Built features for a real-time resource monitoring platform, focusing on performance and reliability.
+- Built features for a real-time monitoring platform, focusing on performance and reliability.
 - Worked with Node.js microservices to implement WhatsApp-based alerting for faster fault detection.
 - Implemented complex, high-performance UI workflows using React & Redux Toolkit.
+- Converted a 3-month internship into a paid part-time remote role based on performance.
         `,
         skills: [
           "React",

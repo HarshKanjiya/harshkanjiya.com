@@ -12,7 +12,7 @@ export function About() {
   return (
     <Panel className="screen-line-before screen-line-after" id="about-me">
       <h2 className="sr-only">About me</h2>
-      <div className="flex items-center justify-between flex-1 flex-col h-full overflow-hidden bg-accent dark:bg-accent/50">
+      <div className="flex items-center justify-between flex-1 flex-col h-full overflow-hidden dark:bg-accent/50 shadow-[inset_0_3px_2px_rgba(255,255,255,0.021)] bg-accent">
         <h3 className="w-full py-1.5 px-4 text-muted-foreground text-left">
           <a href="#about-me">About me</a>
         </h3>

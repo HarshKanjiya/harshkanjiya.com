@@ -32,7 +32,7 @@ export function ExperiencePositionItem({
             "relative before:absolute before:-top-1 before:-right-1 before:-bottom-1.5 before:left-7 before:-z-1 before:rounded-lg hover:before:bg-accent2"
           )}
         >
-          <div className="relative z-1 mb-1 flex items-center gap-3">
+          <div className="relative z-1 mb-1 flex items-center gap-4">
             <div
               className={cn(
                 "flex size-6 shrink-0 items-center justify-center rounded-sm",
@@ -56,7 +56,7 @@ export function ExperiencePositionItem({
             </div>
           </div>
 
-          <div className="flex items-center gap-2 pl-9 text-sm text-muted-foreground">
+          <div className="flex items-center gap-2 pl-10 text-sm text-muted-foreground">
             {position.employmentType && (
               <>
                 <dl>
@@ -94,13 +94,13 @@ export function ExperiencePositionItem({
 
         <CollapsibleContent className="overflow-hidden duration-300 data-[state=closed]:animate-collapsible-fade-up data-[state=open]:animate-collapsible-fade-down">
           {position.description && (
-            <ProseMono className="pt-2 pl-9">
+            <ProseMono className="pt-2 pl-10">
               <Markdown>{position.description}</Markdown>
             </ProseMono>
           )}
 
           {Array.isArray(position.skills) && position.skills.length > 0 && (
-            <ul className="flex flex-wrap gap-1.5 pt-2 pl-9">
+            <ul className="flex flex-wrap gap-1.5 pt-2 pl-10">
               {position.skills.map((skill, index) => (
                 <li key={index} className="flex">
                   <Tag>{skill}</Tag>

@@ -580,7 +580,6 @@ body {
   --gradient-color-4: var(--mesh-color-4);
 }
 
-
 .tooltip {
   transition:
     transform 0.125s ease-out,
@@ -597,4 +596,9 @@ body {
   &[data-instant] {
     transition-duration: 0ms;
   }
+}
+
+::view-transition-old(root), ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
 }
