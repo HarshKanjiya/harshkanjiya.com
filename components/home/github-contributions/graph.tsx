@@ -2,7 +2,6 @@
 
 import { format } from "date-fns";
 import { LoaderIcon } from "lucide-react";
-import { use } from "react";
 
 import type { Activity } from "@/components/kibo-ui/contribution-graph";
 import {
@@ -23,14 +22,12 @@ import { GITHUB_USERNAME } from "@/config/site";
 export function GitHubContributionGraph({
   contributions,
 }: {
-  contributions: Promise<Activity[]>;
+  contributions: Activity[];
 }) {
-  const data = use(contributions);
-
   return (
     <ContributionGraph
       className="mx-auto py-2"
-      data={data}
+      data={contributions}
       blockSize={11}
       blockMargin={3}
       blockRadius={0}
