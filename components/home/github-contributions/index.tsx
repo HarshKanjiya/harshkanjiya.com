@@ -21,7 +21,7 @@ export function GitHubContributions() {
     const fetchContributions = async () => {
       try {
         const res = await fetch(
-          `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=2026`
+          `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=last`
         );
         const data = (await res.json()) as GitHubContributionsResponse;
         setContributions(data.contributions);
