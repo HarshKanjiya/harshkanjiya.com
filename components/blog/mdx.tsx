@@ -38,6 +38,8 @@ import { getIconForLanguageExtension, Icons } from "@/components/icons";
 // QUICK UX WINS COMPONENTS
 import * as quickUxWinsComponents from "./content/quick-ux-wins";
 
+import CodeBlock from "@/components/blog/code-block";
+
 const components: MDXRemoteProps["components"] = {
   h1: (props: React.ComponentProps<"h1">) => <Heading as="h1" {...props} />,
   h2: (props: React.ComponentProps<"h2">) => <Heading as="h2" {...props} />,
@@ -148,6 +150,7 @@ const components: MDXRemoteProps["components"] = {
   ),
   YouTubeEmbed,
   FramedImage,
+  CodeBlock,
 
   ...quickUxWinsComponents
 

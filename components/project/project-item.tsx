@@ -14,7 +14,9 @@ export function ProjectItem({ project, shouldPreloadImage }: { project: Project;
             <h3 className="w-full py-1.5 px-4 text-muted-foreground text-left group-hover:underline">
                 {project.metadata.title}
                 {project.metadata.new && (
-                    <span className="ml-2 inline-block size-2 -translate-y-px rounded-full bg-info">
+                    <span className="relative w-min h-min inline-flex items-center justify-center ml-2">
+                        <span className="absolute inline-flex size-3 animate-ping rounded-full bg-info opacity-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                        <span className="relative inline-flex size-2 rounded-full bg-info" />
                         <span className="sr-only">New</span>
                     </span>
                 )}
