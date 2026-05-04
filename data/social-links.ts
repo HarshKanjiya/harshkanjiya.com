@@ -16,8 +16,8 @@ export const SOCIAL_LINKS: SocialLink[] = [
     {
         icon: "https://assets.harshkanjiya.com/social/x.webp",
         title: "X",
-        description: "@iamharshkanjiya",
-        href: "https://x.com/iamharshkanjiya",
+        description: "@harshexists",
+        href: "https://x.com/harshexists",
     },
     // {
     //     icon: "https://assets.harshkanjiya.com/images/link-icons/dailydotdev.webp?t=1759581475",

@@ -21,7 +21,7 @@ export function GitHubContributions() {
     const fetchContributions = async () => {
       try {
         const res = await fetch(
-          `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=last`
+          `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=2026`
         );
         const data = (await res.json()) as GitHubContributionsResponse;
         setContributions(data.contributions);
@@ -40,7 +40,7 @@ export function GitHubContributions() {
       <h2 className="sr-only">GitHub Contributions</h2>
       <div className="flex items-center justify-between flex-1 flex-col h-full overflow-hidden dark:bg-accent/50 shadow-[inset_0_3px_2px_rgba(255,255,255,0.021)] bg-accent">
         <div className="p-0.5 flex-1 h-full flex w-full py-[3px]">
-          <div className="flex-1 max-sm:pb-3 flex flex-col bg-background outline rounded-sm outline-muted/50 relative overflow-hidden group w-full h-[170px]">
+          <div className="flex-1 flex flex-col bg-background outline rounded-sm outline-muted/50 relative overflow-hidden group w-full sm:h-[170px]">
             {
               loading ? (
                 <div className="flex justify-center items-center h-full">

@@ -1,5 +1,5 @@
 import { getMDXData } from "@/lib/mdx-reader";
-import { Project, ProjectMetadata } from "@/types/projects";
+import { ProjectMetadata } from "@/types/projects";
 import path from "path";
 
 export function getAllProjects() {
