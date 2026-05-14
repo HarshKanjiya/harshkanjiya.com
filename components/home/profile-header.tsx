@@ -3,13 +3,13 @@ import { USER } from "@/data/user";
 
 export function ProfileHeader() {
   return (
-    <div className="screen-line-after flex flex-col sm:flex-row border-x border-edge pb-2">
+    <div className="flex flex-col sm:flex-row border-x border-edge pb-2 relative z-10 screen-line-after">
       <div className="shrink-0 border-edge">
         <div className="sm:mx-0.5 my-[3px] ml-[50%] -translate-x-1/2 sm:translate-x-3 w-fit mt-16 mx-0 sm:mt-[3px]">
           <img
             className="size-32 rounded-full ring-2 ring-border ring-offset-2 ring-offset-background select-none sm:size-40"
             alt={`${USER.displayName}'s avatar`}
-            src={USER.avatar}
+            src={'/me.png'}
             fetchPriority="high"
           />
         </div>

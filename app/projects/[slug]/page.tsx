@@ -23,6 +23,7 @@ import { USER } from "@/data/user";
 import { cn, findNeighbour } from "@/lib/utils";
 import { Project } from "@/types/projects";
 import Image from "next/image";
+import CustomSeparator from "@/components/custom-separator";
 
 export async function generateStaticParams() {
     const blogs = getAllProjects();
@@ -114,7 +115,7 @@ export default async function Page({
     const { previous, next } = findNeighbour(allProjects, slug);
 
     return (
-        <div className="min-h-svh border-x border-edge">
+        <main className="mx-auto w-full *:[[id]]:scroll-mt-22 min-h-svh">
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{
@@ -193,7 +194,8 @@ export default async function Page({
                 </div>
             </div>
 
-            <div className="screen-line-before">
+            <CustomSeparator />
+            <div>
                 <div
                     className={cn(
                         "h-8",
@@ -203,8 +205,9 @@ export default async function Page({
                 />
             </div>
 
-            <Prose className="px-4">
-                <div className="flex items-center justify-between gap-3 screen-line-before screen-line-after">
+            <Prose className="px-4 pb-4">
+                <CustomSeparator />
+                <div className="flex items-center justify-between gap-3 py-4">
                     <div className="flex items-center gap-3">
                         {
                             project.metadata.logo && (
@@ -263,8 +266,9 @@ export default async function Page({
                         }
                     </div>
                 </div>
+                <CustomSeparator />
 
-                <p className="text-muted-foreground">{project.metadata.description}</p>
+                <p className="text-muted-foreground mt-4">{project.metadata.description}</p>
 
                 {
                     project.metadata.image && (
@@ -285,7 +289,8 @@ export default async function Page({
                 </div>
             </Prose>
 
-            <div className="screen-line-before h-4 w-full" />
-        </div>
+            <CustomSeparator />
+            <div className="h-4 w-full" />
+        </main>
     );
 }

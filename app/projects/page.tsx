@@ -5,6 +5,7 @@ import { ProjectSearchInput } from "@/components/project/project-search-input";
 import { SITE_INFO } from "@/config/site";
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import CustomSeparator from "@/components/custom-separator";
 
 export const metadata: Metadata = {
     title: {
@@ -40,32 +41,36 @@ export default function Page() {
     const allProjects = getAllProjects();
 
     return (
-        <div className="min-h-svh border-x border-edge">
-            <div className="screen-line-after px-4">
-                <h1 className="text-3xl font-semibold">Projects</h1>
-            </div>
+        <main className="mx-auto w-full *:[[id]]:scroll-mt-22 min-h-svh">
+            <div className="px-0">
+                <div className="px-0 pt-12">
+                    <h1 className="text-3xl font-semibold px-2">Projects</h1>
+                </div>
 
-            <div className="p-4">
-                <p className="font-mono text-sm text-balance text-muted-foreground">
-                    {metadata.description}
-                </p>
+                <div className="p-2">
+                    <p className="font-mono text-sm text-balance text-muted-foreground">
+                        {metadata.description}
+                    </p>
+                </div>
             </div>
+            <CustomSeparator />
 
-            <div className="screen-line-before screen-line-after p-2">
-                <Suspense
-                    fallback={
-                        <div className="flex h-9 w-full rounded-lg border border-input shadow-xs dark:bg-input/30" />
-                    }
-                >
-                    <ProjectSearchInput />
-                </Suspense>
-            </div>
+            <Suspense
+                fallback={
+                    <div className="flex h-9 w-full rounded-lg border border-input shadow-xs dark:bg-input/30" />
+                }
+            >
+                <ProjectSearchInput />
+            </Suspense>
+
+            <CustomSeparator />
 
             <Suspense fallback={<ProjectList projects={allProjects} />}>
                 <ProjectListWithSearch posts={allProjects} />
             </Suspense>
 
+            <CustomSeparator />
             <div className="h-4" />
-        </div>
+        </main>
     );
 }

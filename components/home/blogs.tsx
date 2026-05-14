@@ -9,8 +9,8 @@ export function Blog() {
     const allPosts = getAllBlogs();
 
     return (
-        <Panel id="blog">
-            <PanelHeader>
+        <Panel id="blog" className="px-0">
+            <PanelHeader className="px-0">
                 <PanelTitle className="flex gap-2 items-center justify-between">
                     <a href="#blog" className="flex gap-2 group">
                         Blog
@@ -31,14 +31,9 @@ export function Blog() {
             </PanelHeader>
 
             <div className="relative py-4 px-0">
-                <div className="pointer-events-none absolute inset-0 -z-1 grid grid-cols-1 gap-4 sm:grid-cols-2 px-4">
-                    <div className="border-x border-edge"></div>
-                    <div className="border-x border-edge"></div>
-                </div>
-
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 px-4">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 px-0">
                     {allPosts.slice(0, 2).map((post, id) => (
-                        <div className="screen-line-after screen-line-before" key={id}>
+                        <div key={id}>
                             <PostItem key={post.slug} post={post} />
                         </div>
                     ))}

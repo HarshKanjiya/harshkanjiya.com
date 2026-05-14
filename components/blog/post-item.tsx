@@ -13,7 +13,7 @@ export function PostItem({
 }) {
     return (
         // <div className="">
-            <Link href={`/blog/${post.slug}`} className="flex items-center justify-between flex-1 flex-col border-edge border h-full overflow-hidden bg-accent dark:bg-accent/50 relative group">
+            <Link href={`/blog/${post.slug}`} className="flex items-center justify-between flex-1 flex-col h-full overflow-hidden dark:bg-accent/50 shadow-[inset_0_3px_2px_rgba(255,255,255,0.021)] bg-accent rounded-xl relative group">
                 <h3 className="w-full py-1.5 px-4 text-muted-foreground text-left group-hover:underline">
                     {post.metadata.title}
                     {post.metadata.new && (
@@ -28,8 +28,8 @@ export function PostItem({
                         <span className="sr-only">Pinned</span>
                     </span>
                 )}
-                <div className="p-0.5 pt-0 flex-1 h-full flex w-full">
-                    <div className="flex-1 p-1.5 flex flex-col bg-background outline outline-muted/50 rounded-sm relative overflow-hidden group w-full">
+                <div className="pt-0 flex-1 h-full flex w-full p-[3px]">
+                    <div className="flex-1 p-1.5 flex flex-col bg-background outline outline-muted/50 rounded-[10px] relative overflow-hidden group w-full">
                         {post.metadata.image && (
                             <div className="relative select-none [&_img]:aspect-1200/630 [&_img]:rounded-sm">
                                 <Image

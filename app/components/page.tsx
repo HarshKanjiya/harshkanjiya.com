@@ -32,7 +32,7 @@ export default function ComponentsPage() {
         </p>
       </div>
 
-      <div className="screen-line-before screen-line-after p-4">
+      {/* <div className="screen-line-before screen-line-after p-4">
         <p className="mb-2 font-mono text-xs text-muted-foreground">
           Global install
         </p>
@@ -42,7 +42,7 @@ export default function ComponentsPage() {
           __yarn__="yarn dlx shadcn@latest add https://harshkanjiya.com/r/hello-world.json"
           __bun__="bunx shadcn@latest add https://harshkanjiya.com/r/hello-world.json"
         />
-      </div>
+      </div> */}
 
       <ul className="divide-y divide-edge">
         {REGISTRY_COMPONENTS.map((comp) => (

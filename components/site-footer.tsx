@@ -4,7 +4,7 @@ import { BotIcon, RssIcon } from "lucide-react";
 export function SiteFooter() {
   return (
     <footer className="max-w-screen overflow-x-hidden px-4 sm:px-2">
-      <div className="screen-line-before mx-auto pt-4 md:max-w-216 border-x border-edge">
+      <div className="screen-line-before mx-auto pt-4 md:max-w-4xl border-x border-edge">
         <figure className="relative mx-auto flex flex-col items-center px-4 text-center z-10 pb-3">
           <blockquote className="w-full text-center">
             <p className="font-serif italic tracking-tight text-lg sm:text-2xl md:text-3xl">
@@ -17,10 +17,7 @@ export function SiteFooter() {
         </figure>
 
       </div>
-      <div className="screen-line-before mx-auto border-x border-b border-edge pt-4 md:max-w-216">
-        <p className="mb-1 px-4 text-center font-mono text-sm text-balance text-muted-foreground">
-          Inspired by chanhdai.com & ui.shadcn.com
-        </p>
+      <div className="screen-line-before mx-auto border-x border-b border-edge pt-4 md:max-w-4xl">
 
         <p className="mb-4 px-4 text-center font-mono text-sm text-balance text-muted-foreground">
           Built by{" "}

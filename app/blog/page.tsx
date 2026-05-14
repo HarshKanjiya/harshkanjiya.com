@@ -5,6 +5,7 @@ import { PostSearchInput } from "@/components/blog/post-search-input";
 import type { Metadata } from "next";
 import { SITE_INFO } from "@/config/site";
 import { Suspense } from "react";
+import CustomSeparator from "@/components/custom-separator";
 
 export const metadata: Metadata = {
   title: {
@@ -40,32 +41,37 @@ export default function Page() {
   const allPosts = getAllBlogs();
 
   return (
-    <div className="min-h-svh border-x border-edge">
-      <div className="screen-line-after px-4">
-        <h1 className="text-3xl font-semibold">Blog</h1>
+    <main className="mx-auto w-full *:[[id]]:scroll-mt-22 min-h-svh">
+      <div className="px-0">
+        <div className="px-0 pt-12">
+          <h1 className="text-3xl font-semibold px-2">Blogs</h1>
+        </div>
+
+        <div className="p-2">
+          <p className="font-mono text-sm text-balance text-muted-foreground">
+            {metadata.description}
+          </p>
+        </div>
       </div>
 
-      <div className="p-4">
-        <p className="font-mono text-sm text-balance text-muted-foreground">
-          {metadata.description}
-        </p>
-      </div>
+      <CustomSeparator />
 
-      <div className="screen-line-before screen-line-after p-2">
-        <Suspense
-          fallback={
-            <div className="flex h-9 w-full rounded-lg border border-input shadow-xs dark:bg-input/30" />
-          }
-        >
-          <PostSearchInput />
-        </Suspense>
-      </div>
+      <Suspense
+        fallback={
+          <div className="flex h-9 w-full rounded-lg border border-input shadow-xs dark:bg-input/30" />
+        }
+      >
+        <PostSearchInput />
+      </Suspense>
+
+      <CustomSeparator />
 
       <Suspense fallback={<PostList posts={allPosts} />}>
         <PostListWithSearch posts={allPosts} />
       </Suspense>
 
+      <CustomSeparator />
       <div className="h-4" />
-    </div>
+    </main>
   );
 }

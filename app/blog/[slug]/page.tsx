@@ -22,6 +22,7 @@ import { USER } from "@/data/user";
 import { cn, findNeighbour } from "@/lib/utils";
 import { Blog } from "@/types/blog";
 import { getAllBlogs, getBlogBySlug } from "@/actions/blog";
+import CustomSeparator from "@/components/custom-separator";
 
 export async function generateStaticParams() {
   const blogs = getAllBlogs();
@@ -113,7 +114,7 @@ export default async function Page({
   const { previous, next } = findNeighbour(allBlogs, slug);
 
   return (
-    <div className="min-h-svh border-x border-edge">
+    <main className="mx-auto w-full *:[[id]]:scroll-mt-22 min-h-svh">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -188,7 +189,8 @@ export default async function Page({
         </div>
       </div>
 
-      <div className="screen-line-before screen-line-after">
+      <CustomSeparator />
+      <div>
         <div
           className={cn(
             "h-8",
@@ -198,12 +200,14 @@ export default async function Page({
         />
       </div>
 
-      <Prose className="px-4">
-        <h1 className="screen-line-after text-3xl font-semibold">
+      <Prose className="px-4 pb-4">
+        <CustomSeparator />
+        <h1 className="text-3xl font-semibold py-4">
           {post.metadata.title}
         </h1>
 
-        <p className="text-muted-foreground">{post.metadata.description}</p>
+        <CustomSeparator />
+        <p className="text-muted-foreground mt-4">{post.metadata.description}</p>
 
         <InlineTOC items={toc} />
 
@@ -212,9 +216,10 @@ export default async function Page({
         </div>
       </Prose>
 
-      <div className="screen-line-before w-full h-4" />
+      <CustomSeparator />
+      <div className="w-full h-4" />
 
-    </div>
+    </main>
   );
 }
 

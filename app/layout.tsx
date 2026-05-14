@@ -104,24 +104,16 @@ export default function RootLayout({
             <Analytics />
             <MeshReloader />
             <SiteHeader />
-            <div className="flex-1 flex justify-center">
-              <div
-                className="relative w-4 md:w-12 border-l border-edge opacity-75 lg:block
-              before:absolute before:inset-0 before:-z-1
-              before:bg-[repeating-linear-gradient(315deg,var(--pattern-foreground)_0,var(--pattern-foreground)_2px,transparent_0,transparent_50%)]
-              before:bg-size-[10px_10px]
-              before:[--pattern-foreground:var(--color-border)]/56
-              dark:before:[--pattern-foreground:var(--color-border)]/56"
-              />
-              <main className="w-screen max-w-3xl overflow-x-hidden">{children}</main>
-              <div
-                className="relative w-4 md:w-12 border-r border-edge opacity-75 lg:block
-              before:absolute before:inset-0 before:-z-1
-              before:bg-[repeating-linear-gradient(315deg,var(--pattern-foreground)_0,var(--pattern-foreground)_2px,transparent_0,transparent_50%)]
-              before:bg-size-[10px_10px]
-              before:[--pattern-foreground:var(--color-border)]/56
-              dark:before:[--pattern-foreground:var(--color-border)]/56"
-              />
+            <div className="w-full max-w-4xl mx-auto px-12 relative flex flex-col justify-start items-start overflow-x-hidden">
+              {/* Left vertical line */}
+              <div className="w-[1px] h-full absolute left-0 top-0 bg-[rgba(55,50,47,0.12)] dark:bg-[rgba(255,255,255,0.12)] shadow-[1px_0px_0px_white] dark:shadow-[1px_0px_0px_black] z-0 opacity-60"></div>
+
+              {/* Right vertical line */}
+              <div className="w-[1px] h-full absolute right-0 top-0 bg-[rgba(55,50,47,0.12)] dark:bg-[rgba(255,255,255,0.12)] shadow-[1px_0px_0px_white] dark:shadow-[1px_0px_0px_black] z-0 opacity-60"></div>
+
+              <main className="w-full">
+                {children}
+              </main>
             </div>
             <SiteFooter />
             <ScrollToTop />

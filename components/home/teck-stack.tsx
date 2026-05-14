@@ -12,14 +12,14 @@ import { TECH_STACK } from "@/data/tech-stack";
 
 export function TeckStack() {
   return (
-    <Panel className="screen-line-before screen-line-after" id="stack">
+    <Panel id="stack">
       <h2 className="sr-only">Tech Stack</h2>
-      <div className="flex items-center justify-between flex-1 flex-col h-full overflow-hidden dark:bg-accent/50 shadow-[inset_0_3px_2px_rgba(255,255,255,0.021)] bg-accent">
+      <div className="flex items-center justify-between flex-1 flex-col h-full overflow-hidden dark:bg-accent/50 shadow-[inset_0_3px_2px_rgba(255,255,255,0.021)] bg-accent rounded-xl">
         <h3 className="w-full py-1.5 px-4 text-muted-foreground text-left">
           <a href="#stack">Tech Stack</a>
         </h3>
-        <div className="p-0.5 pt-0 flex-1 h-full flex w-full pb-[3px]">
-          <div className="flex-1 px-3 py-2 max-sm:pb-3 flex flex-col bg-background outline rounded-sm outline-muted/50 relative overflow-hidden group w-full">
+        <div className="pt-0 flex-1 h-full flex w-full p-[3px]">
+          <div className="flex-1 px-3 py-2 max-sm:pb-3 flex flex-col bg-background outline rounded-[10px] outline-muted/50 relative overflow-hidden group w-full">
             <PanelContent className="space-y-2.5 bg-background w-full p-0 sm:p-4">
               <ul className="flex flex-wrap gap-4 select-none justify-center">
                 {TECH_STACK.map((tech) => {

@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 export default async function Page() {
     return (
         <main
-            className="mx-auto md:max-w-3xl *:[[id]]:scroll-mt-22">
+            className="mx-auto w-full *:[[id]]:scroll-mt-22">
             {/* <Script src="/js/meshCanvas.js" strategy="beforeInteractive" /> */}
 
             <HeroSection />
@@ -40,12 +40,17 @@ export default async function Page() {
 
             <Overview />
             <CustomSeparator />
+            <SocialLinks />
+
+            <CustomSeparator />
 
             <About />
             <CustomSeparator />
 
-            <SocialLinks />
+            <GitHubContributions />
             <CustomSeparator />
+
+            {/* <CustomSeparator /> */}
 
             {/* <TestimonialsMarquee /> */}
             {/* <CustomSeparator /> */}
@@ -66,22 +71,20 @@ export default async function Page() {
             {/* <Certifications /> */}
             {/* <CustomSeparator /> */}
 
-            <Bookmarks />
-            <CustomSeparator />
-
             <Experiences />
             <CustomSeparator />
 
-            <GitHubContributions />
+            <Bookmarks />
             <CustomSeparator />
 
-            <HelloWorld name="Harsh" />
+
+            {/* <HelloWorld name="Harsh" />
             <HeroDummy />
             <CustomSeparator />
 
             <HelloWorld name="Harsh" />
             <HeroDummy />
-            <CustomSeparator />
+            <CustomSeparator /> */}
         </main>
     );
 }
