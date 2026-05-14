@@ -4,7 +4,7 @@ import path from "node:path";
 import { u } from "unist-builder";
 import { visit } from "unist-util-visit";
 
-// import { Index } from "@/__registry__/index";
+import { BLOCK_SOURCE_MAP, COMPONENT_SOURCE_MAP } from "@/lib/registry/component-map";
 import type { UnistNode, UnistTree } from "@/types/unist";
 
 export function rehypeComponent() {
@@ -35,18 +35,10 @@ export function rehypeComponent() {
           if (srcPath) {
             src = path.join(process.cwd(), srcPath);
           } else {
-            // const component = Index[name];
-            // src = fileName
-            //   ? component.files.find((file: unknown) => {
-            //       if (typeof file === "string") {
-            //         return (
-            //           file.endsWith(`${fileName}.tsx`) ||
-            //           file.endsWith(`${fileName}.ts`)
-            //         );
-            //       }
-            //       return false;
-            //     }) || component.files[0]?.path
-            //   : component.files[0]?.path;
+            const relPath =
+              COMPONENT_SOURCE_MAP[name] || BLOCK_SOURCE_MAP[name];
+            if (!relPath) return null;
+            src = path.join(process.cwd(), relPath);
           }
 
           // Read the source file.
@@ -105,21 +97,16 @@ export function rehypeComponent() {
         }
 
         try {
-          // const component = Index[name];
+          const relPath =
+            COMPONENT_SOURCE_MAP[name] || BLOCK_SOURCE_MAP[name];
 
-          // const src = component.files[0]?.path;
+          if (!relPath) return null;
 
-          // Read the source file.
-          // const filePath = src;
-          // let source = fs.readFileSync(filePath, "utf8");
+          const filePath = path.join(process.cwd(), relPath);
+          let source = fs.readFileSync(filePath, "utf8");
 
-          // Replace imports.
-          // TODO: Use @swc/core and a visitor to replace this.
-          // For now a simple regex should do.
-          // source = source.replaceAll(`@/registry/`, "@/components/ncdai/");
-          // source = source.replaceAll("export default", "export");
+          source = source.replaceAll("export default", "export");
 
-          // Add code as children so that rehype can take over at build time.
           node.children?.push(
             u("element", {
               tagName: "pre",
@@ -136,7 +123,7 @@ export function rehypeComponent() {
                   children: [
                     {
                       type: "text",
-                      // value: source,
+                      value: source,
                     },
                   ],
                 }),

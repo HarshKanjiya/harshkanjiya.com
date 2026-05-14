@@ -4,6 +4,7 @@ import { CodeXmlIcon, EyeIcon, RepeatIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import React, { useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
+import { componentIndex } from "@/lib/registry/index";
 
 import { CodeCollapsibleWrapper } from "./code-collapsible-wrapper";
 import { Button } from "./ui/button";
@@ -38,17 +39,17 @@ export function ComponentPreview({
   const Code = Codes[0];
 
   const Preview = useMemo(() => {
-    // const Component = Index[name]?.component;
+    const Component = componentIndex[name]
 
-    // if (!Component) {
-    //   return (
-    //     <p className="text-sm text-muted-foreground">
-    //       Component <CodeInline>{name}</CodeInline> not found in registry.
-    //     </p>
-    //   );
-    // }
+    if (!Component) {
+      return (
+        <p className="text-sm text-muted-foreground">
+          Component <CodeInline>{name}</CodeInline> not found in registry.
+        </p>
+      )
+    }
 
-    // return <Component />;
+    return <Component />
   }, [name]);
 
   return (
@@ -111,7 +112,7 @@ export function ComponentPreview({
                   </div>
                 }
               >
-                {/* {Preview} */}
+                {Preview}
               </React.Suspense>
             </div>
 
