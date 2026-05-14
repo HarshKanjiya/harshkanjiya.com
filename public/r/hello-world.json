@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "hello-world",
+  "type": "registry:component",
+  "title": "Hello World",
+  "description": "A simple animated greeting component.",
+  "author": "Harsh Kanjiya <https://harshkanjiya.com>",
+  "dependencies": [],
+  "devDependencies": [],
+  "registryDependencies": ["utils"],
+  "files": [
+    {
+      "path": "components/hello-world/hello-world.tsx",
+      "type": "registry:component"
+    }
+  ]
+}

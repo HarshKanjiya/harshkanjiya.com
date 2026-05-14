@@ -1,0 +1,59 @@
+---
+title: Hello World
+description: A simple animated greeting component. A great starting point for your registry.
+---
+
+<ComponentPreview name="hello-world" canReplay />
+
+## Installation
+
+<Tabs defaultValue="cli">
+  <TabsListInstallType />
+
+  <TabsContent value="cli">
+
+```bash
+pnpm dlx shadcn@latest add https://harshkanjiya.com/r/hello-world.json
+```
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy the component file into your project</Step>
+
+Copy `components/hello-world/hello-world.tsx` into your codebase.
+
+<Step>Install dependencies</Step>
+
+This component uses only `clsx` / `tailwind-merge` via your existing `@/lib/utils`.
+
+<Step>Import and use</Step>
+
+```tsx
+import { HelloWorld } from "@/components/hello-world/hello-world"
+```
+
+</Steps>
+
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { HelloWorld } from "@/components/hello-world/hello-world"
+
+export default function Page() {
+  return <HelloWorld name="Harsh" />
+}
+```
+
+## API Reference
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `name` | `string` | `"World"` | The name displayed in the greeting |
+| `className` | `string` | — | Additional CSS classes passed to the root element |

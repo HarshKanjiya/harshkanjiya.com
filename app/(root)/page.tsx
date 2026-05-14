@@ -1,4 +1,6 @@
 import CustomSeparator from "@/components/custom-separator";
+import { HelloWorld } from "@/components/hello-world/hello-world";
+import { HeroDummy } from "@/components/blocks/hero-dummy/hero-dummy";
 import { About } from "@/components/home/about";
 import { Blog } from "@/components/home/blogs";
 import { Bookmarks } from "@/components/home/bookmarks";
@@ -59,8 +61,9 @@ export default async function Page() {
             <SocialLinks />
             <CustomSeparator />
 
-            {/* <Brand /> */}
-            {/* <CustomSeparator /> */}
+            <HelloWorld name="Harsh" />
+            <HeroDummy />
+            <CustomSeparator />
         </main>
     );
 }

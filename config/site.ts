@@ -19,10 +19,14 @@ export const MAIN_NAV: NavItem[] = [
     title: "Portfolio",
     href: "/",
   },
-  // {
-  //   title: "Components",
-  //   href: "/components",
-  // },
+  {
+    title: "Components",
+    href: "/components",
+  },
+  {
+    title: "Blocks",
+    href: "/blocks",
+  },
   {
     title: "Projects",
     href: "/projects",
@@ -31,10 +35,6 @@ export const MAIN_NAV: NavItem[] = [
     title: "Blog",
     href: "/blog",
   },
-  // {
-  //   title: "My Library",
-  //   href: "/my-library",
-  // },
 ];
 
 export const GITHUB_USERNAME = "harshkanjiya";
