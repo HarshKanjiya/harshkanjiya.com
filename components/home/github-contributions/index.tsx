@@ -39,11 +39,11 @@ export function GitHubContributions() {
     <Panel id="github-contributions">
       <h2 className="sr-only">GitHub Contributions</h2>
       <div className="flex items-center justify-between flex-1 flex-col h-full overflow-hidden dark:bg-accent/50 shadow-[inset_0_3px_2px_rgba(255,255,255,0.021)] bg-accent rounded-xl">
-        <h3 className="w-full py-1.5 px-4 text-muted-foreground text-left">
+        <h3 className="w-full py-1.5 px-4 text-muted-foreground text-left text-sm sm:text-base">
           <a href="#github-contributions">GitHub Contributions</a>
         </h3>
         <div className="pt-0 flex-1 h-full flex w-full p-[3px]">
-          <div className="flex-1 px-3 py-2 max-sm:pb-3 flex flex-col bg-background outline rounded-[10px] outline-muted/50 relative overflow-hidden group w-full sm:h-[170px]">
+          <div className="flex-1 px-3 py-2 max-sm:pb-2 flex flex-col bg-background outline rounded-[10px] outline-muted/50 relative overflow-hidden group w-full">
             {
               loading ? (
                 <div className="flex justify-center items-center h-full">

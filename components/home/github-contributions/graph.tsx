@@ -58,10 +58,10 @@ export function GitHubContributionGraph({
         )}
       </ContributionGraphCalendar>
 
-      <ContributionGraphFooter className="px-2">
+      <ContributionGraphFooter className="px-2 flex flex-col items-center justify-center sm:flex-row sm:justify-between gap-4 py-2">
         <ContributionGraphTotalCount>
           {({ totalCount, year }) => (
-            <div className="text-muted-foreground">
+            <div className="text-muted-foreground text-sm sm:text-base">
               {totalCount.toLocaleString("en")} contributions in {year} on{" "}
               <a
                 className="font-medium underline underline-offset-4"

@@ -118,16 +118,16 @@ export function ShutterCta() {
                     onTouchMove={handleTouchMove}
                     onTouchEnd={handleTouchEnd}
                     className="
-                    group relative font-medium text-[17px] px-4 py-[0.35em] pl-5 h-[48px] rounded-[10px]
-                    bg-[#222] dark:bg-[#0A6256] text-white flex items-center overflow-hidden cursor-pointer
-                    dark:shadow-[inset_0px_0px_6px_6px_rgba(4,47,41,0.61),inset_0px_0px_2px_1px_rgba(2,24,21,0.5)]
+                    relative font-medium text-[17px] px-4 py-[0.35em] pl-5 h-[48px] rounded-[10px] group
+                    bg-[#222] dark:bg-[#343434] text-white flex items-center overflow-hidden cursor-pointer
+                    dark:shadow-[inset_0px_0px_6px_6px_rgba(12,12,12,0.61),inset_0px_0px_2px_1px_rgba(67,67,67,0.5)]
                     "
                 >
                     <div
                         className="
-                        lg:group-hover:w-[calc(100%-8px)] top-[4px] left-[4px] h-[40px] w-[42px] bg-[#0A6256] dark:bg-[#111]
+                        group-hover:w-[calc(100%-8px)] top-[4px] left-[4px] h-[40px] w-[42px] bg-[#454545] dark:bg-[#111]
                         flex items-center gap-2 absolute rounded-[7px] overflow-hidden ease-in-out
-                        shadow-[0px_0px_17px_4px_#000000,inset_0px_0px_6px_6px_rgba(4,47,41,0.31),inset_0px_0px_2px_1px_rgba(2,24,21,0.35)]
+                        shadow-[0px_0px_17px_4px_#000000,inset_0px_0px_6px_6px_rgba(4,47,41,0.31),inset_0px_0px_2px_1px_rgba(67,67,67,0.35)]
                         dark:shadow-[0px_0px_4px_2px_#333]
                         "
                         style={{

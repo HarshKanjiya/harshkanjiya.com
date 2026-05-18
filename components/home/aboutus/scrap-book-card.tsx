@@ -181,7 +181,7 @@ const ScrapBookCard = () => {
   };
   return (
     <div className="flex items-center justify-between flex-1 flex-col border-edge border h-full bg-accent dark:bg-accent/50">
-      <h3 className="w-full py-1.5 px-4 text-muted-foreground text-left">
+      <h3 className="w-full py-1.5 px-4 text-muted-foreground text-left text-sm sm:text-base">
         Scrap Book
       </h3>
       <div className="p-0.5 pt-0 flex-1 h-full rounded-md flex w-full">

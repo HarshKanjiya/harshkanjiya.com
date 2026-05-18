@@ -14,6 +14,7 @@ import { SocialLinks } from "@/components/home/social-links";
 import { TeckStack } from "@/components/home/teck-stack";
 import { SITE_INFO } from "@/config/site";
 import { Metadata } from "next";
+import { Components } from "@/components/home/components";
 
 export const metadata: Metadata = {
     description: SITE_INFO.description,
@@ -58,6 +59,9 @@ export default async function Page() {
             <Projects />
             <CustomSeparator />
 
+            <Components />
+            <CustomSeparator />
+
             <Blog />
             <CustomSeparator />
 
@@ -73,6 +77,7 @@ export default async function Page() {
 
             <SocialLinks />
             <CustomSeparator />
+
             <Bookmarks />
             <CustomSeparator />
 

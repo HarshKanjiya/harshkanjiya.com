@@ -36,20 +36,9 @@ export function BookmarkItem({
         <h3 className="leading-snug font-medium text-balance underline-offset-4 group-hover/bookmark:underline">
           {bookmark.title}
         </h3>
-
-        {/* <div className="text-sm text-muted-foreground">
-          <dl>
-            <dt className="sr-only">Created on</dt>
-            <dd>
-              <time dateTime={new Date(bookmark.createdAt).toISOString()}>
-                {format(new Date(bookmark.createdAt), "dd.MM.yyyy")}
-              </time>
-            </dd>
-          </dl>
-        </div> */}
       </div>
 
-      <ArrowUpRightIcon className="size-4 text-muted-foreground" aria-hidden />
+      <ArrowUpRightIcon className="size-4 text-muted-foreground -translate-x-3" aria-hidden />
     </a>
   );
 }

@@ -30,17 +30,13 @@ export const metadata: Metadata = {
 }
 
 // Edit this grid config for new components
-const componentGridConfig: Record<string, { className: string; visual: React.ReactNode }> = {
+export const componentGridConfig: Record<string, { className: string; visual: React.ReactNode }> = {
   "realistic-button": {
-    className: "md:col-span-8 md:row-span-2 flex items-center justify-center  bg-[#f7f7f7] dark:bg-black/10",
+    className: "md:col-span-6 md:row-span-2 flex items-center justify-center  bg-[#f7f7f7] dark:bg-black/10",
     visual: <RealisticButton />,
   },
-  "hello-world": {
-    className: "md:col-span-4 md:row-span-2 flex items-center justify-center bg-gradient-to-br from-background  bg-[#f7f7f7] dark:bg-black/10 to-muted/20",
-    visual: <HelloWorld />,
-  },
   "shutter-cta": {
-    className: "md:col-span-8 md:row-span-2 flex items-center justify-center  bg-[#f7f7f7] dark:bg-black/10",
+    className: "md:col-span-6 md:row-span-2 flex items-center justify-center  bg-[#f7f7f7] dark:bg-black/10",
     visual: <ShutterCta />,
   },
   "vertical-toggle": {
@@ -58,7 +54,11 @@ const componentGridConfig: Record<string, { className: string; visual: React.Rea
   "push-button": {
     className: "md:col-span-8 md:row-span-2 flex items-center justify-center bg-[#f7f7f7] dark:bg-black/10",
     visual: <PushButton />,
-  }
+  },
+  "hello-world": {
+    className: "md:col-span-4 md:row-span-2 flex items-center justify-center bg-gradient-to-br from-background  bg-[#f7f7f7] dark:bg-black/10 to-muted/20",
+    visual: <HelloWorld />,
+  },
 }
 
 export default function ComponentsPage() {
@@ -93,29 +93,35 @@ export default function ComponentsPage() {
 
           return (
             <div key={comp.slug} className={cn("p-1 border border-edge rounded-xl corner-squircle", config.className)}>
-              <Link
-                href={`/components/${comp.slug}`}
+              <div
                 className={cn(
                   "group relative flex flex-col h-full w-full bg-background transition-colors hover:bg-muted/10",
                 )}
               >
+                <Link
+                  href={`/components/${comp.slug}`}
+                  className="absolute inset-0 z-0"
+                >
+                  <span className="sr-only">View {comp.title}</span>
+                </Link>
+
                 {/* Visual UI Container */}
-                <div className="relative z-10 flex h-full w-full flex-1 items-center justify-center p-6">
+                <div className="relative z-10 flex h-full w-full flex-1 items-center justify-center p-6 pointer-events-none *:pointer-events-auto">
                   {config.visual}
                 </div>
 
                 {/* Title & Info Overlay (Shows on hover or subtle default) */}
-                <div className="absolute left-4 top-4 z-20 transition-opacity">
+                <div className="absolute left-4 top-4 z-20 transition-opacity pointer-events-none">
                   <p className="font-mono text-xs font-medium text-foreground opacity-0 group-hover:opacity-100">
                     {comp.title}
                   </p>
                 </div>
-                <div className="absolute bottom-4 right-4 z-20 transition-opacity">
+                <div className="absolute bottom-4 right-4 z-20 transition-opacity pointer-events-none">
                   <p className="font-mono text-[10px] text-muted-foreground opacity-0 group-hover:opacity-100">
                     @harshexists/{comp.slug}
                   </p>
                 </div>
-              </Link>
+              </div>
             </div>
           )
         })}

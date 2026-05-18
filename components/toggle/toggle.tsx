@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import styles from './toggle.module.css'
+import { useSound } from '@/hooks/use-sound'
 
 export function Toggle() {
   const [isOn, setIsOn] = useState(false)
@@ -15,11 +16,16 @@ export function Toggle() {
     }
   }
 
+  const playClick = useSound("/audio/ui-sounds/toggle.mp3");
+
   return (
     <button
       role="switch"
       aria-checked={isOn}
-      onClick={toggle}
+      onClick={() => {
+        toggle();
+        playClick();
+      }}
       onKeyDown={handleKeyDown}
       className={`${styles.track} relative flex items-center w-[88px] h-[44px] rounded-full cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-neutral-400 select-none bg-[#e8e8e8] dark:bg-[#151518]`}
     >

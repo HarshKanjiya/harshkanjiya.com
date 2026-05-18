@@ -1,27 +1,27 @@
-import type { Metadata } from "next"
-import { notFound } from "next/navigation"
 import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react"
+import type { Metadata } from "next"
 import Link from "next/link"
+import { notFound } from "next/navigation"
 
-import { MDX } from "@/components/blog/mdx"
-import { Button } from "@/components/ui/button"
-import { Prose } from "@/components/ui/typography"
-import { SITE_INFO } from "@/config/site"
-import { REGISTRY_COMPONENTS } from "@/lib/registry/components"
 import {
   getAllRegistryComponents,
   getRegistryComponentBySlug,
 } from "@/actions/registry"
-import CustomSeparator from "@/components/custom-separator"
+import { MDX } from "@/components/blog/mdx"
 import { PostShareMenu } from "@/components/blog/post-share-menu"
+import CustomSeparator from "@/components/custom-separator"
 import { KeyboardShortcuts } from "@/components/keyboard-shortcuts"
-import { findNeighbour } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { Kbd, KbdGroup } from "@/components/ui/kbd"
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { Kbd, KbdGroup } from "@/components/ui/kbd"
+import { Prose } from "@/components/ui/typography"
+import { SITE_INFO } from "@/config/site"
+import { REGISTRY_COMPONENTS } from "@/lib/registry/components"
+import { findNeighbour } from "@/lib/utils"
 
 export async function generateStaticParams() {
   return REGISTRY_COMPONENTS.map((c) => ({ slug: c.slug }))
@@ -68,7 +68,7 @@ export default async function ComponentPage({
       <CustomSeparator />
       <KeyboardShortcuts basePath="/components" previous={previous} next={next} />
 
-      <div className="flex screen-line-after screen-line-before items-center justify-between p-2">
+      <div className="flex screen-line-before items-center justify-between p-2">
         <Button
           className="h-7 gap-2 rounded-lg px-0 font-mono text-muted-foreground"
           variant="link"
@@ -140,13 +140,13 @@ export default async function ComponentPage({
       <Prose className="p-4">
         <div className="flex items-center justify-between gap-3 py-4">
           <div className="flex items-center gap-3">
-            <h1 className="text-3xl font-semibold m-0!">
+            <h1 className="text-2xl sm:text-3xl font-semibold m-0!">
               {item.metadata.title}
             </h1>
           </div>
         </div>
 
-        <p className="text-muted-foreground mb-4 mt-0">{item.metadata.description}</p>
+        <p className="text-sm sm:text-base text-muted-foreground mb-6 mt-0">{item.metadata.description}</p>
 
         <div>
           <MDX code={item.content} />

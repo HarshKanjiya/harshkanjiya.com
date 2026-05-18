@@ -11,8 +11,8 @@ export function Blog() {
     return (
         <Panel id="blog" className="px-0">
             <PanelHeader className="px-0">
-                <PanelTitle className="flex gap-2 items-center justify-between">
-                    <a href="#blog" className="flex gap-2 group">
+                <PanelTitle className="flex gap-2 items-center justify-between w-full screen-line-after screen-line-before">
+                    <a href="#projects" className="flex gap-2 group max-sm:text-xl">
                         Blog
                         <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">#</span>
                     </a>

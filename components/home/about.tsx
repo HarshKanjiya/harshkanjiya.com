@@ -2,7 +2,7 @@ import { Markdown } from "@/components/markdown";
 import { ProseMono } from "@/components/ui/typography";
 import { USER } from "@/data/user";
 
-import { Panel, PanelContent, PanelHeader, PanelTitle } from "@/components/panel";
+import { Panel, PanelContent } from "@/components/panel";
 
 // import CurrentBookCard from "./aboutus/current-book-card";
 // import FavSongCard from "./aboutus/fav-song-card";
@@ -13,12 +13,12 @@ export function About() {
     <Panel id="about-me">
       <h2 className="sr-only">About me</h2>
       <div className="flex items-center justify-between flex-1 flex-col h-full overflow-hidden dark:bg-accent/50 shadow-[inset_0_3px_2px_rgba(255,255,255,0.021)] bg-accent rounded-xl">
-        <h3 className="w-full py-1.5 px-4 text-muted-foreground text-left">
+        <h3 className="w-full py-1.5 px-4 text-muted-foreground text-left text-sm sm:text-base">
           <a href="#about-me">About me</a>
         </h3>
         <div className="pt-0 flex-1 h-full flex w-full p-[3px]">
-          <div className="flex-1 px-3 py-2 max-sm:pb-3 flex flex-col bg-background outline rounded-[10px] outline-muted/50 relative overflow-hidden group w-full">
-            <PanelContent className="space-y-2.5 bg-background w-full p-0 sm:p-4">
+          <div className="flex-1 px-3 py-2 max-sm:pb-2 flex flex-col bg-background outline rounded-[10px] outline-muted/50 relative overflow-hidden group w-full">
+            <PanelContent className="space-y-2.5 bg-background w-full py-1 px-0 sm:p-4">
               <ProseMono>
                 <Markdown>{USER.about}</Markdown>
               </ProseMono>

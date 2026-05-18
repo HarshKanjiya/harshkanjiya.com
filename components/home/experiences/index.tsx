@@ -25,7 +25,7 @@ export function Experiences() {
     <Panel id="experiences">
       <h2 className="sr-only">Experiences</h2>
       <div className="flex items-center justify-between flex-1 flex-col h-full overflow-hidden dark:bg-accent/50 shadow-[inset_0_3px_2px_rgba(255,255,255,0.021)] bg-accent rounded-xl">
-        <h3 className="w-full py-1.5 px-4 text-muted-foreground text-left">
+        <h3 className="w-full py-1.5 px-4 text-muted-foreground text-left text-sm sm:text-base">
           <a href="#experiences">Experiences</a>
         </h3>
         <div className="pt-0 flex-1 h-full flex w-full p-[3px]">

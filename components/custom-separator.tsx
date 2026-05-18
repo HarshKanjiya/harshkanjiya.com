@@ -1,8 +1,7 @@
-import { cn } from "@/lib/utils";
 
 export default function CustomSeparator({ className }: { className?: string }) {
     return (
-        <div className="relative py-6">
+        <div className="relative py-4 sm:py-6">
             {/* <div className="w-full h-px absolute right-0 top-1/2 -translate-y-1/2 bg-[rgba(55,50,47,0.12)] dark:bg-[rgba(255,255,255,0.12)] shadow-[1px_0px_0px_white] dark:shadow-[1px_0px_0px_black] z-0"></div> */}
         </div>
         // <div

@@ -11,26 +11,10 @@ const SORTED_BOOKMARKS = [...BOOKMARKS].sort((a, b) => {
 
 export function Bookmarks() {
   return (
-    // <Panel id="bookmarks">
-    //   <PanelHeader>
-    //     <a href="#bookmarks">
-    //       <PanelTitle className="flex gap-2 items-center group">
-    //         Bookmarks
-    //         <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">#</span>
-    //       </PanelTitle>
-    //     </a>
-    //   </PanelHeader>
-
-    //   <CollapsibleList
-    //     items={SORTED_BOOKMARKS}
-    //     max={6}
-    //     renderItem={(item) => <BookmarkItem bookmark={item} />}
-    //   />
-    // </Panel>
     <Panel id="bookmarks">
       <h2 className="sr-only">Bookmarks</h2>
       <div className="flex items-center justify-between flex-1 flex-col h-full overflow-hidden dark:bg-accent/50 shadow-[inset_0_3px_2px_rgba(255,255,255,0.021)] bg-accent rounded-xl">
-        <h3 className="w-full py-1.5 px-4 text-muted-foreground text-left">
+        <h3 className="w-full py-1.5 px-4 text-muted-foreground text-left text-sm sm:text-base">
           <a href="#bookmarks">Bookmarks</a>
         </h3>
         <div className="pt-0 flex-1 h-full flex w-full p-[3px]">

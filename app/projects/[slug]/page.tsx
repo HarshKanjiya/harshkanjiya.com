@@ -11,6 +11,7 @@ import { MDX } from "@/components/blog/mdx";
 import { PostShareMenu } from "@/components/blog/post-share-menu";
 import CustomSeparator from "@/components/custom-separator";
 import { KeyboardShortcuts } from "@/components/keyboard-shortcuts";
+import { TOCMinimap } from "@/components/toc-minimap";
 import { Button } from "@/components/ui/button";
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
 import {
@@ -24,7 +25,6 @@ import { USER } from "@/data/user";
 import { findNeighbour } from "@/lib/utils";
 import { Project } from "@/types/projects";
 import Image from "next/image";
-import { TOCMinimap } from "@/components/toc-minimap";
 
 export async function generateStaticParams() {
     const blogs = getAllProjects();
@@ -120,7 +120,7 @@ export default async function Page({
 
             <TOCMinimap
                 items={toc}
-                className="fixed top-1/3 right-0 shadow-sm rounded-lg"
+                className="fixed top-1/3 right-0 shadow-sm rounded-lg hidden md:block"
             />
 
             <script
@@ -132,7 +132,8 @@ export default async function Page({
 
             <CustomSeparator />
             <KeyboardShortcuts basePath="/projects" previous={previous} next={next} />
-            <div className="flex screen-line-after screen-line-before items-center justify-between p-2">
+
+            <div className="flex screen-line-before items-center justify-between p-2">
                 <Button
                     className="h-7 gap-2 rounded-lg px-0 font-mono text-muted-foreground"
                     variant="link"
@@ -197,7 +198,9 @@ export default async function Page({
                 </div>
             </div>
 
-            {/* <CustomSeparator /> */}
+            <div className="screen-line-before screen-line-after">
+                <div className="h-8 before:absolute before:-left-[100vw] before:-z-1 before:h-full before:w-[200vw] before:bg-[repeating-linear-gradient(315deg,var(--pattern-foreground)_0,var(--pattern-foreground)_1px,transparent_0,transparent_50%)] before:bg-size-[10px_10px] before:[--pattern-foreground:var(--color-edge)]/56" />
+            </div>
 
             <Prose className="p-4">
                 <div className="flex items-center justify-between gap-3 py-4">
@@ -213,7 +216,7 @@ export default async function Page({
                                 />
                             )
                         }
-                        <h1 className="text-3xl font-semibold m-0!">
+                        <h1 className="text-2xl sm:text-3xl font-semibold m-0!">
                             {project.metadata.title}
                         </h1>
                         {
@@ -260,7 +263,7 @@ export default async function Page({
                     </div>
                 </div>
 
-                <p className="text-muted-foreground mb-4 mt-0">{project.metadata.description}</p>
+                <p className="text-sm sm:text-base text-muted-foreground mb-6 mt-0">{project.metadata.description}</p>
                 {
                     project.metadata.image && (
                         <Image

@@ -19,15 +19,15 @@ export function ProfileHeader() {
         <div className="border-t border-edge">
           <div className="flex items-center gap-2 w-full sm:w-fit justify-center sm:pl-8">
             <h1 className="-translate-y-px text-3xl font-semibold flex gap-2 sm:items-baseline flex-col sm:flex-row items-center ">
-              <span className="font-mono text-sm text-muted-foreground mr-2">Hey, I'm</span>
+              <span className="font-mono text-sm opacity-80 text-muted-foreground mr-2">Hey, I'm</span>
               <span>
                 <span>{USER.displayName}</span>
-                <span className="font-mono text-sm text-muted-foreground ml-2">&</span>
+                <span className="font-mono text-sm opacity-80 text-muted-foreground ml-2">&</span>
               </span>
             </h1>
           </div>
 
-          <div className="h-12.5 border-t border-edge py-1 sm:pl-4 sm:h-9 font-mono text-muted-foreground text-center sm:text-left">
+          <div className="h-12.5 border-t border-edge py-1 opacity-80 sm:pl-4 sm:h-9 font-mono text-muted-foreground text-center sm:text-left">
             Welcome to my corner of the&nbsp;internet!
           </div>
         </div>

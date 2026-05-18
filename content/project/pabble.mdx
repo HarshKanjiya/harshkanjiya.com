@@ -1,6 +1,6 @@
 ---
 title: Pabble
-description: AI-powered form builder with in-built Automations, conditional logic & multi-step workflows.
+description: A form-workflow platform for freelancers and agencies - not a form builder, a routing engine that happens to start with a form.
 workingOn: true
 pinned: true
 new: true
@@ -10,41 +10,120 @@ tech: NextJS,React,Golang
 link: https://www.pabble.app
 image: https://assets.harshkanjiya.com/project/pabble-og.webp
 logo: https://assets.harshkanjiya.com/project/pabble-logo.png
+role: Solo Founder & Engineer
+stack: Next.js · Go · Postgres · Redis · Cloudflare R2 · SQS
+status: Live Beta
+timeline: 2025–26
 ---
 
-## TLDR;
+## Why I Built This
 
-Pabble is a full-stack form-building platform focused on flexible, embeddable, and workflow-driven data collection.  
-The system is split into three independent applications:
+The form builder market is crowded. But almost every product in it treats data collection as the destination - not as the beginning of a workflow. The moment someone hits Submit, most tools are done with you.
 
-- **Dashboard App** — project management, form builder, analytics shell
-- **Marketing Site** — product pages and onboarding funnel
-- **Form Submission Client** — (pending) public form rendering and submission handling
+Someone still has to manually email the right people. Chase missing documents. Wait for approval. Trigger the next step. Log it somewhere.
 
-## Tech Stack
-
-- Currently built entirely with **Next.js** with shadcn/ui and Tailwind CSS v4.
-- A migration to **Golang** for backend services is planned in the future if scale demands it.
-
-## Current Progress
-
-### Completed
-
-- **Dashboard & Marketing sites**
-- **Basic form-creation flow**
-- **Project and form management structure**
-
-### In Progress
-
-- **Node-based flow editor** for conditional logic and multi-step workflows
-- **Analytics module** for submission trends and performance data
-- **Form Submission site** implementation
+That's not a form problem. That's a routing problem. And no one was solving it cleanly.
 
 ---
 
-## Future Roadmap
+## The Beachhead
 
-- **Submission queues** for reliable, high-volume form processing
-- **Embeddable forms** with a lightweight client runtime
-- **React NPM package** to render forms via a unique form key
-- **Advanced workflow automation** and integration capabilities
+I didn't go wide. I narrowed to the smallest group who felt this acutely - **freelancers and small agencies doing client onboarding**. They collect contracts, briefs, files, payment details, and approval sign-offs - every project cycle, manually, every time.
+
+The insight that locked the vertical in: for this group, the form is their first client touchpoint. A clunky intake form signals something before a word of work is done. Premium UI isn't vanity here - it's a trust signal.
+
+That framing shaped every product and design decision that followed.
+
+---
+
+## Architecture Decisions
+
+These were made before writing the first line of code. Each one would have been expensive to undo.
+
+**Single directed graph JSON model under both editors**
+Pabble has two workflow editor modes - a linear builder and a node canvas. Both are views of one data structure. Made this call to avoid dual models drifting out of sync. More upfront complexity. Eliminates an entire class of future bugs.
+
+**Three separate Next.js apps, not a monolith**
+Marketing, dashboard, and form renderer are independent deployments. The form renderer runs in contexts the dashboard never touches - embedded, shared links, custom domains. Splitting early let each app optimize for its own performance profile.
+
+**Go for the backend, not Node**
+Go Fiber for routing, GORM as the ORM over Postgres. The backend handles webhook delivery, queue processing, file operations, and email triggers - concurrency-heavy work. Go's goroutine model handles this with less overhead than Node's event loop at the same scale.
+
+**Async everything via SQS + dedicated worker**
+Form submissions never block waiting for downstream events. A Go worker consumes from SQS and handles notifications, webhooks, email dispatch, and special events independently. API response time stays clean. Submission experience is instant.
+
+**Self-managed VPS over managed cloud**
+Hostinger VPS + Coolify instead of Render or Railway. Full infrastructure control, Docker-based, self-hosted CI/CD. Chosen deliberately - understanding your own infra is a skill, and abstraction layers you don't understand eventually cost you.
+
+---
+
+## The Full Stack
+
+| Layer    | Technology      | Why                                                               |
+| -------- | --------------- | ----------------------------------------------------------------- |
+| Frontend | Next.js (×3)    | Isolated apps per concern - marketing, dashboard, form renderer   |
+| Routing  | Go Fiber        | Fastest Go HTTP framework; Express-like API without Node overhead |
+| ORM      | GORM + Postgres | Full-featured, idiomatic Go - migrations, associations, hooks     |
+| Queue    | SQS             | Durable at-least-once delivery without running a broker           |
+| Files    | Cloudflare R2   | S3-compatible, zero egress fees - critical for file upload forms  |
+| Cache    | Redis           | Session state, hot-path caching, rate limiting                    |
+| Email    | Resend          | Developer-first transactional email, real deliverability          |
+| Deploy   | Coolify + VPS   | Full infra control, Docker-based, self-hosted CI/CD               |
+
+---
+
+## Product Design Thinking
+
+**Three editors, not one**
+The product has a Form Editor, Flow Editor, and Action Editor (in progress). That's not a feature count - it's a statement about how the problem is layered. Each editor owns a distinct concern.
+
+**Form Editor**
+Shader-rendered backgrounds, premium component design, intentional transitions. Not for aesthetics - because for freelancers and agencies, the intake form is part of the service they deliver. It reflects on them.
+
+**Flow Editor**
+Dual-mode: linear builder as default, node canvas as opt-in. Most similar tools lead with the canvas. I defaulted to linear because canvas-first interfaces kill activation - steep learning curve, slow time-to-first-workflow. Linear gets you to a working flow in under five minutes.
+
+**Dashboard**
+Designed against the typical SaaS admin pattern. Closer in spirit to Claude or ChatGPT's interface - everything surfaced, nothing buried in nested sidebars. 3–4 clicks to anything.
+
+---
+
+## Workflow Vocabulary
+
+Before writing any workflow logic, I identified the smallest set of primitives that could express any business process without needing escape hatches.
+
+| Step         | Purpose                                          |
+| ------------ | ------------------------------------------------ |
+| **Collect**  | Gather structured input from a person            |
+| **Notify**   | Alert a team member or external party            |
+| **Approve**  | Gate the next step behind a human decision       |
+| **Wait**     | Pause the flow for time or an external condition |
+| **Branch**   | Route the workflow based on data or conditions   |
+| **Generate** | Create a document or artifact automatically      |
+| **Charge**   | Trigger a payment at the right point in the flow |
+| **Connect**  | Integrate with an external tool or API           |
+
+Eight primitives. Enough to express any real workflow. Small enough to stay coherent. Defining this vocabulary before building features forced precision - every request either maps to a primitive or it belongs to a different product.
+
+---
+
+## What This Demonstrates
+
+Pabble is notable not because it's a form tool but because of the chain of reasoning required to build it:
+
+- Identifying a real gap inside a crowded, well-funded market
+- Narrowing to the right beachhead before building anything
+- Making structural architecture decisions that hold under growth
+- Shipping production infrastructure - frontend, backend, queue, storage, email, deploy - without a team
+
+Every decision here was made on reasoning, not on user research confirming it first. That's the skill this project is meant to demonstrate.
+
+---
+
+## TL;DR
+
+- The form builder market is crowded but nobody was solving the routing problem after submission
+- Narrowed to freelancers and agencies doing client onboarding as the beachhead
+- Three independent Next.js apps, Go backend, SQS for async processing, R2 for file storage
+- Eight workflow primitives that cover any real business process without escape hatches
+- Solo founder · Full-stack · Live beta · 2026

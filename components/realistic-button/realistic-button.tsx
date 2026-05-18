@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import styles from './realistic-button.module.css';
+import { useSound } from '@/hooks/use-sound';
 
 type TextState = 'off' | 'drawing' | 'on';
 
@@ -9,6 +10,8 @@ export default function RealisticButton() {
     const [isActive, setIsActive] = useState(false);
     const [isPressed, setIsPressed] = useState(false);
     const [textState, setTextState] = useState<TextState>('off');
+
+    const playClick = useSound("/audio/ui-sounds/mech-key-press.mp3");
 
     useEffect(() => {
         if (isActive) {
@@ -20,14 +23,24 @@ export default function RealisticButton() {
         }
     }, [isActive]);
 
+    const onClick = () => {
+        playClick();
+        setIsPressed(true);
+        setIsActive(false);
+        setTimeout(() => setIsPressed(false), 200);
+    }
+
     return (
         <div className={`${styles.wrap} sm:scale-[0.6] scale-[0.5]`}>
             <button
                 className={`${styles.button} ${isPressed ? styles.buttonPressed : ''} relative overflow-hidden w-[250px] h-[96px] bg-black z-20 border-transparent rounded-[24px]`}
                 onMouseEnter={() => setIsActive(true)}
+                onClick={onClick}
                 onMouseLeave={() => { setIsActive(false); setIsPressed(false); }}
                 onMouseDown={() => setIsPressed(true)}
                 onMouseUp={() => setIsPressed(false)}
+                onTouchStart={() => setIsPressed(true)}
+                onTouchEnd={() => setIsPressed(false)}
                 style={{
                     boxShadow: isActive || isPressed
                         ? 'inset 0 1px 1px rgba(255, 255, 255, 0.6), inset 0 -6px 1px -4px #ff7300, inset 0 -15px 6px -8px #cc5500,'

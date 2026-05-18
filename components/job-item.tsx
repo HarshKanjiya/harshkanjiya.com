@@ -34,7 +34,7 @@ type JobItemProps = {
 
 export function JobItem({ title, company, website }: JobItemProps) {
   return (
-    <IntroItem>
+    <IntroItem className="items-start">
       <IntroItemIcon>{getJobIcon(title)}</IntroItemIcon>
 
       <IntroItemContent>

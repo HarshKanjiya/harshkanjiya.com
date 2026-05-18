@@ -1,5 +1,6 @@
 'use client'
 
+import { useSound } from '@/hooks/use-sound'
 import React, { useState } from 'react'
 
 export function PintchSwitch() {
@@ -14,11 +15,16 @@ export function PintchSwitch() {
     }
   }
 
+  const playClick = useSound("/audio/ui-sounds/toggle-2.mp3");
+
   return (
     <button
       role="switch"
       aria-checked={isOn}
-      onClick={toggle}
+      onClick={() => {
+        toggle();
+        playClick();
+      }}
       onKeyDown={handleKeyDown}
       className={[
         'relative flex items-center',
