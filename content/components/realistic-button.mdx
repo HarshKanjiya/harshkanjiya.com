@@ -1,0 +1,52 @@
+---
+title: Realistic Button
+description: A skeuomorphic realistic button with hover and active states.
+---
+
+<ComponentPreview name="realistic-button" canReplay />
+
+## Installation
+
+<Tabs defaultValue="cli">
+  <TabsListInstallType />
+
+  <TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://harshkanjiya.com/r/realistic-button.json
+```
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy the component files into your project</Step>
+
+Copy `components/realistic-button/realistic-button.tsx` and `components/realistic-button/realistic-button.module.css` into your codebase.
+
+<Step>Install dependencies</Step>
+
+This component relies on standard CSS modules, so no extra dependencies are required.
+
+<Step>Import and use</Step>
+
+```tsx
+import { RealisticButton } from "@/components/realistic-button"
+```
+
+</Steps>
+
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { RealisticButton } from "@/components/realistic-button"
+
+export default function Page() {
+  return <RealisticButton />
+}
+```

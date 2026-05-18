@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
-import { ArrowLeftIcon } from "lucide-react"
+import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react"
 import Link from "next/link"
 
 import { MDX } from "@/components/blog/mdx"
@@ -12,6 +12,16 @@ import {
   getAllRegistryComponents,
   getRegistryComponentBySlug,
 } from "@/actions/registry"
+import CustomSeparator from "@/components/custom-separator"
+import { PostShareMenu } from "@/components/blog/post-share-menu"
+import { KeyboardShortcuts } from "@/components/keyboard-shortcuts"
+import { findNeighbour } from "@/lib/utils"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+import { Kbd, KbdGroup } from "@/components/ui/kbd"
 
 export async function generateStaticParams() {
   return REGISTRY_COMPONENTS.map((c) => ({ slug: c.slug }))
@@ -50,9 +60,15 @@ export default async function ComponentPage({
 
   if (!item) notFound()
 
+  const allComponents = getAllRegistryComponents()
+  const { previous, next } = findNeighbour(allComponents, slug)
+
   return (
-    <div className="min-h-svh border-x border-edge">
-      <div className="flex items-center justify-between p-2 pl-4">
+    <main className="mx-auto w-full *:[[id]]:scroll-mt-22 min-h-svh">
+      <CustomSeparator />
+      <KeyboardShortcuts basePath="/components" previous={previous} next={next} />
+
+      <div className="flex screen-line-after screen-line-before items-center justify-between p-2">
         <Button
           className="h-7 gap-2 rounded-lg px-0 font-mono text-muted-foreground"
           variant="link"
@@ -63,23 +79,82 @@ export default async function ComponentPage({
             Components
           </Link>
         </Button>
+
+        <div className="flex items-center gap-2">
+          <PostShareMenu url={`/components/${slug}`} />
+
+          {previous && (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="secondary" size="icon-sm" asChild>
+                  <Link href={`/components/${previous.slug}`}>
+                    <ArrowLeftIcon />
+                    <span className="sr-only">Previous</span>
+                  </Link>
+                </Button>
+              </TooltipTrigger>
+
+              <TooltipContent className="pr-2 pl-3">
+                <div className="flex items-center gap-3">
+                  Previous Component
+                  <KbdGroup>
+                    <Kbd>
+                      <ArrowLeftIcon />
+                    </Kbd>
+                  </KbdGroup>
+                </div>
+              </TooltipContent>
+            </Tooltip>
+          )}
+
+          {next && (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="secondary" size="icon-sm" asChild>
+                  <Link href={`/components/${next.slug}`}>
+                    <span className="sr-only">Next</span>
+                    <ArrowRightIcon />
+                  </Link>
+                </Button>
+              </TooltipTrigger>
+
+              <TooltipContent className="pr-2 pl-3">
+                <div className="flex items-center gap-3">
+                  Next Component
+                  <KbdGroup>
+                    <Kbd>
+                      <ArrowRightIcon />
+                    </Kbd>
+                  </KbdGroup>
+                </div>
+              </TooltipContent>
+            </Tooltip>
+          )}
+        </div>
       </div>
 
       <div className="screen-line-before screen-line-after">
         <div className="h-8 before:absolute before:-left-[100vw] before:-z-1 before:h-full before:w-[200vw] before:bg-[repeating-linear-gradient(315deg,var(--pattern-foreground)_0,var(--pattern-foreground)_1px,transparent_0,transparent_50%)] before:bg-size-[10px_10px] before:[--pattern-foreground:var(--color-edge)]/56" />
       </div>
 
-      <Prose className="px-4">
-        <h1 className="screen-line-after text-3xl font-semibold">
-          {item.metadata.title}
-        </h1>
-        <p className="text-muted-foreground">{item.metadata.description}</p>
+      <Prose className="p-4">
+        <div className="flex items-center justify-between gap-3 py-4">
+          <div className="flex items-center gap-3">
+            <h1 className="text-3xl font-semibold m-0!">
+              {item.metadata.title}
+            </h1>
+          </div>
+        </div>
+
+        <p className="text-muted-foreground mb-4 mt-0">{item.metadata.description}</p>
+
         <div>
           <MDX code={item.content} />
         </div>
       </Prose>
 
-      <div className="screen-line-before h-4 w-full" />
-    </div>
+      <CustomSeparator />
+      <div className="h-4 w-full" />
+    </main>
   )
 }

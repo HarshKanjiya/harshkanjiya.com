@@ -1,9 +1,9 @@
 "use client";
 
-import { Blog } from "@/types/blog";
-import { Project } from "@/types/projects";
 import { useRouter } from "next/navigation";
 import { useHotkeys } from "react-hotkeys-hook";
+
+type NavigableItem = { slug: string };
 
 export function KeyboardShortcuts({
   basePath,
@@ -11,12 +11,12 @@ export function KeyboardShortcuts({
   next,
 }: {
   basePath: string;
-  previous: Blog | Project | null;
-  next: Blog | Project | null;
+  previous: NavigableItem | null;
+  next: NavigableItem | null;
 }) {
   const router = useRouter();
 
-  const navigate = (post: Blog | Project | null) => {
+  const navigate = (post: NavigableItem | null) => {
     if (post) {
       router.push(`${basePath}/${post.slug}`);
     }

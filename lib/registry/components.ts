@@ -12,4 +12,10 @@ export const REGISTRY_COMPONENTS: RegistryComponent[] = [
     description: "A simple animated greeting component.",
     installCmd: "@harshexists/hello-world",
   },
+  {
+    slug: "realistic-button",
+    title: "Realistic Button",
+    description: "A skeuomorphic realistic button with hover and active states.",
+    installCmd: "@harshexists/realistic-button",
+  },
 ]

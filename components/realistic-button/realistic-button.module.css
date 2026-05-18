@@ -1,0 +1,527 @@
+.wrap {
+    --radius: 24px;
+    --bg: #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    pointer-events: none;
+    width: fit-content;
+}
+
+.wrap::before {
+    content: "";
+    position: absolute;
+    width: 250%;
+    height: 250%;
+    border-radius: var(--radius);
+    background-color: rgba(255, 255, 255, 0.05);
+    filter: blur(60px);
+    transform: skewY(-20deg);
+}
+
+.wrap::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius);
+    background-color: rgba(0, 0, 0, 0.5);
+    filter: blur(30px);
+}
+
+.button {
+    box-shadow: inset 0 1px 1px rgb(255 255 255 / 40%),
+        inset 0 -6px 1px -4px #ff7300,
+        inset 0 -15px 6px -8px #ff6600;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.button::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: calc(var(--radius) * 0.8);
+    border-top: 40px solid #414244;
+    border-left: 32px solid #2b2b2c;
+    border-right: 32px solid #2b2b2c;
+    border-bottom: 40px solid #15161a;
+    filter: blur(5px);
+    transition: all 0.5s ease;
+}
+
+.button::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 101%;
+    height: 40px;
+    width: 96px;
+    border-radius: 40px 40px 0 0;
+    background: #ff7300;
+    filter: contrast(10) blur(7px);
+    transition: all 0.3s ease;
+    opacity: 1;
+}
+
+.buttonActive::after {
+    width: 120px;
+    background: #ff9500;
+    filter: contrast(12) blur(9px);
+}
+
+.buttonPressed::before {
+    border-top: 16px solid #414244;
+    border-left: 18px solid #2b2b2c;
+    border-right: 18px solid #2b2b2c;
+    border-bottom: 16px solid #15161a;
+    transition: all 0.07s ease;
+}
+
+/* --- corners --- */
+
+.corner {
+    transition: all 0.4s ease;
+    opacity: 0.1;
+}
+
+.corner::before,
+.corner::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    border-top: 44px solid white;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    filter: blur(5px);
+    transition: all 0.4s ease;
+}
+
+.corner::before {
+    left: 8px;
+    transform: rotate(-40deg);
+}
+
+.corner::after {
+    right: 8px;
+    transform: rotate(40deg);
+}
+
+.cornerActive {
+    opacity: 0.65;
+}
+
+.cornerActive::before,
+.cornerActive::after {
+    border-top-color: #ff8c00;
+    filter: blur(5px);
+}
+
+/* --- inner panel --- */
+
+.inner {
+    transition: all 0.3s ease;
+}
+
+/* --- svg text states --- */
+
+.svgTextOff {
+    fill: #0a0a0a;
+    stroke: none;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    font-family: inherit;
+}
+
+.svgTextDrawing {
+    fill: #0a0a0a;
+    stroke: #ff9040;
+    stroke-width: 0.6;
+    stroke-dasharray: 1000;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    font-family: inherit;
+    animation: drawText 0.9s ease forwards;
+}
+
+.svgTextOn {
+    fill: #ff9040;
+    stroke: #ff9040;
+    stroke-width: 0.3;
+    stroke-dashoffset: 0;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    font-family: inherit;
+}
+
+.svgTextGlowDrawing {
+    fill: transparent;
+    stroke: #ce7c02;
+    stroke-width: 14;
+    stroke-dasharray: 1000;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    font-family: inherit;
+    filter: blur(6px);
+    opacity: 0.5;
+    animation: drawText 0.9s ease forwards;
+}
+
+.svgTextGlowOn {
+    fill: #ce7c02;
+    stroke: none;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    font-family: inherit;
+    filter: blur(6px);
+    opacity: 0.5;
+}
+
+@keyframes drawText {
+    from {
+        stroke-dashoffset: 1000;
+    }
+
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.svgTextBlink {
+    animation: textBlink 0.5s step-end infinite;
+}
+
+@keyframes textBlink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.4;
+    }
+}
+
+/* --- symbol body --- */
+
+.symbol {
+    fill: #212123;
+    transition: fill 0.4s ease;
+}
+
+.symbolActive {
+    fill: #2a1808;
+}
+
+/* --- symbol stroke paths (idle: animated draw) --- */
+
+.symbolPath {
+    filter: brightness(1.1) contrast(1.1);
+}
+
+.symbolPath path {
+    stroke-dasharray: 650;
+    stroke-dashoffset: -650;
+    stroke-width: 5;
+    stroke: #ff7a3c;
+    animation: symbolPath 2s ease-in-out;
+}
+
+.symbolPathGlow path {
+    stroke-dasharray: 650;
+    stroke-dashoffset: -650;
+    stroke-width: 30;
+    stroke: #ce7c02;
+    filter: blur(30px);
+    animation: symbolPath 2s ease-in-out;
+}
+
+.symbolPath circle {
+    fill: #ff593c;
+    opacity: 0;
+    animation: symbolCircle 2s ease-in-out;
+}
+
+.symbolPathGlow circle {
+    fill: #ce7c02;
+    filter: blur(30px);
+    opacity: 0;
+    animation: symbolCircle 2s ease-in-out;
+}
+
+/* --- symbol stroke paths (active: persistent orange glow) --- */
+
+.symbolPathActive path {
+    stroke-dashoffset: 0;
+    stroke: #ff9040;
+    animation: symbolGlowPulse 1.5s ease-in-out infinite alternate;
+    opacity: 1;
+}
+
+.symbolPathGlowActive path {
+    stroke-dashoffset: 0;
+    animation: symbolGlowPulse 1.5s ease-in-out infinite alternate;
+    opacity: 0.75;
+}
+
+.symbolPathActive circle {
+    opacity: 1;
+    animation: symbolGlowPulse 1.5s ease-in-out infinite alternate;
+}
+
+.symbolPathGlowActive circle {
+    opacity: 0.6;
+    animation: symbolGlowPulse 1.5s ease-in-out infinite alternate;
+}
+
+/* --- background layers --- */
+
+.bg {
+    border-radius: calc(var(--radius) * 1.25);
+}
+
+.bg::before {
+    content: "";
+    position: absolute;
+    border-radius: inherit;
+    inset: 0;
+    z-index: 1;
+}
+
+.shine1 {
+    animation: bg 2.4s linear 0.3s infinite;
+}
+
+.shine2 {
+    transition: all 0.5s linear;
+}
+
+.shine2::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    transition: all 0.3s ease;
+    background: rgb(255, 115, 0);
+    width: 10px;
+    height: 10px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    border-radius: 50%;
+    filter: blur(2px);
+    animation: bg 2.4s linear infinite;
+}
+
+.bgGlow {
+    position: absolute;
+    inset: 0;
+    border-radius: calc(var(--radius) * 1.25);
+    transition: all 0.5s linear;
+}
+
+.bgGlow::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(to bottom, #ff7300 0%, black 100%);
+    filter: blur(12px);
+    opacity: 0;
+    animation: bgGlow 3s linear infinite;
+}
+
+.led {
+    animation: none;
+}
+
+/* --- keyframes --- */
+
+@keyframes symbolPath {
+    0% {
+        stroke-dashoffset: -650;
+    }
+
+    50% {
+        stroke-dashoffset: 0;
+    }
+
+    100% {
+        stroke-dashoffset: 650;
+    }
+}
+
+@keyframes symbolCircle {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes symbolGlowPulse {
+    0% {
+        opacity: 0.8;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes bg {
+    0% {
+        transform: translateY(0) scale(0);
+    }
+
+    12% {
+        transform: translateY(0) scale(25);
+    }
+
+    60%,
+    100% {
+        transform: translateY(-280px) scale(20, 18);
+    }
+}
+
+@keyframes bgGlow {
+    0% {
+        opacity: 0;
+    }
+
+    40% {
+        opacity: 1;
+    }
+
+    80%,
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes bgGlowPulse {
+    0% {
+        opacity: 0.6;
+        filter: blur(20px);
+    }
+
+    100% {
+        opacity: 0.9;
+        filter: blur(25px);
+    }
+}
+
+@keyframes ledPulse {
+    0% {
+        box-shadow: 0 -5px 14px 4px #ff7300,
+            inset 0 1px 2px 0px rgba(255, 255, 255, 0.6),
+            0 0 0px 2px rgba(255, 130, 0, 0.25);
+    }
+
+    100% {
+        box-shadow: 0 -6px 18px 6px #ff9500,
+            inset 0 1px 2px 0px rgba(255, 255, 255, 0.8),
+            0 0 0px 2px rgba(255, 160, 0, 0.35);
+    }
+}
+
+@keyframes reflexLedTurnOff {
+
+    30%,
+    60% {
+        box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4),
+            inset 0 -6px 1px -4px #9b8100,
+            inset 0 -15px 6px -8px #373326;
+    }
+
+    60.1%,
+    65% {
+        box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4),
+            inset 0 -6px 1px -4px rgba(255, 255, 255, 0.1),
+            inset 0 -15px 6px -8px rgba(255, 255, 255, 0.1);
+    }
+
+    65.1%,
+    70% {
+        box-shadow: inset 0 1px 1px rgb(255 255 255 / 40%),
+            inset 0 -6px 1px -4px #9b8100,
+            inset 0 -15px 6px -8px #373326;
+    }
+
+    70.1%,
+    100% {
+        box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4),
+            inset 0 -6px 1px -4px rgba(255, 255, 255, 0.1),
+            inset 0 -15px 6px -8px rgba(255, 255, 255, 0.1);
+    }
+}
+
+@keyframes reflexLedBlurTurnOff {
+
+    30%,
+    60% {
+        background: #ffc400;
+    }
+
+    60.1%,
+    65% {
+        background: transparent;
+    }
+
+    65.1%,
+    70% {
+        background: #ffc400;
+    }
+
+    70.1%,
+    100% {
+        background: transparent;
+    }
+}
+
+@keyframes bgBeforeTurnOff {
+
+    30%,
+    60% {
+        box-shadow: inset 0 -2px 0px -1px rgba(255, 230, 120, 0.3),
+            inset 0 0 5px 1px black,
+            inset 0 0 0 1px black;
+    }
+
+    60.1%,
+    65% {
+        box-shadow: inset 0 -2px 0px -1px rgba(160, 160, 160, 0.3),
+            inset 0 0 5px 1px black,
+            inset 0 0 0 1px black;
+    }
+
+    65.1%,
+    70% {
+        box-shadow: inset 0 -2px 0px -1px rgba(255, 230, 120, 0.3),
+            inset 0 0 5px 1px black,
+            inset 0 0 0 1px black;
+    }
+
+    70.1%,
+    100% {
+        box-shadow: inset 0 -2px 0px -1px rgba(160, 160, 160, 0.3),
+            inset 0 0 5px 1px black,
+            inset 0 0 0 1px black;
+    }
+}

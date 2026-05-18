@@ -1,0 +1,229 @@
+# Have you ever thought about how platforms implement integrations?
+
+I thought so too. And here's what I ended up building.
+
+---
+
+Okay, real talk.
+
+When I started building [Pabble](https://pabble.app) — a form workflow tool for freelancers and agencies — I hit a wall pretty early. Not a bug. Not a design problem. Just a question that kept nagging me at 1am:
+
+> _"When my users want to connect Slack, or HubSpot, or Google Sheets… how the heck does that actually work under the hood?"_
+
+I went down the rabbit hole. I read docs. I stared at other tools. I drew a lot of messy diagrams on my iPad.
+
+And then it clicked.
+
+Here's everything I figured out — explained simply, no computer science degree required.
+
+---
+
+## The bad way first (so you appreciate the good way)
+
+Imagine you're building integrations the naive way. User wants Slack? You write Slack code directly into your app. User wants HubSpot? You write HubSpot code right next to the Slack code. User wants Mailchimp? You add it right there too.
+
+Six months later, your codebase looks like a plate of spaghetti that someone sneezed on.
+
+Adding integration #12 means touching files that have nothing to do with integrations. A bug in Slack somehow breaks HubSpot. You dread every new integration request.
+
+There had to be a better way.
+
+---
+
+## The idea that changed everything: the plug-in socket
+
+Think about a power strip at home.
+
+You don't rewire your house every time you want to plug in a new lamp. The socket has a standard shape. Any device that fits the shape just… works. The house doesn't care if it's a lamp or a phone charger or a toaster.
+
+Integrations can work the exact same way.
+
+What if every integration — Slack, Google Sheets, HubSpot, whatever — was just a "plug" that fit the same standard socket? And the rest of Pabble never had to care _which_ plug was connected, just that _something_ was connected?
+
+That's the insight. And it has a fancy name: the **Provider Registry Pattern**.
+
+But don't let the name scare you. It's just a power strip for your code.
+
+---
+
+## How it actually works
+
+Here's the system I built for Pabble, broken into four layers. Think of it like a building.
+
+### 🏢 Floor 4 — The Workflow Engine (the people upstairs)
+
+This is where your workflow lives. The eight step types: **Collect, Notify, Approve, Wait, Branch, Generate, Charge, Connect.**
+
+When a workflow runs and hits a "Connect" step — say, "notify Slack when this form is submitted" — it doesn't know or care what Slack is. It just says:
+
+> _"Hey, run integration ID `slack` with this payload."_
+
+That's it. It passes the baton and moves on.
+
+---
+
+### 🏢 Floor 3 — The Integration Bus (the coordinator)
+
+This floor handles the messy stuff your workflow engine shouldn't have to think about:
+
+- **Event queue** — makes sure the right integration fires at the right moment
+- **Credential store** — safely holds the user's API keys and OAuth tokens so Pabble never pays a penny for external services (the user connects their own account)
+- **Retry + audit log** — if Slack is down for 30 seconds, it retries automatically and logs everything
+
+The workflow engine drops a message here. This floor figures out the rest.
+
+---
+
+### 🏢 Floor 2 — The Provider Registry (the directory)
+
+This is the magic floor.
+
+Every integration lives here as its own self-contained file. Each file — called an **adapter** — looks like this:
+
+```typescript
+// integrations/adapters/slack.ts
+
+export const SlackAdapter = {
+  id: "slack",
+  name: "Slack",
+  authType: "oauth2",
+
+  async execute(action, context) {
+    await fetch("https://slack.com/api/chat.postMessage", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${context.credentials.accessToken}` },
+      body: JSON.stringify({
+        channel: action.params.channel,
+        text: action.params.text,
+      }),
+    });
+    return { success: true };
+  },
+};
+```
+
+Every adapter speaks the same language. Same structure. Same method names. Like every plug fitting the same socket.
+
+The registry is just a simple list:
+
+```typescript
+// integrations/registry.ts
+
+import { SlackAdapter } from "./adapters/slack";
+import { SheetsAdapter } from "./adapters/sheets";
+import { HubSpotAdapter } from "./adapters/hubspot";
+// ... more here
+
+export const registry = {
+  slack: SlackAdapter,
+  sheets: SheetsAdapter,
+  hubspot: HubSpotAdapter,
+};
+```
+
+Want to add Microsoft Teams next month? Write one file. Add one line to this list. Ship it.
+
+_Nothing else changes. Not one other file._
+
+---
+
+### 🏢 Floor 1 — The Auth Layer (the security desk)
+
+Before any integration fires, the user's credentials need to be fetched and verified. This floor handles three types:
+
+- **OAuth2** — the "Login with Google/Slack/HubSpot" flow
+- **API key** — user pastes their key, Pabble stores it encrypted
+- **Webhook** — Pabble sends a POST to whatever URL the user provides
+
+The key insight here? **Users bring their own credentials.** Pabble never signs up for a Slack account on their behalf. Users connect their own workspace. Which means Pabble pays exactly $0 for any integration at the platform level.
+
+(Except Stripe, which takes a cut of transactions — but that's unavoidable and the user expects it anyway.)
+
+---
+
+## The file structure (the beautiful part)
+
+Once everything clicks, the folder structure basically designs itself:
+
+```
+/integrations
+  registry.ts           ← the only file that imports adapters
+  base.types.ts         ← the standard "socket" shape every adapter must fit
+  /adapters
+    slack.ts
+    google-sheets.ts
+    hubspot.ts
+    mailchimp.ts
+    calendly.ts
+    zapier.ts
+    airtable.ts
+    notion.ts
+    activecampaign.ts
+    pipedrive.ts
+    google-analytics.ts
+    microsoft-teams.ts
+    ← drop new files here. forever.
+```
+
+It's so clean it almost makes me emotional.
+
+---
+
+## The "aha" moment
+
+Here's the thing I kept getting wrong before I figured this out:
+
+I was thinking about integrations as _features_.
+
+But they're not features. They're **plug-ins**.
+
+A feature lives inside your product. A plug-in lives at the edge of your product, connected to the outside world. When you treat them differently — give them their own dedicated layer, their own interface, their own isolated files — everything gets easier.
+
+Adding integration #20 takes the same amount of effort as adding integration #2.
+
+A bug in Notion never touches Slack.
+
+A new engineer on the team can write a new adapter in an afternoon without touching anything they shouldn't.
+
+---
+
+## What I'm building next
+
+Pabble is currently focused on **client onboarding workflows** for freelancers and agencies — the boring, painful, repetitive stuff like collecting briefs, getting approvals, sending contracts, and chasing payments.
+
+The first integrations I'm shipping (in order of usefulness):
+
+1. **Slack** — notify your team the second a client submits something
+2. **Google Sheets** — auto-log every response, freelancers live in Sheets
+3. **HubSpot** — push onboarded clients straight into your CRM
+4. **Mailchimp** — trigger email sequences after workflow completion
+5. **Calendly** — embed a booking step inside the onboarding flow
+6. **Zapier** — the escape hatch for everything not natively supported
+7. **Airtable** — structured client database for agencies managing many clients
+8. **Notion** — many freelancers use Notion as their client hub
+9. **ActiveCampaign** — email automations for the power users
+10. **Pipedrive** — for sales-focused freelancers who live in their pipeline
+11. **Google Analytics** — track workflow completion and drop-off
+12. **Microsoft Teams** — for the agencies on the Microsoft stack
+
+And the beauty of the system? When someone asks me to add integration #13, #20, or #47 — I just write one file, add one line, and ship.
+
+---
+
+## TL;DR
+
+- Don't write integrations directly into your app — you'll regret it
+- Use the **Provider Registry Pattern**: each integration is a self-contained adapter file with a standard interface
+- A central registry maps IDs to adapters — the rest of your app never imports integrations directly
+- Users bring their own credentials — Pabble pays $0 per integration
+- Adding new integrations forever = write one file, add one line
+
+---
+
+If you're building something similar and want to nerd out about architecture, I'm always up for it. Hit me up.
+
+And if you're a freelancer or agency drowning in client onboarding chaos — [Pabble](https://pabble.app) is being built for you. Early access is open.
+
+---
+
+_— Harsh, building Pabble_

@@ -9,6 +9,7 @@ import { getAllProjects, getProjectBySlug } from "@/actions/project";
 import { InlineTOC } from "@/components/blog/inline-toc";
 import { MDX } from "@/components/blog/mdx";
 import { PostShareMenu } from "@/components/blog/post-share-menu";
+import CustomSeparator from "@/components/custom-separator";
 import { KeyboardShortcuts } from "@/components/keyboard-shortcuts";
 import { Button } from "@/components/ui/button";
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
@@ -20,10 +21,10 @@ import {
 import { Prose } from "@/components/ui/typography";
 import { SITE_INFO } from "@/config/site";
 import { USER } from "@/data/user";
-import { cn, findNeighbour } from "@/lib/utils";
+import { findNeighbour } from "@/lib/utils";
 import { Project } from "@/types/projects";
 import Image from "next/image";
-import CustomSeparator from "@/components/custom-separator";
+import { TOCMinimap } from "@/components/toc-minimap";
 
 export async function generateStaticParams() {
     const blogs = getAllProjects();
@@ -116,6 +117,12 @@ export default async function Page({
 
     return (
         <main className="mx-auto w-full *:[[id]]:scroll-mt-22 min-h-svh">
+
+            <TOCMinimap
+                items={toc}
+                className="fixed top-1/3 right-0 shadow-sm rounded-lg"
+            />
+
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{
@@ -123,8 +130,9 @@ export default async function Page({
                 }}
             />
 
+            <CustomSeparator />
             <KeyboardShortcuts basePath="/projects" previous={previous} next={next} />
-            <div className="flex items-center justify-between p-2 pl-4">
+            <div className="flex screen-line-after screen-line-before items-center justify-between p-2">
                 <Button
                     className="h-7 gap-2 rounded-lg px-0 font-mono text-muted-foreground"
                     variant="link"
@@ -137,18 +145,13 @@ export default async function Page({
                 </Button>
 
                 <div className="flex items-center gap-2">
-                    {/* <LLMCopyButtonWithViewOptions
-            markdownUrl={`${getPostUrl(post)}.mdx`}
-            isComponent={post.metadata.category === "components"}
-          /> */}
-
                     <PostShareMenu url={`/projects/${project.slug}`} />
 
                     {previous && (
                         <Tooltip>
                             <TooltipTrigger asChild>
                                 <Button variant="secondary" size="icon-sm" asChild>
-                                    <Link href={`/blog/${previous.slug}`}>
+                                    <Link href={`/projects/${previous.slug}`}>
                                         <ArrowLeftIcon />
                                         <span className="sr-only">Previous</span>
                                     </Link>
@@ -172,7 +175,7 @@ export default async function Page({
                         <Tooltip>
                             <TooltipTrigger asChild>
                                 <Button variant="secondary" size="icon-sm" asChild>
-                                    <Link href={`/blog/${next.slug}`}>
+                                    <Link href={`/projects/${next.slug}`}>
                                         <span className="sr-only">Next</span>
                                         <ArrowRightIcon />
                                     </Link>
@@ -194,19 +197,9 @@ export default async function Page({
                 </div>
             </div>
 
-            <CustomSeparator />
-            <div>
-                <div
-                    className={cn(
-                        "h-8",
-                        "before:absolute before:-left-[100vw] before:-z-1 before:h-full before:w-[200vw]",
-                        "before:bg-[repeating-linear-gradient(315deg,var(--pattern-foreground)_0,var(--pattern-foreground)_1px,transparent_0,transparent_50%)] before:bg-size-[10px_10px] before:[--pattern-foreground:var(--color-edge)]/56"
-                    )}
-                />
-            </div>
+            {/* <CustomSeparator /> */}
 
-            <Prose className="px-4 pb-4">
-                <CustomSeparator />
+            <Prose className="p-4">
                 <div className="flex items-center justify-between gap-3 py-4">
                     <div className="flex items-center gap-3">
                         {
@@ -266,10 +259,8 @@ export default async function Page({
                         }
                     </div>
                 </div>
-                <CustomSeparator />
 
-                <p className="text-muted-foreground mt-4">{project.metadata.description}</p>
-
+                <p className="text-muted-foreground mb-4 mt-0">{project.metadata.description}</p>
                 {
                     project.metadata.image && (
                         <Image

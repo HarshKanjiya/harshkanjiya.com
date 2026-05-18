@@ -23,10 +23,18 @@ export function ProjectItem({ project, shouldPreloadImage }: { project: Project;
             </h3>
             <div className="absolute top-1.5 right-1.5 flex items-center justify-center gap-2">
                 {project.metadata.link && (
-                    <a onClick={(e) => { e.stopPropagation(); }} href={project.metadata.link} target="_blank" rel="noopener noreferrer" className="flex size-6 items-center justify-center rounded-md bg-secondary">
+                    <button
+                        type="button"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            window.open(project.metadata.link, "_blank", "noopener,noreferrer");
+                        }}
+                        className="flex size-6 items-center justify-center rounded-md bg-secondary"
+                    >
                         <SquareArrowOutUpRightIcon className="size-4 text-secondary-foreground" />
                         <span className="sr-only">External link</span>
-                    </a>
+                    </button>
                 )}
                 {project.metadata.pinned && (
                     <span className="flex size-6 items-center justify-center rounded-md bg-secondary">

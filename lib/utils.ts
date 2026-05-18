@@ -1,5 +1,3 @@
-import { Blog } from "@/types/blog";
-import { Project } from "@/types/projects";
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 
@@ -7,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function findNeighbour(posts: (Blog | Project)[], slug: string) {
+export function findNeighbour<T extends { slug: string }>(posts: T[], slug: string) {
   const len = posts.length;
 
   for (let i = 0; i < len; ++i) {

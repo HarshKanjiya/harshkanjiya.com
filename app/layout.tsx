@@ -104,14 +104,14 @@ export default function RootLayout({
             <Analytics />
             <MeshReloader />
             <SiteHeader />
-            <div className="w-full max-w-4xl mx-auto px-12 relative flex flex-col justify-start items-start overflow-x-hidden">
+            <div className="w-full max-w-4xl mx-auto px-12 relative flex flex-col justify-start items-start overflow-x-hidden min-h-min">
               {/* Left vertical line */}
               <div className="w-[1px] h-full absolute left-0 top-0 bg-[rgba(55,50,47,0.12)] dark:bg-[rgba(255,255,255,0.12)] shadow-[1px_0px_0px_white] dark:shadow-[1px_0px_0px_black] z-0 opacity-60"></div>
 
               {/* Right vertical line */}
               <div className="w-[1px] h-full absolute right-0 top-0 bg-[rgba(55,50,47,0.12)] dark:bg-[rgba(255,255,255,0.12)] shadow-[1px_0px_0px_white] dark:shadow-[1px_0px_0px_black] z-0 opacity-60"></div>
 
-              <main className="w-full">
+              <main className="w-full h-full">
                 {children}
               </main>
             </div>

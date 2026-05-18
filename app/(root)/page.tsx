@@ -40,9 +40,6 @@ export default async function Page() {
 
             <Overview />
             <CustomSeparator />
-            <SocialLinks />
-
-            <CustomSeparator />
 
             <About />
             <CustomSeparator />
@@ -74,6 +71,8 @@ export default async function Page() {
             <Experiences />
             <CustomSeparator />
 
+            <SocialLinks />
+            <CustomSeparator />
             <Bookmarks />
             <CustomSeparator />
 
