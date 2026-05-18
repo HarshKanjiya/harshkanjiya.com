@@ -1,0 +1,52 @@
+---
+title: Shutter CTA
+description: A slide-to-action button with animated dot pulses.
+---
+
+<ComponentPreview name="shutter-cta" canReplay />
+
+## Installation
+
+<Tabs defaultValue="cli">
+  <TabsListInstallType />
+
+  <TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://harshkanjiya.com/r/shutter-cta.json
+```
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy the component files into your project</Step>
+
+Copy `components/shutter-cta/shutter-cta.tsx` into your codebase.
+
+<Step>Install dependencies</Step>
+
+This component relies on standard React hooks and standard Next.js `next/link`.
+
+<Step>Import and use</Step>
+
+```tsx
+import { ShutterCta } from "@/components/shutter-cta"
+```
+
+</Steps>
+
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { ShutterCta } from "@/components/shutter-cta"
+
+export default function Page() {
+  return <ShutterCta />
+}
+```

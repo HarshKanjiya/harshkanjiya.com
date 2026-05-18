@@ -1,0 +1,27 @@
+/* Track: flat on-surface channel (inset only, no outer neumorphic raise) */
+.track {
+  box-shadow:
+    inset 3px 3px 7px rgba(0, 0, 0, 0.09),
+    inset -2px -2px 5px rgba(255, 255, 255, 0.8);
+}
+
+/* Thumb: prominently raised above the surface */
+.thumb {
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.15),
+    0 2px 5px rgba(0, 0, 0, 0.10),
+    0 0 0 1px rgba(0, 0, 0, 0.04);
+}
+
+:global(.dark) .track {
+  box-shadow:
+    inset 3px 3px 7px rgba(0, 0, 0, 0.5),
+    inset -2px -2px 5px rgba(50, 50, 65, 0.35);
+}
+
+:global(.dark) .thumb {
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.55),
+    0 2px 5px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.06);
+}
