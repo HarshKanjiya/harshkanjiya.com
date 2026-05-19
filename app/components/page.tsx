@@ -6,6 +6,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 
 // Import actual components for visuals
+import { ScifiInput } from "@/components/scifi-input"
 import { HelloWorld } from "@/components/hello-world"
 import { PushButton } from "@/components/push-button"
 import { RealisticButton } from "@/components/realistic-button"
@@ -31,6 +32,10 @@ export const metadata: Metadata = {
 
 // Edit this grid config for new components
 export const componentGridConfig: Record<string, { className: string; visual: React.ReactNode }> = {
+  "scifi-input": {
+    className: "md:col-span-12 md:row-span-2 flex items-center justify-center bg-[#010d12]",
+    visual: <ScifiInput />,
+  },
   "realistic-button": {
     className: "md:col-span-6 md:row-span-2 flex items-center justify-center  bg-[#f7f7f7] dark:bg-black/10",
     visual: <RealisticButton />,

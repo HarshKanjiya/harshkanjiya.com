@@ -1,5 +1,6 @@
 /** Maps component slugs to their source file paths (relative to project root). Used by the rehype plugin to inject source code into MDX. */
 export const COMPONENT_SOURCE_MAP: Record<string, string> = {
+  "scifi-input": "components/scifi-input/scifi-input.tsx",
   "hello-world": "components/hello-world/hello-world.tsx",
   "realistic-button": "components/realistic-button/realistic-button.tsx",
   "vertical-toggle": "components/vertical-toggle/vertical-toggle.tsx",

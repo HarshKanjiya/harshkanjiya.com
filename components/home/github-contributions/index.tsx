@@ -46,7 +46,7 @@ export function GitHubContributions() {
           <div className="flex-1 px-3 py-2 max-sm:pb-2 flex flex-col bg-background outline rounded-[10px] outline-muted/50 relative overflow-hidden group w-full">
             {
               loading ? (
-                <div className="flex justify-center items-center h-full">
+                <div className="flex justify-center items-center h-full min-h-46">
                   <Loader2 className="animate-spin" size={24} />
                 </div>
               ) : (

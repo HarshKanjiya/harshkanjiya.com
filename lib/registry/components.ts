@@ -6,7 +6,12 @@ export type RegistryComponent = {
 }
 
 export const REGISTRY_COMPONENTS: RegistryComponent[] = [
-
+  {
+    slug: "scifi-input",
+    title: "Sci-Fi Input",
+    description: "A terminal-style HUD input with glowing cyan borders, scan line animation, and corner brackets.",
+    installCmd: "@harshexists/scifi-input",
+  },
   {
     slug: "realistic-button",
     title: "Realistic Button",

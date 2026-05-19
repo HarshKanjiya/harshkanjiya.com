@@ -1,0 +1,52 @@
+---
+title: Sci-Fi Input
+description: A terminal-style HUD input with glowing cyan borders, scan line animation, and corner brackets.
+---
+
+<ComponentPreview name="scifi-input" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+  <TabsListInstallType />
+  <TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://harshkanjiya.com/r/scifi-input.json
+```
+
+  </TabsContent>
+  <TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy the component files into your project</Step>
+
+Copy `components/scifi-input/scifi-input.tsx` and `components/scifi-input/scifi-input.module.css` into your codebase.
+
+<Step>Import and use</Step>
+
+```tsx
+import { ScifiInput } from "@/components/scifi-input"
+```
+
+</Steps>
+
+  </TabsContent>
+</Tabs>
+
+## Usage
+
+```tsx
+import { ScifiInput } from "@/components/scifi-input"
+
+export default function Page() {
+  return <ScifiInput />
+}
+```
+
+## API Reference
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `className` | `string` | `undefined` | Additional class names applied to the root wrapper. |
