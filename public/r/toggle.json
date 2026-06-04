@@ -1,0 +1,34 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "toggle",
+  "type": "registry:component",
+  "title": "Toggle",
+  "author": "Harsh Kanjiya <https://harshkanjiya.com>",
+  "description": "A beautiful toggle switch component.",
+  "dependencies": [],
+  "devDependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/toggle/toggle.tsx",
+      "content": "'use client'\r\n\r\nimport React, { useState } from 'react'\r\nimport styles from './toggle.module.css'\r\nimport { useSound } from '@/hooks/use-sound'\r\n\r\nexport function Toggle() {\r\n  const [isOn, setIsOn] = useState(false)\r\n\r\n  const toggle = () => setIsOn(p => !p)\r\n\r\n  const handleKeyDown = (e: React.KeyboardEvent) => {\r\n    if (e.key === ' ' || e.key === 'Enter') {\r\n      e.preventDefault()\r\n      toggle()\r\n    }\r\n  }\r\n\r\n  const playClick = useSound(\"/audio/ui-sounds/toggle.mp3\");\r\n\r\n  return (\r\n    <button\r\n      role=\"switch\"\r\n      aria-checked={isOn}\r\n      onClick={() => {\r\n        toggle();\r\n        playClick();\r\n      }}\r\n      onKeyDown={handleKeyDown}\r\n      className={`${styles.track} relative flex items-center w-[88px] h-[44px] rounded-full cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-neutral-400 select-none bg-[#e8e8e8] dark:bg-[#151518]`}\r\n    >\r\n      {/* Left dot — subtle, visible when ON */}\r\n      <span\r\n        className={`pointer-events-none absolute left-[11px] top-[19px] w-[6px] h-[6px] rounded-full bg-[#a8b8c4] dark:bg-[#607a8c] transition-opacity duration-300 ${isOn ? 'opacity-70' : 'opacity-0'}`}\r\n      />\r\n\r\n      {/* Right dot — orange, visible when OFF */}\r\n      <span\r\n        className={`pointer-events-none absolute right-[11px] top-[19px] w-[6px] h-[6px] rounded-full bg-[#f05a00] dark:bg-[#ff6820] transition-opacity duration-300 ${isOn ? 'opacity-0' : 'opacity-100'}`}\r\n      />\r\n\r\n      {/* Thumb — raised pintch button */}\r\n      <span\r\n        className={`${styles.thumb} pointer-events-none absolute top-[4px] left-[4px] w-[36px] h-[36px] rounded-full bg-[#f8f8f8] dark:bg-[#2a2a32] transition-transform duration-300 ease-in-out ${isOn ? 'translate-x-[44px]' : 'translate-x-0'}`}\r\n      />\r\n    </button>\r\n  )\r\n}\r\n\r\nexport default Toggle\r\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "components/toggle/index.ts",
+      "content": "export { Toggle, default } from \"./toggle\"\r\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "components/toggle/toggle.module.css",
+      "content": "/* Track: flat on-surface channel (inset only, no outer neumorphic raise) */\r\n.track {\r\n  box-shadow:\r\n    inset 3px 3px 7px rgba(0, 0, 0, 0.09),\r\n    inset -2px -2px 5px rgba(255, 255, 255, 0.8);\r\n}\r\n\r\n/* Thumb: prominently raised above the surface */\r\n.thumb {\r\n  box-shadow:\r\n    0 5px 15px rgba(0, 0, 0, 0.15),\r\n    0 2px 5px rgba(0, 0, 0, 0.10),\r\n    0 0 0 1px rgba(0, 0, 0, 0.04);\r\n}\r\n\r\n:global(.dark) .track {\r\n  box-shadow:\r\n    inset 3px 3px 7px rgba(0, 0, 0, 0.5),\r\n    inset -2px -2px 5px rgba(50, 50, 65, 0.35);\r\n}\r\n\r\n:global(.dark) .thumb {\r\n  box-shadow:\r\n    0 5px 15px rgba(0, 0, 0, 0.55),\r\n    0 2px 5px rgba(0, 0, 0, 0.35),\r\n    0 0 0 1px rgba(255, 255, 255, 0.06);\r\n}\r\n",
+      "type": "registry:file",
+      "target": "components/toggle/toggle.module.css"
+    },
+    {
+      "path": "hooks/use-sound.ts",
+      "content": "import { useCallback, useEffect, useRef } from \"react\";\n\n/**\n * Custom React hook to load and play a sound from a given URL using the Web Audio API.\n *\n * This hook fetches the audio file at the specified URL, decodes it, and prepares it for playback.\n * It returns a `play` function that can be called to play the loaded sound.\n *\n * @param url - The URL of the audio file to load and play.\n * @returns A function that, when called, plays the loaded sound.\n *\n * @remarks\n * - If the Web Audio API is not supported in the browser, a warning is logged and playback is disabled.\n * - The audio context and buffer are managed internally using React refs.\n * - Errors during fetching or decoding the audio are logged to the console.\n *\n * @example\n * ```tsx\n * const playClick = useSound('/sounds/click.mp3');\n * // Later in an event handler:\n * playClick();\n * ```\n */\nexport function useSound(url: string) {\n  const audioCtxRef = useRef<AudioContext | null>(null);\n  const bufferRef = useRef<AudioBuffer | null>(null);\n\n  useEffect(() => {\n    const AudioContextClass =\n      window.AudioContext ||\n      (window as unknown as { webkitAudioContext: typeof AudioContext })\n        .webkitAudioContext;\n\n    if (!AudioContextClass) {\n      console.warn(\"Web Audio API is not supported in this browser.\");\n      return;\n    }\n\n    const audioCtx = new AudioContextClass();\n    audioCtxRef.current = audioCtx;\n\n    fetch(url)\n      .then((res) => res.arrayBuffer())\n      .then((data) => audioCtx.decodeAudioData(data))\n      .then((decoded) => {\n        bufferRef.current = decoded;\n      })\n      .catch((err) => {\n        console.log(`Failed to load click sound from ${url}:`, err);\n      });\n  }, [url]);\n\n  const play = useCallback((volume: number = 1) => {\n    if (audioCtxRef.current && bufferRef.current) {\n      const source = audioCtxRef.current.createBufferSource();\n      const gainNode = audioCtxRef.current.createGain();\n\n      source.buffer = bufferRef.current;\n      gainNode.gain.value = volume;\n\n      source.connect(gainNode);\n      gainNode.connect(audioCtxRef.current.destination);\n      source.start(0);\n    }\n  }, []);\n\n  return play;\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

@@ -3,14 +3,22 @@
   "name": "hello-world",
   "type": "registry:component",
   "title": "Hello World",
-  "description": "A simple animated greeting component.",
   "author": "Harsh Kanjiya <https://harshkanjiya.com>",
+  "description": "A simple animated greeting component.",
   "dependencies": [],
   "devDependencies": [],
-  "registryDependencies": ["utils"],
+  "registryDependencies": [
+    "utils"
+  ],
   "files": [
     {
       "path": "components/hello-world/hello-world.tsx",
+      "content": "import { cn } from \"@/lib/utils\"\r\n\r\ninterface HelloWorldProps {\r\n  name?: string\r\n  className?: string\r\n}\r\n\r\nexport function HelloWorld({ name = \"World\", className }: HelloWorldProps) {\r\n  return (\r\n    <div\r\n      className={cn(\r\n        \"flex items-center gap-2 rounded-xl border border-edge bg-muted/40 px-4 py-3 font-mono text-sm\",\r\n        className\r\n      )}\r\n    >\r\n      <span className=\"animate-pulse text-green-500\">●</span>\r\n      <span>\r\n        Hello, <span className=\"font-semibold text-foreground\">{name}</span>!\r\n      </span>\r\n    </div>\r\n  )\r\n}\r\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "components/hello-world/index.ts",
+      "content": "export { HelloWorld } from \"./hello-world\"\r\n",
       "type": "registry:component"
     }
   ]

@@ -1,0 +1,152 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "harshkanjiya",
+  "homepage": "https://harshkanjiya.com",
+  "items": [
+    {
+      "name": "realistic-button",
+      "type": "registry:component",
+      "title": "Realistic Button",
+      "description": "A skeuomorphic realistic button with hover and active states.",
+      "author": "Harsh Kanjiya <https://harshkanjiya.com>",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/realistic-button/realistic-button.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/realistic-button/index.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/realistic-button/realistic-button.module.css",
+          "type": "registry:file",
+          "target": "components/realistic-button/realistic-button.module.css"
+        },
+        {
+          "path": "hooks/use-sound.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "shutter-cta",
+      "type": "registry:component",
+      "title": "Shutter CTA",
+      "description": "A slide-to-action button with animated dot pulses.",
+      "author": "Harsh Kanjiya <https://harshkanjiya.com>",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/shutter-cta/shutter-cta.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/shutter-cta/index.ts",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "toggle",
+      "type": "registry:component",
+      "title": "Toggle",
+      "description": "A beautiful toggle switch component.",
+      "author": "Harsh Kanjiya <https://harshkanjiya.com>",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/toggle/toggle.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/toggle/index.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/toggle/toggle.module.css",
+          "type": "registry:file",
+          "target": "components/toggle/toggle.module.css"
+        },
+        {
+          "path": "hooks/use-sound.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "pintch-switch",
+      "type": "registry:component",
+      "title": "Pintch Switch",
+      "description": "A flat-track toggle with a raised pintch-style thumb.",
+      "author": "Harsh Kanjiya <https://harshkanjiya.com>",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/pintch-switch/pintch-switch.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/pintch-switch/index.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/pintch-switch/pintch-switch.module.css",
+          "type": "registry:file",
+          "target": "components/pintch-switch/pintch-switch.module.css"
+        },
+        {
+          "path": "hooks/use-sound.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "hello-world",
+      "type": "registry:component",
+      "title": "Hello World",
+      "description": "A simple animated greeting component.",
+      "author": "Harsh Kanjiya <https://harshkanjiya.com>",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/hello-world/hello-world.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/hello-world/index.ts",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "hero-dummy",
+      "type": "registry:block",
+      "title": "Hero Dummy",
+      "description": "A minimal hero section block.",
+      "author": "Harsh Kanjiya <https://harshkanjiya.com>",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/blocks/hero-dummy/hero-dummy.tsx",
+          "type": "registry:component"
+        }
+      ]
+    }
+  ]
+}
