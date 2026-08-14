@@ -2,6 +2,30 @@ import { Experience } from "@/types/experiences";
 
 export const EXPERIENCES: Experience[] = [
   {
+    id: "hitachi-digital-services",
+    companyName: "Hitachi Digital Services",
+    companyLogo: "https://assets.harshkanjiya.com/companies/hitachi-logo.jpeg",
+    positions: [
+      {
+        id: "e4a6f7b1-2c3d-4e5f-9a8b-1c2d3e4f5a6b",
+        title: "Full Stack AWS Developer",
+        employmentPeriod: {
+          start: "July 2026",
+        },
+        employmentType: "Full-time",
+        icon: "code",
+        skills: [
+          "Angular",
+          "Node.js",
+          "AWS",
+          "TypeScript",
+        ],
+        isExpanded: true,
+      },
+    ],
+    isCurrentEmployer: true,
+  },
+  {
     id: "projecttree",
     companyName: "Project Tree Infotech",
     companyLogo: "https://assets.harshkanjiya.com/companies/ptree-logo.svg",
@@ -11,6 +35,7 @@ export const EXPERIENCES: Experience[] = [
         title: "Full Stack Developer",
         employmentPeriod: {
           start: "Dec 2023",
+          end: "June 2026",
         },
         employmentType: "Full-time",
         icon: "code",
@@ -33,7 +58,6 @@ export const EXPERIENCES: Experience[] = [
         isExpanded: false,
       },
     ],
-    isCurrentEmployer: true,
   },
   {
     id: "squirracode-technologies",

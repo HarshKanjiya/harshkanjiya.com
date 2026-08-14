@@ -9,26 +9,26 @@ export const USER: User = {
     pronouns: "he/him",
     flipSentences: [
         "Creating with code. Small details matter.",
-        "Full stack Developer",
+        "Full Stack AWS Developer",
     ],
     address: "Surat, Gujarat, India",
     phoneNumber: "KzkxIDkwNTQyIDQyMDA0", // E.164 format, base64 encoded (https://t.io.vn/base64-string-converter)
     email: "aGFyc2hrYW5qaXlhMTAwQGdtYWlsLmNvbQ==", // base64 encoded
     website: "https://www.harshkanjiya.com",
-    jobTitle: "Full stack Developer",
+    jobTitle: "Full Stack AWS Developer",
     jobs: [
         {
-            title: "Full stack Developer",
-            company: "Project Tree",
-            website: "https://projecttree.in/",
+            title: "Full Stack AWS Developer",
+            company: "Hitachi Digital Services",
+            website: "https://hitachids.com/",
         },
     ],
     about: `
-- **Full Stack Developer** with **3+ years of experience**,
-- Skilled in **Next.js**, **React**, **Angular**, **TypeScript** & Golang.
+- **Full Stack AWS Developer** with **3.5+ years of experience**,
+- Skilled in **Next.js**, **React**, **Angular**, **TypeScript**, **Nodejs**, **Golang** & **AWS**.
 - Passionate about exploring new technologies & learning design philosophy.
-- Learning in **System Design** & **GenAI**.
-    `,
+`,
+    // - Learning in **System Design** & **GenAI**.
     avatar: "https://assets.harshkanjiya.com/general/profile-real.webp",
 
     // METADATA

@@ -1,0 +1,812 @@
+---
+title: "Angular 22 Is Here: The Signal-First Release That Changes Daily Work"
+description: "A practical Angular 22 guide for experienced Angular developers: Signal Forms, Resource APIs, OnPush defaults, Fetch-based HTTP, injectAsync, Angular Aria, hydration, templates, and upgrade risks."
+image: https://assets.harshkanjiya.com/blog/angular-22-developer-guide-og.webp
+createdAt: 2026-06-07
+updatedAt: 2026-06-07
+---
+
+Angular 22 is not the kind of release where you skim the changelog, update a few dependencies, and move on.
+
+It changes the default mental model of Angular.
+
+If you have been working with Angular 16 through 21, you have already seen the pieces arrive one by one: standalone APIs, control flow, signals, zoneless work, hydration, `@defer`, and early versions of Signal Forms and resources. Angular 22 pulls several of those pieces into a more serious shape.
+
+The direction is clear:
+
+- Signals are now the center of Angular application state.
+- Common async work needs less RxJS ceremony.
+- New apps assume `OnPush` behavior.
+- SSR and hydration are becoming less manual.
+- Services, templates, forms, and accessibility APIs are being cleaned up.
+
+That is why Angular 22 matters. It is not only a "new features" release. It is the release where the modern Angular style starts feeling like the default style instead of the optional one.
+
+This guide is written for teams already building Angular apps. We will skip the beginner tour and focus on what changes in day-to-day work.
+
+## The Short Version
+
+If you only have 10 minutes, these are the Angular 22 changes I would pay attention to first:
+
+| Area | What changed | Why it matters |
+| --- | --- | --- |
+| Forms | Signal Forms are stable | Form state now fits the same reactive model as the rest of Angular |
+| Data fetching | `resource()` and `httpResource()` are production ready | Loading, error, and refetch state become signals |
+| Change detection | `OnPush` is the default for new apps | Mutation-heavy components become easier to spot |
+| HTTP | `HttpClient` moves toward Fetch by default | Better alignment with modern browsers and SSR |
+| DI | `@Service()` and `injectAsync()` arrive | Services can be simpler and lazy-loaded |
+| SSR | Incremental hydration keeps improving | Less JavaScript is needed before a page feels usable |
+| Accessibility | Angular Aria is stable | Headless accessible behavior is now a first-class option |
+| Templates | Comments, spread syntax, stronger `@switch`, arrow functions | Templates are a little closer to normal TypeScript thinking |
+
+## Signal Forms Are Now Stable
+
+Signal Forms are the biggest practical change in Angular 22 for teams that build forms every day.
+
+Reactive Forms gave Angular developers a powerful model, but that model came with a lot of machinery. You had `FormGroup`, `FormControl`, `valueChanges`, validators, async validators, `ControlValueAccessor`, `statusChanges`, and a good amount of RxJS plumbing just to describe ordinary state.
+
+Signal Forms move form state into signals. A form model is a writable signal, and each field exposes state such as value, errors, touched, dirty, valid, invalid, pending, hidden, and disabled through signal-based APIs.
+
+That means your form state can be read directly in templates and computed values without subscribing or converting between observables and signals.
+
+<Tabs defaultValue="reactive">
+  <TabsList>
+    <TabsTrigger value="reactive">Reactive Forms</TabsTrigger>
+    <TabsTrigger value="signals">Signal Forms</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="reactive">
+
+```ts
+import { Component } from '@angular/core';
+import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-login',
+  imports: [ReactiveFormsModule],
+  template: `
+    <form [formGroup]="form">
+      <input formControlName="email" />
+
+      @if (form.controls.email.touched && form.controls.email.invalid) {
+        <p>Email is required</p>
+      }
+
+      <button [disabled]="form.invalid">Sign in</button>
+    </form>
+  `,
+})
+export class LoginComponent {
+  readonly form = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required],
+  });
+
+  constructor(private fb: FormBuilder) {}
+}
+```
+
+  </TabsContent>
+
+  <TabsContent value="signals">
+
+```ts
+import { Component, signal } from '@angular/core';
+import { email, form, FormField, required } from '@angular/forms/signals';
+
+type LoginModel = {
+  email: string;
+  password: string;
+};
+
+@Component({
+  selector: 'app-login',
+  imports: [FormField],
+  template: `
+    <form>
+      <input type="email" [formField]="loginForm.email" />
+
+      @if (loginForm.email().touched() && loginForm.email().invalid()) {
+        @for (error of loginForm.email().errors(); track error.kind) {
+          <p>{{ error.message }}</p>
+        }
+      }
+
+      <button [disabled]="loginForm().invalid()">Sign in</button>
+    </form>
+  `,
+})
+export class LoginComponent {
+  readonly loginModel = signal<LoginModel>({
+    email: '',
+    password: '',
+  });
+
+  readonly loginForm = form(this.loginModel, (path) => {
+    required(path.email, { message: 'Email is required' });
+    email(path.email, { message: 'Enter a valid email address' });
+    required(path.password, { message: 'Password is required' });
+  });
+}
+```
+
+  </TabsContent>
+</Tabs>
+
+The important difference is not only syntax. In the Signal Forms version, the model is the source of truth, and the form is a reactive layer around it. The template reads field state directly. If the email field changes, Angular can update the pieces of UI that read that field.
+
+### Validation Feels More Like Application Logic
+
+Built-in validation looks familiar, but custom validation is where Signal Forms start to feel better than older approaches.
+
+```ts
+import { Component, signal } from '@angular/core';
+import { form, FormField, minLength, required, validate } from '@angular/forms/signals';
+
+type PasswordModel = {
+  password: string;
+  confirmPassword: string;
+};
+
+@Component({
+  selector: 'app-password-form',
+  imports: [FormField],
+  template: `
+    <input type="password" [formField]="passwordForm.password" />
+    <input type="password" [formField]="passwordForm.confirmPassword" />
+
+    @if (passwordForm.confirmPassword().touched()) {
+      @for (error of passwordForm.confirmPassword().errors(); track error.kind) {
+        <p>{{ error.message }}</p>
+      }
+    }
+  `,
+})
+export class PasswordFormComponent {
+  readonly passwordModel = signal<PasswordModel>({
+    password: '',
+    confirmPassword: '',
+  });
+
+  readonly passwordForm = form(this.passwordModel, (path) => {
+    required(path.password, { message: 'Password is required' });
+    minLength(path.password, 8, { message: 'Use at least 8 characters' });
+    required(path.confirmPassword, { message: 'Confirm your password' });
+
+    validate(path.confirmPassword, ({ value, valueOf }) => {
+      if (value() !== valueOf(path.password)) {
+        return {
+          kind: 'passwordMismatch',
+          message: 'Passwords do not match',
+        };
+      }
+
+      return null;
+    });
+  });
+}
+```
+
+With Reactive Forms, cross-field validation often meant placing a validator on the group, then manually deciding which control should display the error. With Signal Forms, the validator can read another field through the form context and return a field-specific error.
+
+That is a small API difference with a big maintenance impact.
+
+### Async Validation Without the RxJS Maze
+
+Async validation used to be one of those places where Angular developers quietly accepted a lot of RxJS boilerplate. You needed debounce behavior, cancellation, loading state, error mapping, and a clean way to avoid running the request when basic validation already failed.
+
+Angular 22 gives Signal Forms a much clearer path:
+
+```ts
+import { Component, signal } from '@angular/core';
+import { form, FormField, required, validateHttp } from '@angular/forms/signals';
+
+type RegistrationModel = {
+  username: string;
+};
+
+@Component({
+  selector: 'app-registration',
+  imports: [FormField],
+  template: `
+    <input [formField]="registrationForm.username" />
+
+    @if (registrationForm.username().pending()) {
+      <p>Checking availability...</p>
+    }
+
+    @for (error of registrationForm.username().errors(); track error.kind) {
+      <p>{{ error.message }}</p>
+    }
+  `,
+})
+export class RegistrationComponent {
+  readonly registrationModel = signal<RegistrationModel>({
+    username: '',
+  });
+
+  readonly registrationForm = form(this.registrationModel, (path) => {
+    required(path.username, { message: 'Username is required' });
+
+    validateHttp(path.username, {
+      request: ({ value }) => {
+        const username = value().trim();
+        return username ? `/api/users/check-name?username=${username}` : undefined;
+      },
+      onSuccess: (response: { available: boolean }) => {
+        return response.available
+          ? null
+          : { kind: 'usernameTaken', message: 'That username is already taken' };
+      },
+      onError: () => ({
+        kind: 'usernameCheckFailed',
+        message: 'Could not check this username right now',
+      }),
+    });
+  });
+}
+```
+
+The async state is not somewhere else. `pending()`, `errors()`, and `invalid()` live beside the field.
+
+### Dynamic Forms Become Easier to Reason About
+
+Dynamic forms are where Angular teams usually start building custom abstractions. Think onboarding flows, survey products, admin-defined forms, insurance applications, and internal workflow tools.
+
+With Signal Forms, the model can be generated from configuration, while the schema layer describes behavior.
+
+```ts
+type Question = {
+  key: string;
+  label: string;
+  required?: boolean;
+};
+
+const questions = signal<Question[]>([
+  { key: 'companyName', label: 'Company name', required: true },
+  { key: 'website', label: 'Website' },
+]);
+
+const answerModel = signal<Record<string, string>>({
+  companyName: '',
+  website: '',
+});
+
+const answerForm = form(answerModel, (path) => {
+  for (const question of questions()) {
+    if (question.required) {
+      required(path[question.key], {
+        message: `${question.label} is required`,
+      });
+    }
+  }
+});
+```
+
+In a real app, you would wrap this in a form-builder layer, but the interesting part is the same: the state, validation, and UI can all react to the same model.
+
+### How This Impacts Form Builders
+
+Large form-builder products benefit from Signal Forms because form state becomes more granular and more explicit.
+
+Imagine building a Typeform alternative. You care about conditional questions, step-level validation, partial autosave, async checks, mobile typing performance, and analytics around dirty or abandoned fields.
+
+Reactive Forms can do all of this, but teams usually build a framework around the framework. Signal Forms reduce the amount of custom glue because each field is already a reactive unit.
+
+For form-heavy SaaS apps, that is the real win. You are getting a better base for complex, configurable form systems.
+
+## OnPush Is Now the Default
+
+Angular 22 makes `OnPush` the default change detection strategy for new applications. The older broad checking behavior is now represented by `ChangeDetectionStrategy.Eager`.
+
+Before Angular 22, a component without an explicit `changeDetection` setting used the old default strategy. Browser events, timers, XHRs, and other async work could cause Angular to check a wide part of the component tree.
+
+That behavior was convenient, but it also allowed inefficient code to survive for a long time.
+
+```ts
+@Component({
+  selector: 'app-orders-table',
+  template: `<app-order-row *ngFor="let order of orders" [order]="order" />`,
+})
+export class OrdersTableComponent {
+  orders: Order[] = [];
+}
+```
+
+Under the older default model, mutating local fields often appeared to work because change detection was eager.
+
+```ts
+addOrder(order: Order) {
+  this.orders.push(order);
+}
+```
+
+With `OnPush`, you should treat this as a bug waiting to happen. Use immutable updates or signals:
+
+```ts
+readonly orders = signal<Order[]>([]);
+
+addOrder(order: Order) {
+  this.orders.update((current) => [...current, order]);
+}
+```
+
+The template then reads the signal:
+
+```html
+@for (order of orders(); track order.id) {
+  <app-order-row [order]="order" />
+}
+```
+
+This is the Angular 22 mindset: make the changed state visible to Angular through signals, inputs, events, or explicit change detection APIs.
+
+### Migration Considerations
+
+The biggest upgrade risk is not compilation. It is behavior.
+
+Places to inspect:
+
+- Components that mutate arrays or objects in place.
+- Manual subscriptions that assign to plain class fields.
+- Third-party callbacks that run outside Angular awareness.
+- Deep component trees where child components expect broad parent checks.
+- Tests that pass because `fixture.detectChanges()` hides missing reactive wiring.
+
+If a component really needs the old behavior during migration, Angular 22 gives you a clearer name:
+
+```ts
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+
+@Component({
+  selector: 'app-legacy-grid',
+  changeDetection: ChangeDetectionStrategy.Eager,
+  template: `...`,
+})
+export class LegacyGridComponent {}
+```
+
+Use that as a temporary bridge, not a permanent hiding place.
+
+### Where OnPush Helps Most
+
+The performance gains show up most clearly in large UIs: grids, dashboards, reporting tools, admin screens, and enterprise routes with several feature areas.
+
+The benefit is not magic speed. Angular checks less code by default, and your state updates become easier to trace.
+
+## Resource APIs Are Stable
+
+Angular 22 also stabilizes the asynchronous reactivity APIs: `resource()`, `rxResource()`, and `httpResource()`.
+
+These APIs do not replace RxJS everywhere. They replace the common "fetch data and show loading, value, and error state" pattern that many Angular apps have repeated for years.
+
+Here is the traditional shape:
+
+```ts
+readonly query = new FormControl('');
+readonly results$ = this.query.valueChanges.pipe(
+  debounceTime(300),
+  distinctUntilChanged(),
+  switchMap((query) =>
+    this.searchService.search(query ?? '').pipe(
+      map((items) => ({ status: 'success' as const, items })),
+      startWith({ status: 'loading' as const, items: [] }),
+      catchError((error) => of({ status: 'error' as const, error, items: [] }))
+    )
+  )
+);
+```
+
+That code is fine if your team is strong with RxJS. But for a simple search box, it is a lot of structure.
+
+With `httpResource()`, the request can follow signals directly:
+
+```ts
+import { Component, signal } from '@angular/core';
+import { httpResource } from '@angular/common/http';
+
+@Component({
+  selector: 'app-product-search',
+  template: `
+    <input
+      [value]="query()"
+      (input)="query.set($any($event.target).value)"
+      placeholder="Search products"
+    />
+
+    @if (products.isLoading()) {
+      <p>Loading...</p>
+    } @else if (products.error()) {
+      <p>Could not load products.</p>
+    } @else {
+      @for (product of products.value(); track product.id) {
+        <article>{{ product.name }}</article>
+      }
+    }
+  `,
+})
+export class ProductSearchComponent {
+  readonly query = signal('');
+
+  readonly products = httpResource<Product[]>(() => {
+    const q = this.query().trim();
+    return q ? `/api/products?q=${encodeURIComponent(q)}` : undefined;
+  });
+}
+```
+
+The value, loading state, and error state are all readable from the resource. When `query()` changes, the request can rerun.
+
+### Pagination Example
+
+Resources also fit paginated screens nicely:
+
+```ts
+readonly page = signal(1);
+readonly pageSize = signal(25);
+
+readonly invoices = httpResource<{
+  items: Invoice[];
+  total: number;
+}>(() => ({
+  url: '/api/invoices',
+  params: {
+    page: this.page(),
+    pageSize: this.pageSize(),
+  },
+}));
+
+nextPage() {
+  this.page.update((page) => page + 1);
+}
+```
+
+This gives table components a clean model: the current page is a signal, the resource depends on it, and the template reads one consistent object.
+
+### Traditional Angular Service Pattern vs Resource API
+
+| Concern | Traditional service plus RxJS | Resource API |
+| --- | --- | --- |
+| Loading state | Usually custom `BehaviorSubject`, `startWith`, or component state | Built into the resource |
+| Error state | Usually `catchError` plus custom shape | Built into the resource |
+| Refetching | Manual subscription or stream trigger | Recomputed from signal params |
+| Template usage | `async` pipe or conversion to signals | Direct signal reads |
+| Best for | Complex streams, websockets, event pipelines | Request-driven UI state |
+
+RxJS still belongs in Angular. If you are modeling websockets, event streams, cancellation-heavy workflows, or multi-source composition, RxJS remains excellent.
+
+But if you are fetching a list of products because a search signal changed, a resource is often the cleaner tool.
+
+## HttpClient and Fetch
+
+Angular 22 continues the move from `XMLHttpRequest` toward Fetch for `HttpClient`.
+
+This matters because Fetch is the modern browser primitive. It works better with streaming, request and response primitives, abort signals, and server environments. It also makes Angular's client and SSR behavior easier to align over time.
+
+For most app code, your `HttpClient` calls still look familiar:
+
+```ts
+this.http.get<User[]>('/api/users');
+```
+
+The difference is under the backend.
+
+Fetch changes a few details teams should test:
+
+- Progress events are not identical to XHR progress events.
+- Upload progress needs special attention.
+- Streaming responses become more natural.
+- Abort behavior maps to platform APIs.
+- SSR request handling becomes easier to reason about.
+
+If your application depends on XHR-specific behavior, test those flows carefully during the upgrade. File uploads, progress bars, custom interceptors, auth redirects, and transfer cache behavior deserve real QA.
+
+## The New @Service Decorator
+
+Angular 22 introduces `@Service()` as a shorter way to define common application services.
+
+The old pattern is still valid:
+
+```ts
+import { Injectable } from '@angular/core';
+
+@Injectable({ providedIn: 'root' })
+export class UserPreferencesService {}
+```
+
+The new pattern is clearer for the common singleton case:
+
+```ts
+import { Service } from '@angular/core';
+
+@Service()
+export class UserPreferencesService {
+  private readonly theme = signal<'light' | 'dark' | 'system'>('system');
+
+  currentTheme = this.theme.asReadonly();
+
+  setTheme(theme: 'light' | 'dark' | 'system') {
+    this.theme.set(theme);
+  }
+}
+```
+
+Use `@Service()` when you want the standard root-provided service shape. Keep `@Injectable()` when you need deeper provider configuration, special DI behavior, or a pattern already used heavily in an existing library.
+
+This is not a huge architectural feature. It is a readability feature. But Angular has carried a lot of ceremony for years, so readability changes still matter.
+
+## injectAsync()
+
+`injectAsync()` solves a real performance problem: services could be injected eagerly even when they were only needed for rare actions.
+
+Think about exports, PDF generation, chart rendering, image processing, or a large editor integration. You do not want every user to pay for that code on initial load.
+
+```ts
+import { Component, injectAsync, onIdle } from '@angular/core';
+
+@Component({
+  selector: 'app-report-actions',
+  template: `<button (click)="exportCsv()">Export CSV</button>`,
+})
+export class ReportActionsComponent {
+  private readonly exporter = injectAsync(
+    () => import('./csv-exporter').then((m) => m.CsvExporterService),
+    { prefetch: onIdle }
+  );
+
+  async exportCsv() {
+    const exporter = await this.exporter();
+    await exporter.export();
+  }
+}
+```
+
+The service must be auto-provided, either with `@Service()` or `@Injectable({ providedIn: 'root' })`.
+
+Use `injectAsync()` for heavy, optional services: exports, editors, admin-only analytics tools, SDK wrappers, and expensive visualization helpers.
+
+Do not use it for tiny services that every route needs anyway. Auth state, router helpers, formatting services, and startup dependencies should usually stay eagerly available. Lazy loading the wrong dependency can make code harder to follow and can add a delay right when the user clicks.
+
+## Incremental Hydration Improvements
+
+Hydration is the process of taking server-rendered HTML and connecting it to client-side Angular so the page becomes interactive.
+
+The hard part is that full hydration can force the browser to download and execute more JavaScript than the first interaction needs. That hurts pages with lots of below-the-fold widgets, dashboards, comments, ads, recommendations, maps, charts, or product configurators.
+
+Incremental hydration lets Angular hydrate only the parts that need to become interactive. Combined with `@defer`, it gives teams a more practical SSR model:
+
+```html
+<article>
+  <h1>{{ post.title }}</h1>
+  <p>{{ post.summary }}</p>
+</article>
+
+@defer (on viewport) {
+  <app-comments [postId]="post.id" />
+} @placeholder {
+  <p>Comments loading...</p>
+}
+```
+
+The server can still send meaningful HTML early. The browser can delay work for parts of the page that are not needed yet.
+
+This matters for SEO because crawlers and social previews can see useful content in the initial HTML. It matters for users because the first meaningful view does not need to wait for every interactive island.
+
+Real-world use cases:
+
+- Blog posts with interactive examples.
+- Product pages with reviews and recommendations.
+- Dashboards with below-the-fold charts.
+- Documentation pages with demos.
+- Ecommerce pages with expensive personalization widgets.
+
+Angular 22 does not mean you can ignore hydration design. You still need to decide which parts of a route should be interactive immediately. But the framework is giving you better defaults and cleaner tools.
+
+## Angular Aria Is Stable
+
+Angular Aria gives Angular developers headless accessible primitives for common UI patterns.
+
+This is important because accessibility is not only about adding `aria-label` at the end. Complex widgets need keyboard behavior, focus management, roles, states, and screen reader expectations that match WAI-ARIA patterns.
+
+For example, a toolbar is not just a row of buttons. It needs predictable keyboard navigation:
+
+```ts
+import { Component } from '@angular/core';
+import { Toolbar, ToolbarWidget } from '@angular/aria/toolbar';
+
+@Component({
+  selector: 'app-editor-toolbar',
+  imports: [Toolbar, ToolbarWidget],
+  template: `
+    <div toolbar aria-label="Editor formatting">
+      <button toolbarWidget type="button">Bold</button>
+      <button toolbarWidget type="button">Italic</button>
+      <button toolbarWidget type="button">Underline</button>
+    </div>
+  `,
+})
+export class EditorToolbarComponent {}
+```
+
+The value is that your design system can stay visually custom while the behavior is backed by tested accessibility primitives.
+
+Angular Aria is especially useful for:
+
+- Menus.
+- Toolbars.
+- Tabs.
+- Trees.
+- Listboxes.
+- Custom selects.
+- Combobox-style controls.
+
+If your team maintains a component library, Angular Aria deserves a serious look before building another custom keyboard-navigation layer from scratch.
+
+## Template Improvements
+
+Angular 22 includes several template improvements that make templates easier to write and easier to type-check.
+
+### Comments Inside HTML Elements
+
+You can now add comments around attributes and bindings:
+
+```html
+<button
+  // Kept explicit because analytics depends on this stable id.
+  data-event-id="checkout-submit"
+  [disabled]="checkoutForm().invalid()"
+>
+  Place order
+</button>
+```
+
+This is helpful when a binding exists for a non-obvious reason.
+
+### Spread Syntax
+
+Templates can use spread syntax in object literals, array literals, and function calls:
+
+```html
+<app-product-card
+  [metadata]="{ ...baseMetadata, source: 'search-results' }"
+  [tags]="[...product.tags, 'recommended']"
+/>
+```
+
+Keep it readable. If the expression starts looking like business logic, move it to the component.
+
+### Better @switch
+
+Multiple cases can share one block:
+
+```html
+@switch (order.status) {
+  @case ('pending')
+  @case ('processing') {
+    <app-status-badge tone="info">In progress</app-status-badge>
+  }
+  @case ('shipped') {
+    <app-status-badge tone="success">Shipped</app-status-badge>
+  }
+  @default {
+    <app-status-badge tone="muted">Unknown</app-status-badge>
+  }
+}
+```
+
+Angular 22 also improves exhaustive checking for `@switch`, which is useful when the switch expression is a union type.
+
+### Arrow Functions in Templates
+
+Small inline arrow functions are now valid:
+
+```html
+<button (click)="cart.update((items) => [...items, product()])">
+  Add to cart
+</button>
+```
+
+Use this carefully. A short signal update is fine. A multi-step pricing calculation belongs in TypeScript.
+
+## Security Improvements
+
+Angular 22 includes practical security hardening across template sanitization, SVG handling, URL handling, and SSR behavior.
+
+The changes worth noticing:
+
+- Dynamic `href` and `xlink:href` bindings inside SVG are sanitized more carefully.
+- URL validation is stricter in server-side code paths.
+- SSR hardening reduces risk around suspicious URLs and request handling.
+- Transfer cache behavior is safer for requests that may include credentials or cookies.
+
+Why should application developers care? Because modern Angular apps often render icons, SVGs, CMS fields, markdown, rich text, embedded links, and server-rendered pages. A small sanitization gap in those areas can become a real security issue.
+
+You still need to avoid unsafe bypasses. Treat `DomSanitizer.bypassSecurityTrust...` methods as review-worthy code. Angular can protect a lot, but it cannot save an app that tells it to trust untrusted content.
+
+## What Angular Developers Should Learn First
+
+### Learn Immediately
+
+**Signal Forms** because every new form should be evaluated against the stable signal-based API.
+
+**Resource APIs** because most apps fetch data everywhere, and `httpResource()` can remove a lot of repeated loading and error state.
+
+**OnPush mindset** because new code should prefer signals, immutable updates, and visible state changes.
+
+### Learn Next
+
+**Fetch-based HttpClient** if you have upload progress, interceptors, SSR, or transfer cache behavior.
+
+**Incremental Hydration** if you build public pages, ecommerce flows, docs, or content-heavy apps.
+
+**injectAsync** when you have heavy optional services that should not be part of the first load.
+
+### Nice To Know
+
+**@Service** is useful and readable, but not urgent.
+
+**Angular Aria** is critical if you own a design system, less urgent if your app already uses a mature component library.
+
+**Template improvements** are worth learning gradually. Use them to make templates clearer, not more clever.
+
+## What This Means for Existing Angular Applications
+
+For existing apps, the Angular 22 upgrade is less about one huge breaking change and more about surfacing old assumptions.
+
+| Current version | Main concern | Best first move |
+| --- | --- | --- |
+| Angular 17 | Several eras change at once: control flow, standalone patterns, signals, hydration, and defaults | Stabilize the framework upgrade before rewriting forms |
+| Angular 18 | Mixed signal and non-signal code | Convert shared UI and new feature work first |
+| Angular 19 | Async state may still be custom RxJS scaffolding everywhere | Try resources on one list or detail page |
+| Angular 20 | Defaults matter more than syntax | Audit `OnPush`, Fetch, SSR, and transfer cache behavior |
+| Angular 21 | Early Signal Forms or resources may differ from final APIs | Compare against Angular 22 docs and remove workarounds |
+
+The safest upgrade path is boring in a good way. Run the official update, keep compatibility migrations where needed, then test the screens where eager checking hid mistakes.
+
+Pay special attention to forms, lazy routes, SSR pages, upload flows, manual subscriptions, third-party components, large tables, and dashboards. Those are the places where small framework changes are most likely to reveal real app assumptions.
+
+## Angular 22 for Enterprise Applications
+
+Angular 22 is especially relevant for enterprise apps because enterprise UIs are where the old defaults usually hurt first.
+
+Large datasets need predictable rendering, so `OnPush`, signals, and immutable updates help tables, grids, and dashboards avoid unnecessary checks. Reporting apps need request state everywhere, which makes resources a useful shared pattern. Internal tools and SaaS products are often form-heavy, so Signal Forms help keep conditional validation and cross-field logic close to the model.
+
+Public SaaS pages also benefit from SSR and hydration work because useful HTML can arrive early while secondary widgets wait until they are needed.
+
+For large apps, the strategy is simple:
+
+- Start new forms with Signal Forms.
+- Consider resources for new request-driven screens.
+- Write new components with the `OnPush` mindset.
+- Use `injectAsync()` for heavy optional services.
+- Use Angular Aria before hand-writing complex keyboard behavior.
+
+That is how teams modernize without turning the release into a rewrite project.
+
+## Final Thoughts
+
+Angular 22 makes Angular's future much easier to read.
+
+Signals are no longer a side feature. They are becoming the language Angular uses for state, forms, async work, and rendering.
+
+RxJS is not going away, and it should not. But Angular is reducing the number of places where developers needed RxJS only because the framework had no simpler model.
+
+The best learning investment for the next 6 to 12 months is straightforward:
+
+1. Learn Signal Forms well enough to build one real production form.
+2. Learn `httpResource()` well enough to replace one list page's loading and error state.
+3. Audit your mutation habits for `OnPush`.
+4. Understand Fetch-related behavior if your app does uploads, SSR, or transfer cache.
+5. Study Angular Aria if your team owns custom UI primitives.
+
+Angular 22 is not asking experienced Angular teams to forget everything they know. It is asking them to stop carrying old patterns into new code when the framework now has better defaults.
+
+## Sources
+
+- [Official Angular v22 release announcement](https://blog.angular.dev/announcing-angular-v22-c52bb83a4664)
+- [Angular v22 release page](https://angular.dev/events/v22)
+- [Angular v22 changelog](https://github.com/angular/angular/releases/tag/22.0.0)
+- [Signal Forms guide](https://angular.dev/guide/forms/signals/validation)
+- [httpResource guide](https://angular.dev/guide/http/http-resource)
+- [Lazy loading services with injectAsync](https://angular.dev/guide/di/lazy-loading-services)
+- [Angular Aria overview](https://angular.dev/guide/aria/overview)

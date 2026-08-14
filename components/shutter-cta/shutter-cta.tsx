@@ -111,7 +111,8 @@ export function ShutterCta() {
         <div className="flex flex-wrap items-center justify-center flex-col md:flex-row md:justify-start md:gap-8 gap-6">
             <Link
                 prefetch
-                href="#" className="relative">
+                href="#"
+                className="relative">
                 <button
                     ref={buttonRef}
                     onTouchStart={handleTouchStart}
